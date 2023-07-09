@@ -1,0 +1,1059 @@
+<odoo>
+
+  <!-- REPORTE PARA EL ALUMNO : reporte DE NOTAS -->
+  <template id="reporte_notas_alumno_form" name="Reporte">
+    <t t-call="website.layout">
+      <div class="wrapper">
+        <!-- Sidebar -->
+        <nav id="sidebar" style="background-color:#51a3f4;">
+
+          <ul class="list-unstyled components">
+            <p style="background-color:#012bbf; height:60px;" class="text-center">
+              <strong>REPORTE DE NOTAS</strong>
+            </p>
+
+            <li>
+              <a class="" href="/reporte/alumno">ACADEMICO DE ALUMNO</a>
+            </li>
+            <li>
+              <a href="/reporte/alumno/asistencia">ASISTENCIA</a>
+            </li>
+          </ul>
+        </nav>
+
+        <!-- Page Content -->
+        <div id="content">
+          <button type="button" id="sidebarCollapse" class="btn btn-info">
+            <i class="fa fa-align-left"></i>
+          </button>
+          <h4 class="text-center mt-5">REPORTE DE NOTAS:
+            <span t-field="user.name"></span>
+          </h4>
+          <section class="search-section-reporte">
+            <div class="align-items-center">
+              <form action="#" method="post" novalidate="novalidate">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="row text-center">
+                      <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                        <h6 class="text-center m-0 p-0" style="color:white;">DESDE</h6>
+                        <input class="text-center m-0 p-0 w-50" t-att-value="fecha_inicio" name="fecha_desde" type="date" placeholder="dd/mm/aaaa"/>
+                      </div>
+                      <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                        <h6 class="text-center m-0 p-0" style="color:white;">HASTA</h6>
+                        <input class="text-center m-0 p-0 w-50" t-att-value="fecha_fin" name="fecha_hasta" type="date" placeholder="dd/mm/aaaa"/>
+                      </div>
+                      <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                        <h6 class="text-center m-0 p-0" style="color:white;">AULA</h6>
+                        <select class="text-center m-0 p-0 w-75" name="aula">
+                          <t t-foreach="aulas" t-as="aula">
+                            <option t-att-value="'%s' % (aula.id)" t-esc="aula.name"/>
+                          </t>
+                        </select>
+                      </div>
+                      <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                        <button type="button" class="btn wrn-btn-reporte w-50 wrn-btn-reporte-admin">REPORTAR</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </section>
+          <div id="pruenda-render">
+            <div id="template-reporte-render"></div>
+          </div>
+          <div class="mx-auto align-items-center m-3 p-3" style="width:100%; background-color: white;">
+
+            <br/>
+            <div class="reporte" style="background-color: white;">
+              <div class="align-items-center text-center">
+                <h3>PRUEBAS DIARIAS</h3>
+              </div>
+              <br/>
+              <div id="template-reporte-diario-render"></div>
+              <br/>
+              <div class="align-items-center text-center">
+                <h3>PRUEBAS SEMANAL</h3>
+              </div>
+              <br/>
+
+              <div id="template-reporte-semanal-render"></div>
+
+              <br/>
+              <div class="align-items-center text-center">
+                <h3>PRUEBAS SIMULACRO</h3>
+              </div>
+              <br/>
+
+              <div id="template-reporte-simulacro-render"></div>
+              <br/>
+
+              <canvas id="bar-chart" width="800" height="450"></canvas>
+              <br/>
+              <div id="template-reporte-situacion-render"></div>
+              <br/>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+
+
+    </t>
+  </template>
+
+
+  <!-- REPORTE PARA EL ALUMNO : reporte DE ASISTENCIA -->
+
+  <template id="reporte_asistencia_alumno_form" name="Reporte">
+    <t t-call="website.layout">
+      <div class="wrapper">
+        <!-- Sidebar -->
+        <nav id="sidebar" style="background-color:#51a3f4;">
+
+          <ul class="list-unstyled components">
+            <p style="background-color:#012bbf; height:60px;" class="text-center">
+              <strong>REPORTE DE NOTAS</strong>
+            </p>
+
+            <li>
+              <a class="" href="/reporte/alumno">ACADEMICO DE ALUMNO</a>
+            </li>
+            <li>
+              <a href="/reporte/alumno/asistencia">ASISTENCIA</a>
+            </li>
+          </ul>
+        </nav>
+
+        <!-- Page Content -->
+        <div id="content">
+          <button type="button" id="sidebarCollapse" class="btn btn-info">
+            <i class="fa fa-align-left"></i>
+          </button>
+          <h4 class="text-center mt-5">REPORTE DE ASISTENCIA
+            <span t-field="user.name"></span>
+          </h4>
+          <section class="search-section-reporte-asistencia">
+            <div class="align-items-center">
+              <form action="#" method="post" novalidate="novalidate">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="row text-center">
+                      <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                        <h6 class="text-center m-0 p-0" style="color:white;">DESDE</h6>
+                        <input class="text-center m-0 p-0 w-50" t-att-value="fecha_inicio" name="fecha_desde" type="date" placeholder="dd/mm/aaaa"/>
+                      </div>
+                      <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                        <h6 class="text-center m-0 p-0" style="color:white;">HASTA</h6>
+                        <input class="text-center m-0 p-0 w-50" t-att-value="fecha_fin" name="fecha_hasta" type="date" placeholder="dd/mm/aaaa"/>
+                      </div>
+                      <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                        <h6 class="text-center m-0 p-0" style="color:white;">AULA</h6>
+                        <select class="text-center m-0 p-0 w-75" name="aula">
+                          <t t-foreach="aulas" t-as="aula">
+                            <option t-att-value="'%s' % (aula.id)" t-esc="aula.name"/>
+                          </t>
+                        </select>
+                      </div>
+                      <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                        <button type="button" class="btn wrn-btn-reporte w-50">REPORTAR</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </section>
+
+          <div class="mx-auto align-items-center m-3 p-3" style="width:100%; background-color: white;">
+            <section class="loading-learning" style="display:none;">
+              <div class="circle-loading"></div>
+              <div class="circle-loading"></div>
+              <div class="circle-loading"></div>
+            </section>
+            <br/>
+            <div class="reporte" style="background-color: white;">
+
+              <div id="template-reporte-asistencia-render"></div>
+              <br/>
+
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+
+
+    </t>
+  </template>
+
+
+  <template id="reporte_notas_admin_form" name="Reporte">
+    <t t-call="website.layout">
+      <div class="wrapper">
+        <!-- Sidebar -->
+        <nav id="sidebar" style="background-color:#51a3f4;">
+
+          <ul class="list-unstyled components">
+            <p style="background-color:#012bbf; height:60px;" class="text-center">
+              <strong>REPORTE DE NOTAS</strong>
+            </p>
+
+            <li>
+              <a class="" href="/reporte/administrador">ACADEMICO DE ALUMNO</a>
+            </li>
+            <li>
+              <a href="/reporte/administrador/diario">PRUEBA DIARIA</a>
+            </li>
+            <li>
+              <a href="/reporte/administrador/semanal">PRUEBA SEMANAL</a>
+            </li>
+            <li>
+              <a href="/reporte/administrador/simulacro">PRUEBA SIMULACRO</a>
+            </li>
+            <li>
+              <a href="/reporte/administrador/promedios">PROMEDIOS SIMULACROS</a>
+            </li>
+            <li>
+              <a href="/reporte/administrador/ponderados">PROMEDIOS PONDERADOS</a>
+            </li>
+            <li>
+              <a href="/reporte/administrador/asistencia">ASISTENCIA POR ALUMNO</a>
+            </li>
+            <li>
+              <a href="/reporte/administrador/asistencia_aula">ASISTENCIA POR AULA</a>
+            </li>
+
+          </ul>
+        </nav>
+
+        <!-- Page Content -->
+        <div id="content">
+          <button type="button" id="sidebarCollapse" class="btn btn-info">
+            <i class="fa fa-align-left"></i>
+          </button>
+          <h3 class="text-center mt-5">REPORTE DE NOTAS
+          </h3>
+          <section class="search-section-reporte-admin">
+            <div class="align-items-center">
+              <form action="#" method="post" novalidate="novalidate">
+                <div class="row m-1">
+                  <div class="col-lg-12">
+                    <div class="row text-center justify-content-center">
+                      <div class="col-lg-6 col-md-6 col-sm-12 p-0">
+                        <h6 class="text-center m-0 p-0" style="color:white;">ALUMNO</h6>
+                        <input class="text-center m-0 p-0 w-75" required="required" list="browsers" name="browser" id="browser"/>
+                      </div>
+                      <datalist id="browsers">
+                        <t t-foreach="alumnos" t-as="alumno">
+                          <option t-att-data-customvalue="alumno.id" t-att-value="alumno.name"/>
+                        </t>
+                      </datalist>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="row text-center">
+                      <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                        <h6 class="text-center m-0 p-0" style="color:white;">DESDE</h6>
+                        <input class="text-center m-0 p-0 w-50" name="fecha_desde" type="date" placeholder="dd/mm/aaaa"/>
+                      </div>
+                      <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                        <h6 class="text-center m-0 p-0" style="color:white;">HASTA</h6>
+                        <input class="text-center m-0 p-0 w-50" name="fecha_hasta" type="date" placeholder="dd/mm/aaaa"/>
+                      </div>
+
+                      <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                        <h6 class="text-center m-0 p-0" style="color:white;">AULA</h6>
+                        <select class="text-center m-0 p-0 w-75" name="aula">
+                          <t t-foreach="aulas" t-as="aula">
+                            <option t-att-value="'%s' % (aula.id)" t-esc="aula.name"/>
+                          </t>
+                        </select>
+                      </div>
+                      <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                        <button type="button" class="btn wrn-btn-reporte wrn-btn-reporte-admin w-50">REPORTAR</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </section>
+
+          <div class="mx-auto align-items-center m-3 p-3" style="width:100%; background-color: white;">
+
+            <br/>
+            <div class="reporte" style="background-color: white;">
+              <div class="template-reporte-diario-render-text align-items-center text-center"></div>
+              <br/>
+              <div id="template-reporte-diario-render"></div>
+              <br/>
+              <div class="template-reporte-semanal-render-text align-items-center text-center"></div>
+              <br/>
+
+              <div id="template-reporte-semanal-render"></div>
+
+              <br/>
+              <div class="template-reporte-simulacro-render-text align-items-center text-center"></div>
+              <br/>
+
+              <div id="template-reporte-simulacro-render"></div>
+              <br/>
+
+              <canvas id="bar-chart" width="800" height="450"></canvas>
+              <br/>
+              <div id="template-reporte-situacion-render"></div>
+              <br/>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </t>
+  </template>
+
+  <template id="reporte_notas_admin_diario" name="Reporte">
+    <t t-call="website.layout">
+      <div class="wrapper">
+        <!-- Sidebar -->
+        <nav id="sidebar" style="background-color:#51a3f4;">
+
+          <ul class="list-unstyled components">
+            <p style="background-color:#012bbf; height:60px;" class="text-center">
+              <strong>REPORTE DE NOTAS</strong>
+            </p>
+
+            <li>
+              <a class="" href="/reporte/administrador">ACADEMICO DE ALUMNO</a>
+            </li>
+            <li>
+              <a href="/reporte/administrador/diario">PRUEBA DIARIA</a>
+            </li>
+            <li>
+              <a href="/reporte/administrador/semanal">PRUEBA SEMANAL</a>
+            </li>
+            <li>
+              <a href="/reporte/administrador/simulacro">PRUEBA SIMULACRO</a>
+            </li>
+            <li>
+              <a href="/reporte/administrador/promedios">PROMEDIOS SIMULACROS</a>
+            </li>
+            <li>
+              <a href="/reporte/administrador/ponderados">PROMEDIOS PONDERADOS</a>
+            </li>
+            <li>
+              <a href="/reporte/administrador/asistencia">ASISTENCIA POR ALUMNO</a>
+            </li>
+            <li>
+              <a href="/reporte/administrador/asistencia_aula">ASISTENCIA POR AULA</a>
+            </li>
+
+          </ul>
+        </nav>
+
+        <!-- Page Content -->
+        <div id="content">
+          <button type="button" id="sidebarCollapse" class="btn btn-info">
+            <i class="fa fa-align-left"></i>
+          </button>
+          <h3 class="text-center mt-5">REPORTE DE NOTAS - PRUEBAS DIARIAS
+          </h3>
+          <section class="search-section-reporte-diario">
+            <div class="align-items-center">
+              <form action="#" method="post" novalidate="novalidate">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="row text-center">
+                      <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                        <h6 class="text-center m-0 p-0" style="color:white;">DESDE</h6>
+                        <input class="text-center m-0 p-0 w-50" id="fecha_desde" name="fecha_desde" type="date" placeholder="dd/mm/aaaa"/>
+                      </div>
+                      <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                        <h6 class="text-center m-0 p-0" style="color:white;">HASTA</h6>
+                        <input class="text-center m-0 p-0 w-50" id="fecha_hasta" name="fecha_hasta" type="date" placeholder="dd/mm/aaaa"/>
+                      </div>
+
+                      <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                        <h6 class="text-center m-0 p-0" style="color:white;">AULA</h6>
+                        <select class="text-center m-0 p-0 w-75" name="aula" id="aula">
+                          <t t-foreach="aulas" t-as="aula">
+                            <option t-att-value="'%s' % (aula.id)" t-esc="aula.name"/>
+                          </t>
+                        </select>
+                      </div>
+                      <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                        <button type="button" class="btn wrn-btn-reporte wrn-btn-reporte-admin w-50">REPORTAR</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </section>
+
+          <div class="mx-auto align-items-center m-3 p-3" style="width:100%; background-color: white;">
+            <section class="loading-learning" style="display:none;">
+              <div class="circle-loading"></div>
+              <div class="circle-loading"></div>
+              <div class="circle-loading"></div>
+            </section>
+            <br/>
+            <div class="reporte" style="background-color: white;">
+
+              <div id="template-reporte-diario-render"></div>
+              <br/>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </t>
+  </template>
+
+  <template id="reporte_notas_admin_semanal" name="Reporte">
+    <t t-call="website.layout">
+      <div class="wrapper">
+        <!-- Sidebar -->
+        <nav id="sidebar" style="background-color:#51a3f4;">
+
+          <ul class="list-unstyled components">
+            <p style="background-color:#012bbf; height:60px;" class="text-center">
+              <strong>REPORTE DE NOTAS</strong>
+            </p>
+
+            <li>
+              <a class="" href="/reporte/administrador">ACADEMICO DE ALUMNO</a>
+            </li>
+            <li>
+              <a href="/reporte/administrador/diario">PRUEBA DIARIA</a>
+            </li>
+            <li>
+              <a href="/reporte/administrador/semanal">PRUEBA SEMANAL</a>
+            </li>
+            <li>
+              <a href="/reporte/administrador/simulacro">PRUEBA SIMULACRO</a>
+            </li>
+            <li>
+              <a href="/reporte/administrador/promedios">PROMEDIOS SIMULACROS</a>
+            </li>
+            <li>
+              <a href="/reporte/administrador/ponderados">PROMEDIOS PONDERADOS</a>
+            </li>
+            <li>
+              <a href="/reporte/administrador/asistencia">ASISTENCIA POR ALUMNO</a>
+            </li>
+            <li>
+              <a href="/reporte/administrador/asistencia_aula">ASISTENCIA POR AULA</a>
+            </li>
+
+          </ul>
+        </nav>
+
+        <!-- Page Content -->
+        <div id="content">
+          <button type="button" id="sidebarCollapse" class="btn btn-info">
+            <i class="fa fa-align-left"></i>
+          </button>
+          <h3 class="text-center mt-5">REPORTE DE NOTAS - PRUEBAS SEMANALES
+          </h3>
+          <section class="search-section-reporte-semanal">
+            <div class="align-items-center">
+              <form action="#" method="post" novalidate="novalidate">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="row text-center">
+                      <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                        <h6 class="text-center m-0 p-0" style="color:white;">DESDE</h6>
+                        <input class="text-center m-0 p-0 w-50" id="fecha_desde" name="fecha_desde" type="date" placeholder="dd/mm/aaaa"/>
+                      </div>
+                      <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                        <h6 class="text-center m-0 p-0" style="color:white;">HASTA</h6>
+                        <input class="text-center m-0 p-0 w-50" id="fecha_hasta" name="fecha_hasta" type="date" placeholder="dd/mm/aaaa"/>
+                      </div>
+
+                      <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                        <h6 class="text-center m-0 p-0" style="color:white;">AULA</h6>
+                        <select class="text-center m-0 p-0 w-75" name="aula" id="aula">
+                          <t t-foreach="aulas" t-as="aula">
+                            <option t-att-value="'%s' % (aula.id)" t-esc="aula.name"/>
+                          </t>
+                        </select>
+                      </div>
+                      <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                        <button type="button" class="btn wrn-btn-reporte wrn-btn-reporte-admin w-50">REPORTAR</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </section>
+
+          <div class="mx-auto align-items-center m-3 p-3" style="width:100%; background-color: white;">
+            <section class="loading-learning" style="display:none;">
+              <div class="circle-loading"></div>
+              <div class="circle-loading"></div>
+              <div class="circle-loading"></div>
+            </section>
+            <br/>
+            <div class="reporte" style="background-color: white;">
+              <div id="template-reporte-semanal-render"></div>
+              <br/>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </t>
+  </template>
+
+  <template id="reporte_notas_admin_simulacro" name="Reporte">
+    <t t-call="website.layout">
+      <div class="wrapper">
+        <!-- Sidebar -->
+        <nav id="sidebar" style="background-color:#51a3f4;">
+
+          <ul class="list-unstyled components">
+            <p style="background-color:#012bbf; height:60px;" class="text-center">
+              <strong>REPORTE DE NOTAS</strong>
+            </p>
+
+            <li>
+              <a class="" href="/reporte/administrador">ACADEMICO DE ALUMNO</a>
+            </li>
+            <li>
+              <a href="/reporte/administrador/diario">PRUEBA DIARIA</a>
+            </li>
+            <li>
+              <a href="/reporte/administrador/semanal">PRUEBA SEMANAL</a>
+            </li>
+            <li>
+              <a href="/reporte/administrador/simulacro">PRUEBA SIMULACRO</a>
+            </li>
+            <li>
+              <a href="/reporte/administrador/promedios">PROMEDIOS SIMULACROS</a>
+            </li>
+            <li>
+              <a href="/reporte/administrador/ponderados">PROMEDIOS PONDERADOS</a>
+            </li>
+            <li>
+              <a href="/reporte/administrador/asistencia">ASISTENCIA POR ALUMNO</a>
+            </li>
+            <li>
+              <a href="/reporte/administrador/asistencia_aula">ASISTENCIA POR AULA</a>
+            </li>
+
+          </ul>
+        </nav>
+
+        <!-- Page Content -->
+        <div id="content">
+          <button type="button" id="sidebarCollapse" class="btn btn-info">
+            <i class="fa fa-align-left"></i>
+          </button>
+          <h3 class="text-center mt-5">REPORTE DE NOTAS - SIMULACROS
+          </h3>
+          <section class="search-section-reporte-simulacro">
+            <div class="align-items-center">
+              <form action="#" method="post" novalidate="novalidate">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="row text-center">
+                      <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                        <h6 class="text-center m-0 p-0" style="color:white;">FECHA DE SIMULACRO</h6>
+                        <input class="text-center m-0 p-0 w-50" id="fecha_desde" name="fecha_desde" type="date" placeholder="dd/mm/aaaa"/>
+                      </div>
+                      <div class="col-lg-3 col-md-3 col-sm-12">
+                        <h6 class="text-center m-0 p-0" style="color:white;">AULA</h6>
+                        <select class="text-center m-0 p-0 w-75" name="aula" id="aula" multiple="multiple">
+                          <t t-foreach="aulas" t-as="aula">
+                            <option t-att-value="'%s' % (aula.id)" t-esc="aula.name"/>
+                          </t>
+                        </select>
+                      </div>
+                      <div class="col-lg-3 col-md-3 col-sm-12">
+                        <h6 class="text-center m-0 p-0" style="color:white;">GRUPOS</h6>
+                        <select class="text-center m-0 p-0 w-75" name="grupo" id="grupo" multiple="multiple">
+                          <t t-foreach="grupos" t-as="grupo">
+                            <option t-att-value="'%s' % (grupo.id)" t-esc="grupo.name"/>
+                          </t>
+                        </select>
+                      </div>
+                      <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                        <button type="button" class="btn wrn-btn-reporte wrn-btn-reporte-admin w-50">REPORTAR</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </section>
+
+          <div class="mx-auto align-items-center m-3 p-3" style="width:100%; background-color: white;">
+            <section class="loading-learning" style="display:none;">
+              <div class="circle-loading"></div>
+              <div class="circle-loading"></div>
+              <div class="circle-loading"></div>
+            </section>
+            <br/>
+            <div class="reporte" style="background-color: white;">
+              <div id="template-reporte-simulacro-render"></div>
+              <br/>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </t>
+  </template>
+
+  <template id="reporte_notas_admin_promedios_simulacro" name="Reporte">
+    <t t-call="website.layout">
+      <div class="wrapper">
+        <!-- Sidebar -->
+        <nav id="sidebar" style="background-color:#51a3f4;">
+
+          <ul class="list-unstyled components">
+            <p style="background-color:#012bbf; height:60px;" class="text-center">
+              <strong>REPORTE DE NOTAS</strong>
+            </p>
+
+            <li>
+              <a class="" href="/reporte/administrador">ACADEMICO DE ALUMNO</a>
+            </li>
+            <li>
+              <a href="/reporte/administrador/diario">PRUEBA DIARIA</a>
+            </li>
+            <li>
+              <a href="/reporte/administrador/semanal">PRUEBA SEMANAL</a>
+            </li>
+            <li>
+              <a href="/reporte/administrador/simulacro">PRUEBA SIMULACRO</a>
+            </li>
+            <li>
+              <a href="/reporte/administrador/promedios">PROMEDIOS SIMULACROS</a>
+            </li>
+            <li>
+              <a href="/reporte/administrador/ponderados">PROMEDIOS PONDERADOS</a>
+            </li>
+            <li>
+              <a href="/reporte/administrador/asistencia">ASISTENCIA POR ALUMNO</a>
+            </li>
+            <li>
+              <a href="/reporte/administrador/asistencia_aula">ASISTENCIA POR AULA</a>
+            </li>
+
+          </ul>
+        </nav>
+
+        <!-- Page Content -->
+        <div id="content">
+          <button type="button" id="sidebarCollapse" class="btn btn-info">
+            <i class="fa fa-align-left"></i>
+          </button>
+            <h3 class="text-center mt-5">PROMEDIOS SIMULACROS
+          </h3>
+          <section class="search-section-reporte-simulacro-promedios">
+            <div class="align-items-center">
+              <form action="#" method="post" novalidate="novalidate">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="row text-center">
+                      <div class="col-lg-2 col-md-2 col-sm-12">
+                        <h6 class="text-center m-0 p-0" style="color:white;">DESDE</h6>
+                        <input class="text-center m-0 p-0" id="fecha_desde" name="fecha_desde" type="date" placeholder="dd/mm/aaaa"/>
+                      </div>
+                      <div class="col-lg-2 col-md-2 col-sm-12">
+                        <h6 class="text-center m-0 p-0" style="color:white;">HASTA</h6>
+                        <input class="text-center m-0 p-0" id="fecha_hasta" name="fecha_hasta" type="date" placeholder="dd/mm/aaaa"/>
+                      </div>
+
+                      <div class="col-lg-3 col-md-3 col-sm-12">
+                        <h6 class="text-center m-0 p-0" style="color:white;">AULA</h6>
+                        <select class="text-center m-0 p-0 w-75" name="aula" id="aula" multiple="multiple">
+                          <t t-foreach="aulas" t-as="aula">
+                            <option t-att-value="'%s' % (aula.id)" t-esc="aula.name"/>
+                          </t>
+                        </select>
+                      </div>
+                      <div class="col-lg-3 col-md-3 col-sm-12">
+                        <h6 class="text-center m-0 p-0" style="color:white;">GRUPOS</h6>
+                        <select class="text-center m-0 p-0 w-75" name="grupo" id="grupo" multiple="multiple">
+                          <t t-foreach="grupos" t-as="grupo">
+                            <option t-att-value="'%s' % (grupo.id)" t-esc="grupo.name"/>
+                          </t>
+                        </select>
+                      </div>
+                      <div class="col-lg-2 col-md-2 col-sm-12">
+                        <button type="button" class="btn wrn-btn-reporte wrn-btn-reporte-admin">REPORTAR</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </section>
+
+          <div class="mx-auto align-items-center m-3 p-3" style="width:100%; background-color: white;">
+            <section class="loading-learning" style="display:none;">
+              <div class="circle-loading"></div>
+              <div class="circle-loading"></div>
+              <div class="circle-loading"></div>
+            </section>
+            <br/>
+            <div class="reporte" style="background-color: white;">
+              <div id="template-reporte-simulacro-render"></div>
+              <br/>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </t>
+  </template>
+
+  <template id="reporte_notas_admin_ponderados_simulacro" name="Reporte">
+    <t t-call="website.layout">
+      <div class="wrapper">
+        <!-- Sidebar -->
+        <nav id="sidebar" style="background-color:#51a3f4;">
+
+          <ul class="list-unstyled components">
+            <p style="background-color:#012bbf; height:60px;" class="text-center">
+              <strong>REPORTE DE NOTAS</strong>
+            </p>
+
+            <li>
+              <a class="" href="/reporte/administrador">ACADEMICO DE ALUMNO</a>
+            </li>
+            <li>
+              <a href="/reporte/administrador/diario">PRUEBA DIARIA</a>
+            </li>
+            <li>
+              <a href="/reporte/administrador/semanal">PRUEBA SEMANAL</a>
+            </li>
+            <li>
+              <a href="/reporte/administrador/simulacro">PRUEBA SIMULACRO</a>
+            </li>
+            <li>
+              <a href="/reporte/administrador/promedios">PROMEDIOS SIMULACROS</a>
+            </li>
+            <li>
+              <a href="/reporte/administrador/ponderados">PROMEDIOS PONDERADOS</a>
+            </li>
+            <li>
+              <a href="/reporte/administrador/asistencia">ASISTENCIA POR ALUMNO</a>
+            </li>
+            <li>
+              <a href="/reporte/administrador/asistencia_aula">ASISTENCIA POR AULA</a>
+            </li>
+
+          </ul>
+        </nav>
+
+        <!-- Page Content -->
+        <div id="content">
+          <button type="button" id="sidebarCollapse" class="btn btn-info">
+            <i class="fa fa-align-left"></i>
+          </button>
+          <h3 class="text-center mt-5">PROMEDIOS PONDERADOS
+          </h3>
+          <section class="search-section-reporte-simulacro-ponderados">
+            <div class="align-items-center">
+              <form action="#" method="post" novalidate="novalidate">
+                <div class="row">
+                      <div class="col-lg-2 col-md-2 col-sm-12">
+                        <h6 class="text-center m-0 p-0" style="color:white;">DESDE</h6>
+                        <input class="text-center m-0 p-0 w-75" id="fecha_desde" name="fecha_desde" type="date" placeholder="dd/mm/aaaa"/>
+                      </div>
+                      <div class="col-lg- col-md-2 col-sm-12">
+                        <h6 class="text-center m-0 p-0" style="color:white;">HASTA</h6>
+                        <input class="text-center m-0 p-0 w-75" id="fecha_hasta" name="fecha_hasta" type="date" placeholder="dd/mm/aaaa"/>
+                      </div>
+                      <div class="col-lg-3 col-md-3 col-sm-12">
+                        <h6 class="text-center m-0 p-0" style="color:white;">AULA</h6>
+                        <select class="text-center m-0 p-0 w-75" name="aula" id="aula" multiple="multiple">
+                          <t t-foreach="aulas" t-as="aula">
+                            <option t-att-value="'%s' % (aula.id)" t-esc="aula.name"/>
+                          </t>
+                        </select>
+                      </div>
+                      <div class="col-lg-3 col-md-3 col-sm-12">
+                        <h6 class="text-center m-0 p-0" style="color:white;">GRUPOS</h6>
+                        <select class="text-center m-0 p-0 w-75" name="grupo" id="grupo" multiple="multiple">
+                          <t t-foreach="grupos" t-as="grupo">
+                            <option t-att-value="'%s' % (grupo.id)" t-esc="grupo.name"/>
+                          </t>
+                        </select>
+                      </div>
+                      <div class="col-lg-2 col-md-2 col-sm-12 p-0">
+                        <button type="button" class="btn wrn-btn-reporte wrn-btn-reporte-admin w-50">REPORTAR</button>
+                      </div>
+                </div>
+              </form>
+            </div>
+          </section>
+
+          <div class="mx-auto align-items-center m-3 p-3" style="width:100%; background-color: white;">
+
+            <br/>
+
+            <section class="loading-learning" style="display:none;">
+              <div class="circle-loading"></div>
+              <div class="circle-loading"></div>
+              <div class="circle-loading"></div>
+            </section>
+
+            <div class="reporte" style="background-color: white;">
+              <div id="template-reporte-simulacro-render"></div>
+              <br/>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </t>
+  </template>
+
+
+  <template id="reporte_asistencia_por_alumno" name="Reporte">
+    <t t-call="website.layout">
+      <div class="wrapper">
+        <!-- Sidebar -->
+        <nav id="sidebar" style="background-color:#51a3f4;">
+
+          <ul class="list-unstyled components">
+            <p style="background-color:#012bbf; height:60px;" class="text-center">
+              <strong>REPORTE DE NOTAS</strong>
+            </p>
+
+            <li>
+              <a class="" href="/reporte/administrador">ACADEMICO DE ALUMNO</a>
+            </li>
+            <li>
+              <a href="/reporte/administrador/diario">PRUEBA DIARIA</a>
+            </li>
+            <li>
+              <a href="/reporte/administrador/semanal">PRUEBA SEMANAL</a>
+            </li>
+            <li>
+              <a href="/reporte/administrador/simulacro">PRUEBA SIMULACRO</a>
+            </li>
+            <li>
+              <a href="/reporte/administrador/promedios">PROMEDIOS SIMULACROS</a>
+            </li>
+            <li>
+              <a href="/reporte/administrador/ponderados">PROMEDIOS PONDERADOS</a>
+            </li>
+            <li>
+              <a href="/reporte/administrador/asistencia">ASISTENCIA POR ALUMNO</a>
+            </li>
+            <li>
+              <a href="/reporte/administrador/asistencia_aula">ASISTENCIA POR AULA</a>
+            </li>
+
+          </ul>
+        </nav>
+
+        <!-- Page Content -->
+        <div id="content">
+          <button type="button" id="sidebarCollapse" class="btn btn-info">
+            <i class="fa fa-align-left"></i>
+          </button>
+          <h3 class="text-center mt-5">REPORTE DE ASISTENCIA
+          </h3>
+          <section class="search-section-reporte-asistencia-alumno">
+            <div class="align-items-center">
+              <form action="#" method="post" novalidate="novalidate">
+                <div class="row m-1">
+                  <div class="col-lg-12">
+                    <div class="row text-center justify-content-center">
+                      <div class="col-lg-6 col-md-6 col-sm-12 p-0">
+                        <h6 class="text-center m-0 p-0" style="color:white;">ALUMNO</h6>
+                        <input class="text-center m-0 p-0 w-75" required="required" list="browsers" name="browser" id="browser"/>
+                      </div>
+                      <datalist id="browsers">
+                        <t t-foreach="alumnos" t-as="alumno">
+                          <option t-att-data-customvalue="alumno.id" t-att-value="alumno.name"/>
+                        </t>
+                      </datalist>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="row text-center">
+                      <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                        <h6 class="text-center m-0 p-0" style="color:white;">DESDE</h6>
+                        <input class="text-center m-0 p-0 w-50" name="fecha_desde" type="date" placeholder="dd/mm/aaaa"/>
+                      </div>
+                      <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                        <h6 class="text-center m-0 p-0" style="color:white;">HASTA</h6>
+                        <input class="text-center m-0 p-0 w-50" name="fecha_hasta" type="date" placeholder="dd/mm/aaaa"/>
+                      </div>
+
+                      <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                        <h6 class="text-center m-0 p-0" style="color:white;">AULA</h6>
+                        <select class="text-center m-0 p-0 w-75" name="aula">
+                          <t t-foreach="aulas" t-as="aula">
+                            <option t-att-value="'%s' % (aula.id)" t-esc="aula.name"/>
+                          </t>
+                        </select>
+                      </div>
+                      <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                        <button type="button" class="btn wrn-btn-reporte wrn-btn-reporte-admin w-50">REPORTAR</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </section>
+
+          <div class="mx-auto align-items-center m-3 p-3" style="width:100%; background-color: white;">
+
+            <br/>
+
+            <section class="loading-learning" style="display:none;">
+              <div class="circle-loading"></div>
+              <div class="circle-loading"></div>
+              <div class="circle-loading"></div>
+            </section>
+
+            <div class="reporte" style="background-color: white;">
+              <div id="template-reporte-asistencia-render"></div>
+              <br/>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </t>
+  </template>
+
+
+  <template id="reporte_asistencia_por_aula" name="Reporte">
+    <t t-call="website.layout">
+      <div class="wrapper">
+        <!-- Sidebar -->
+        <nav id="sidebar" style="background-color:#51a3f4;">
+
+          <ul class="list-unstyled components">
+            <p style="background-color:#012bbf; height:60px;" class="text-center">
+              <strong>REPORTE DE NOTAS</strong>
+            </p>
+
+            <li>
+              <a class="" href="/reporte/administrador">ACADEMICO DE ALUMNO</a>
+            </li>
+            <li>
+              <a href="/reporte/administrador/diario">PRUEBA DIARIA</a>
+            </li>
+            <li>
+              <a href="/reporte/administrador/semanal">PRUEBA SEMANAL</a>
+            </li>
+            <li>
+              <a href="/reporte/administrador/simulacro">PRUEBA SIMULACRO</a>
+            </li>
+            <li>
+              <a href="/reporte/administrador/promedios">PROMEDIOS SIMULACROS</a>
+            </li>
+            <li>
+              <a href="/reporte/administrador/ponderados">PROMEDIOS PONDERADOS</a>
+            </li>
+            <li>
+              <a href="/reporte/administrador/asistencia">ASISTENCIA POR ALUMNO</a>
+            </li>
+            <li>
+              <a href="/reporte/administrador/asistencia_aula">ASISTENCIA POR AULA</a>
+            </li>
+
+
+
+          </ul>
+        </nav>
+
+        <!-- Page Content -->
+        <div id="content">
+          <button type="button" id="sidebarCollapse" class="btn btn-info">
+            <i class="fa fa-align-left"></i>
+          </button>
+          <h3 class="text-center mt-5">REPORTE DE ASISTENCIA
+          </h3>
+          <section class="search-section-reporte-asistencia-aula">
+            <div class="align-items-center">
+              <form action="#" method="post" novalidate="novalidate">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="row text-center">
+                      <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                        <h6 class="text-center m-0 p-0" style="color:white;">DESDE</h6>
+                        <input class="text-center m-0 p-0 w-50" name="fecha_desde" type="date" placeholder="dd/mm/aaaa"/>
+                      </div>
+                      <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                        <h6 class="text-center m-0 p-0" style="color:white;">HASTA</h6>
+                        <input class="text-center m-0 p-0 w-50" name="fecha_hasta" type="date" placeholder="dd/mm/aaaa"/>
+                      </div>
+
+                      <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                        <h6 class="text-center m-0 p-0" style="color:white;">AULA</h6>
+                        <select class="text-center m-0 p-0 w-75" name="aula">
+                          <t t-foreach="aulas" t-as="aula">
+                            <option t-att-value="'%s' % (aula.id)" t-esc="aula.name"/>
+                          </t>
+                        </select>
+                      </div>
+                      <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                        <button type="button" class="btn wrn-btn-reporte wrn-btn-reporte-admin w-50">REPORTAR</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </section>
+
+          <div class="mx-auto align-items-center m-3 p-3" style="width:100%; background-color: white;">
+
+            <br/>
+
+            <section class="loading-learning" style="display:none;">
+              <div class="circle-loading"></div>
+              <div class="circle-loading"></div>
+              <div class="circle-loading"></div>
+            </section>
+
+            <div class="reporte" style="background-color: white;">
+              <div id="template-reporte-asistencia-render"></div>
+              <br/>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </t>
+  </template>
+
+</odoo>

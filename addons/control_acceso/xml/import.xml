@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<odoo>
+
+  <record id="group_res_users_ciclo_tree" model="ir.ui.view">
+    <field name="name">res.users.ciclo.tree</field>
+    <field name="model">res.users.ciclo</field>
+    <field name="arch" type="xml">
+      <tree string="Carreras">
+        <field name="user_id"/>
+        <field name="ciclo_id"/>
+      </tree>
+    </field>
+  </record>
+
+  <record id="group_res_users_ciclo_form" model="ir.ui.view">
+    <field name="name">res.users.ciclo.form</field>
+    <field name="model">res.users.ciclo</field>
+    <field name="arch" type="xml">
+      <form string="Carreras">
+        <sheet>
+          <group>
+            <field name="user_id"/>
+            <field name="ciclo_id"/>
+
+          </group>
+
+        </sheet>
+
+      </form>
+    </field>
+  </record>
+
+  <record id="group_res_users_ciclo_action" model="ir.actions.act_window">
+    <field name="name">Import Usuarios - Areas</field>
+    <field name="res_model">res.users.ciclo</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+
+  <menuitem name="Impor Usuarios - Ciclos" id="menu_res_users_ciclo" parent="elearning_aprentech.menu_configuracion_add"  action="group_res_users_ciclo_action" groups='elearning_aprentech.group_control_acceso_superadmin,elearning_aprentech.group_control_acceso_admin'/>
+</odoo>

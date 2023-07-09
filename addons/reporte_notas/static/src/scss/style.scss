@@ -1,0 +1,213 @@
+
+.wrapper {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+    .search-section-reporte{
+        background: #1A4668;
+        padding: 2rem;
+    }
+    .search-section-reporte-asistencia{
+        background: #1A4668;
+        padding: 2rem;
+    }
+    .search-section-reporte-admin{
+        background: #1A4668;
+        padding: 2rem;
+    }
+    .search-section-reporte-diario{
+        background: #1A4668;
+        padding: 2rem;
+    }
+
+    .search-section-reporte-semanal{
+        background: #1A4668;
+        padding: 2rem;
+    }
+    .search-section-reporte-simulacro{
+        background: #1A4668;
+        padding: 2rem;
+    }
+    .search-section-reporte-simulacro-promedios{
+        background: #1A4668;
+        padding: 2rem;
+    }
+    .search-section-reporte-simulacro-ponderados{
+        background: #1A4668;
+        padding: 2rem;
+    }
+    .search-section-reporte-asistencia-alumno{
+        background: #1A4668;
+        padding: 2rem;
+    }
+    .search-section-reporte-asistencia-aula{
+        background: #1A4668;
+        padding: 2rem;
+    }
+    .wrn-btn-reporte{
+        width: 100%;
+        font-size: 16px;
+        font-weight: 400;
+        text-transform: capitalize;
+         height: calc(3rem + 2px) !important;
+         border-radius:0;
+         background-color:  #00d084;
+    }
+    /* ---------------------------------------------------
+        SIDEBAR STYLE
+    ----------------------------------------------------- */
+
+    #sidebar {
+        min-width: 250px;
+        max-width: 250px;
+        transition: all 0.3s;
+    }
+
+    #sidebar.active {
+        margin-left: -250px;
+    }
+
+    #sidebar .sidebar-header {
+        padding: 20px;
+        background: #6d7fcc;
+    }
+
+    #sidebar ul.components {
+        padding: 20px 0;
+        border-bottom: 1px solid #47748b;
+    }
+
+    #sidebar ul p {
+        color: #fff;
+        padding: 10px;
+    }
+
+    #sidebar ul li a {
+        padding: 10px;
+        font-size: 1.1em;
+        display: block;
+    }
+
+    #sidebar ul li a:hover {
+        color: #7386D5;
+        background: #fff;
+    }
+
+    #sidebar ul li.active>a,
+    a[aria-expanded="true"] {
+        color: #fff;
+        background: #6d7fcc;
+
+    }
+
+    a[data-toggle="collapse"] {
+        position: relative;
+    }
+
+    .dropdown-toggle-preventor::after {
+        display: block;
+        position: absolute;
+        top: 50%;
+        right: 5px;
+        transform: translateY(-50%);
+    }
+
+    
+
+    ul.CTAs {
+        padding: 20px;
+    }
+
+    ul.CTAs a {
+        text-align: center;
+        font-size: 0.9em !important;
+        display: block;
+        border-radius: 5px;
+        margin-bottom: 5px;
+    }
+
+    a.download {
+        background: #fff;
+        color: #7386D5;
+    }
+
+    a.article,
+    a.article:hover {
+        background: #6d7fcc !important;
+        color: #fff !important;
+    }
+
+    /* ---------------------------------------------------
+        CONTENT STYLE
+    ----------------------------------------------------- */
+
+    #content {
+        width: 100%;
+        padding: 20px;
+        min-height: 100vh;
+        transition: all 0.3s;
+    }
+
+    /* ---------------------------------------------------
+        MEDIAQUERIES
+    ----------------------------------------------------- */
+
+    @media (max-width: 768px) {
+        #sidebar {
+            margin-left: -250px;
+        }
+        #sidebar.active {
+            margin-left: 0;
+        }
+        #sidebarCollapse span {
+            display: none;
+        }
+    }
+
+
+
+    // loading
+
+    .loading-learning {
+      display: flex;
+      background-color: rgb(238, 231, 213);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40vh;
+      margin: 0;
+    }
+
+    .circle-loading {
+      width: 10px;
+      height: 10px;
+      background-color: white;
+      border-radius: 50%;
+      margin: 3px;
+      animation: jump 0.5s ease-in infinite;
+    }
+
+    .circle-loading:nth-of-type(1) {
+      background-color: rgb(20, 101, 106);
+    }
+
+    .circle-loading:nth-of-type(2) {
+      animation-delay: 0.1s;
+      background-color: rgb(250, 114, 104);
+    }
+
+    .circle-loading:nth-of-type(3) {
+      animation-delay: 0.2s;
+      background-color: rgb(148, 219, 223);
+    }
+
+    @keyframes jump {
+      0% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+}

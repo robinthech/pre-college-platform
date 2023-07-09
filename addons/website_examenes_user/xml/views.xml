@@ -1,0 +1,488 @@
+<?xml version="1.0"?>
+<odoo>
+  <!--domain de de campos-->
+  <record id="inherit_usuarios_add_aprentech" model="ir.ui.view">
+    <field name="name">inherit.usuarios.aprentech</field>
+    <field name="model">res.users</field>
+    <field name="inherit_id" ref="elearning_aprentech.inheri_user_webiste_lead_tree"/>
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='login_date']" position="after">
+        <field name="carrera_id" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open' : True}"/>
+        <field name="aula_eval_ids"  widget="many2many_tags" />
+
+      </xpath>
+
+    </field>
+  </record>
+
+  <record id="inherit_grupos_add_aprentech" model="ir.ui.view">
+    <field name="name">inherit.grupos.add.aprentech</field>
+    <field name="model">grupo.alumnos</field>
+    <field name="inherit_id" ref="website_examenes.group_alumnos_form"/>
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='name']" position="after">
+        <field name="tipo_grupo"/>
+      </xpath>
+      <xpath expr="//group[@name='Grupo']" position="before">
+        <div class="oe_button_box" name="button_box">
+          <button name="action_cursos_aula" type="object" class="oe_stat_button" icon="fa-pencil-square-o">
+            CURSOS
+          </button>
+
+        </div>
+      </xpath>
+      <xpath  expr="/form/*" position="before">
+        <header>
+          <button string="ACTIVAR" type="object" name="activar_evaluacion" class="btn btn-info" attrs="{'invisible': [('estado','=','activo')]}"/>
+          <button string="INACTIVAR" type="object" name="inactivar_evaluacion" class="btn btn-info" attrs="{'invisible': [('estado','=','inactivo')]}"/>
+            <field name="estado" widget="statusbar"/>
+        </header>
+      </xpath>
+    </field>
+  </record>
+
+  <record id="inherit_carrera_simulacro" model="ir.ui.view">
+    <field name="name">inherit.respuesta.simulacro</field>
+    <field name="model">respuesta.simulacro</field>
+    <field name="inherit_id" ref="website_examenes.respuesta_simulacro_tree"/>
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='puntaje']" position="before">
+        <field name="carrera_id" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open' : True}"/>
+      </xpath>
+
+    </field>
+  </record>
+  <record id="inherit_usuarios_adds_aprentech" model="ir.ui.view">
+    <field name="name">inherit.usuarios.aprentech</field>
+    <field name="model">res.users</field>
+    <field name="inherit_id" ref="elearning_aprentech.inheri_user_webiste_lead_form"/>
+    <field name="arch" type="xml">
+
+      <xpath expr="//field[@name='mobile']" position="after">
+        <field name="carrera_id" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True}"/>
+        <field name="apoderado_id" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True}"/>
+        <field name="grupos_eval_ids" mode="tree">
+          <tree editable="bottom">
+            <field name="grupo_alumnos_id" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True}"/>
+          </tree>
+          <form>
+            <group>
+              <field name="grupo_alumnos_id" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True}"/>
+            </group>
+
+          </form>
+        </field>
+        <field name="aula_eval_ids" mode="tree">
+          <tree editable="bottom">
+            <field name="grupo_alumnos_id" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True}" string="Aula"/>
+          </tree>
+          <form>
+            <group>
+              <field name="grupo_alumnos_id" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True}" string="Grupo"/>
+            </group>
+
+          </form>
+        </field>
+      </xpath>
+
+    </field>
+  </record>
+
+  <record id="group_carrera_tree" model="ir.ui.view">
+    <field name="name">estudiante.carrera.tree</field>
+    <field name="model">estudiante.carrera</field>
+    <field name="arch" type="xml">
+      <tree string="Carreras">
+        <field name="name"/>
+      </tree>
+    </field>
+  </record>
+
+  <record id="group_carrera_form" model="ir.ui.view">
+    <field name="name">estudiante.carrera.form</field>
+    <field name="model">estudiante.carrera</field>
+    <field name="arch" type="xml">
+      <form string="Carreras">
+        <sheet>
+          <group>
+            <field name="name"/>
+
+          </group>
+          <field name="estudiantes_ids" mode="tree" readonly="1">
+            <tree editable="bottom">
+              <field name="name"/>
+              <field name="email"/>
+            </tree>
+            <form>
+              <group>
+                <field name="name"/>
+                <field name="email"/>
+              </group>
+
+            </form>
+          </field>
+        </sheet>
+
+      </form>
+    </field>
+  </record>
+
+  <record id="group_carrera_action" model="ir.actions.act_window">
+    <field name="name">Carreras</field>
+    <field name="res_model">estudiante.carrera</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+
+  <menuitem name="Carreras" id="menu_carreras" parent="elearning_aprentech.menu_configuracion_add" sequence="40" action="group_carrera_action" groups='elearning_aprentech.group_control_acceso_superadmin,elearning_aprentech.group_control_acceso_admin'/>
+
+  <record id="group_apoderado_tree" model="ir.ui.view">
+    <field name="name">apoderado.tree</field>
+    <field name="model">apoderado</field>
+    <field name="arch" type="xml">
+      <tree string="Apoderado">
+        <field name="name"/>
+        <field name="email"/>
+      </tree>
+    </field>
+  </record>
+
+  <record id="users_apoderado_action" model="ir.actions.act_window">
+    <field name="name">Padre/Apoderado</field>
+    <field name="res_model">apoderado</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+
+  <menuitem name="Padre/Apoderado" id="user_apoderado_action" parent="elearning_aprentech.menu_configuracion_add" sequence="10" action="users_apoderado_action" groups='elearning_aprentech.group_control_acceso_superadmin,elearning_aprentech.group_control_acceso_admin'/>
+
+  <record id="group_reuniones_tree_1" model="ir.ui.view">
+    <field name="name">reuniones.tree.horario</field>
+    <field name="model">reuniones</field>
+    <field name="arch" type="xml">
+      <tree string="Reuniones" editable="top">
+        <field name="start_time" required="1"/>
+        <field name="end_date_time" required="1"/>
+        <field name="horario_id" invisible="1"/>
+        <field name="grupo_alumnos" readonly="1"/>
+        <field name="curso_general_id" readonly="1"/>
+        <field name="profesor_id" readonly="1"/>
+      </tree>
+    </field>
+  </record>
+
+  <record id="group_reuniones_tree_1" model="ir.ui.view">
+    <field name="name">reuniones.tree.horario</field>
+    <field name="model">reuniones</field>
+    <field name="arch" type="xml">
+      <tree string="Reuniones" editable="top">
+        <field name="start_time" required="1"/>
+        <field name="end_date_time" required="1"/>
+        <field name="horario_id" invisible="1"/>
+        <field name="grupo_alumnos" readonly="1"/>
+        <field name="curso_general_id" readonly="1"/>
+        <field name="profesor_id" readonly="1"/>
+      </tree>
+    </field>
+  </record>
+
+  <record id="group_reuniones_tree" model="ir.ui.view">
+    <field name="name">reuniones.tree</field>
+    <field name="model">reuniones</field>
+    <field name="arch" type="xml">
+      <tree string="Reuniones">
+        <field name="curso_general_id"/>
+        <field name="profesor_id"/>
+        <field name="name"/>
+        <field name="grupo_alumnos"/>
+        <field name="start_time"/>
+      </tree>
+    </field>
+  </record>
+
+  <record id="group_reuniones_form" model="ir.ui.view">
+    <field name="name">reuniones.form</field>
+    <field name="model">reuniones</field>
+    <field name="arch" type="xml">
+      <form string="Carreras">
+        <sheet>
+          <div class="oe_title">
+            <label for="name" class="oe_edit_only" string="Clase"/>
+            <h1><field name="name" default_focus="1" placeholder="CLASE"/></h1>
+          </div>
+          <group>
+            <field name="curso_general_id" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open' : True}"/>
+            <field name="profesor_id" domain="[('share', '=', False),('id', '!=', 2)]" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open' : True}"/>
+            <field name="grupo_alumnos" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open' : True}"/>
+            <field name="start_time"/>
+            <field name="fecha" invisible="1"/>
+            <field name="end_date_time"/>
+          </group>
+
+          <notebook>
+            <page>
+              <group>
+
+                <field name="meet_url" string="Link"/>
+                <field name="meet_id" string="ID" invisible="1"/>
+                <field name="meet_pwd" string="Contraseña" invisible="1"/>
+              </group>
+
+            </page>
+          </notebook>
+        </sheet>
+
+      </form>
+    </field>
+  </record>
+
+  <record id="group_reuniones_calendar" model="ir.ui.view">
+    <field name="name">reuniones.calendar</field>
+    <field name="model">reuniones</field>
+    <field name="priority" eval="2"/>
+    <field name="arch" type="xml">
+      <calendar js_class="attendee_calendar" string="Reuniones" date_start="start_time" date_stop="end_date_time" event_open_popup="true" event_limit="5" color="curso_general_id"></calendar>
+    </field>
+  </record>
+
+  <record id="group_reuniones_action" model="ir.actions.act_window">
+    <field name="name">Reuniones</field>
+    <field name="res_model">reuniones</field>
+    <field name="view_mode">calendar,tree,form</field>
+  </record>
+
+  <!--menuitem name="Reuniones" id="menu_reuniones_grei" parent="elearning_aprentech.menu_principal" sequence="25" action="group_reuniones_action"/-->
+
+  <record id="cursos_aula_elearning_tree" model="ir.ui.view">
+    <field name="name">elearning.aula.curso.tree</field>
+    <field name="model">slide.channel</field>
+    <field name="arch" type="xml">
+
+      <tree string="Cursos">
+        <field name="sequence" widget="handle"/>
+        <field name="name"/>
+        <field name="channel_type"/>
+        <field name="visibility"/>
+        <field name="grupos_aula_id"/>
+        <field name="user_id" string="Profesor"/>
+        <field name="active" invisible="1"/>
+      </tree>
+    </field>
+
+  </record>
+
+  <record id="cursos_aula_elearning_kanban" model="ir.ui.view">
+    <field name="name">elearning.aula.curso.kanban</field>
+    <field name="model">slide.channel</field>
+    <field name="arch" type="xml">
+
+      <kanban string="eLearning Overview" class="o_emphasize_colors o_kanban_dashboard o_slide_kanban breadcrumb_item active" edit="false">
+        <field name="color"/>
+        <field name="website_published"/>
+        <templates>
+          <t t-name="kanban-box">
+            <div t-attf-class="oe_kanban_color_#{kanban_getcolor(record.color.raw_value)} oe_kanban_card oe_kanban_global_click">
+              <div class="o_dropdown_kanban dropdown">
+                <a role="button" class="dropdown-toggle o-no-caret btn" data-toggle="dropdown" href="#" aria-label="Dropdown menu" title="Dropdown menu">
+                  <span class="fa fa-ellipsis-v" aria-hidden="false"/>
+                </a>
+                <div class="dropdown-menu" role="menu">
+                  <ul class="oe_kanban_colorpicker" data-field="color"/>
+                  <t t-if="widget.deletable">
+                    <a class="dropdown-item" role="menuitem" type="delete">Delete</a>
+                  </t>
+                  <a class="dropdown-item" role="menuitem" type="edit">
+                    Edit
+                  </a>
+                  <a class="dropdown-item" name="action_view_slides" role="menuitem" type="object">
+                    Lessons
+                  </a>
+                  <a class="dropdown-item" name="action_channel_invite" role="menuitem" type="object">
+                    Invite
+                  </a>
+                </div>
+              </div>
+              <div class="o_kanban_card_header">
+                <div class="o_kanban_card_header_title mb16">
+                  <div class="o_primary">
+                    <a type="edit" class="mr-auto">
+                      <span><field name="name" class="o_primary"/></span>
+                    </a>
+                  </div>
+                  <div t-if="record.tag_ids">
+                    <field name="tag_ids" widget="many2many_tags"/>
+                  </div>
+                </div>
+              </div>
+              <div class="container o_kanban_card_content mt0">
+                <div class="row mb16">
+                  <div class="col-6 o_kanban_primary_left">
+                    <button class="btn btn-primary" name="open_website_url" type="object">Ver Curso</button>
+                  </div>
+                  <div class="col-6 o_kanban_primary_right">
+                    <div class="d-flex" t-if="record.rating_count.raw_value">
+                      <a name="action_view_ratings" type="object" class="mr-auto"><field name="rating_count"/>
+                        reviews</a>
+                      <span><field name="rating_avg_stars"/>
+                        / 5</span>
+                    </div>
+                    <div class="d-flex">
+                      <span class="mr-auto">
+                        <label for="total_views" class="mb0">Vistas</label>
+                      </span>
+                      <field name="total_views"/>
+                    </div>
+                    <div class="d-flex" name="info_total_time">
+                      <span class="mr-auto">
+                        <label for="total_time" class="mb0">Duración</label>
+                      </span>
+                      <field name="total_time" widget="float_time"/>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mt3">
+                  <div class="col-4 border-right">
+                    <a name="action_view_slides" type="object" class="d-flex flex-column align-items-center">
+                      <span class="font-weight-bold"><field name="total_slides"/></span>
+                      <span class="text-muted">Contenidos</span>
+                    </a>
+                  </div>
+                  <div class="col-4 border-right">
+                    <a name="action_redirect_to_members" type="object" class="d-flex flex-column align-items-center">
+                      <span class="font-weight-bold"><field name="members_count"/></span>
+                      <span class="text-muted">Asistentes</span>
+                    </a>
+                  </div>
+                  <div class="col-4">
+                    <a name="action_redirect_to_done_members" type="object" class="d-flex flex-column align-items-center">
+                      <span class="font-weight-bold"><field name="members_done_count"/></span>
+                      <span name="done_members_count_label" class="text-muted">Finalizados</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </t>
+        </templates>
+      </kanban>
+    </field>
+
+  </record>
+
+  <record id="cursos_aula_elearning_form" model="ir.ui.view">
+    <field name="name">elearning.aula.curso.form</field>
+    <field name="model">slide.channel</field>
+    <field name="arch" type="xml">
+      <form string="Channels">
+        <sheet>
+          <div class="oe_button_box" name="button_box">
+            <button name="action_view_slides" type="object" icon="fa-files-o" class="oe_stat_button" groups="website.group_website_publisher">
+              <div class="o_field_widget o_stat_info">
+                <span class="o_stat_value"><field name="total_slides" nolabel="1"/></span>
+                <span name="total_slides_label" class="o_stat_text">Contenido</span>
+              </div>
+            </button>
+            <button name="action_redirect_to_done_members" type="object" icon="fa-trophy" class="oe_stat_button" groups="website.group_website_publisher">
+              <div class="o_field_widget o_stat_info">
+                <span class="o_stat_value"><field name="members_done_count" nolabel="1"/></span>
+                <span name="members_done_count_label" class="o_stat_text">Finalizado</span>
+              </div>
+            </button>
+            <button name="action_redirect_to_members" type="object" icon="fa-users" class="oe_stat_button" groups="website.group_website_publisher">
+              <field name="members_count" string="Participantes" widget="statinfo"/>
+            </button>
+            <button name="action_view_ratings" type="object" icon="fa-star" class="oe_stat_button" groups="website.group_website_publisher" attrs="{'invisible': [('allow_comment', '=', False)]}">
+              <field name="rating_count" string="Reseñas" widget="statinfo"/>
+            </button>
+            <button name="action_redirect_to_forum" type="object" class="oe_stat_button" attrs="{'invisible': [('forum_id', '=', False)]}" icon="fa-comment">
+              <field string="Post del Foro" name="forum_total_posts" widget="statinfo"/>
+            </button>
+            <field name="is_published" widget="website_redirect_button"/>
+          </div>
+          <widget name="web_ribbon" title="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}"/>
+          <field name="image_1920" widget="image" class="oe_avatar" options="{'preview_image': 'image_128'}"/>
+          <div class="oe_title">
+            <label for="name" class="oe_edit_only" string="Título del curso"/>
+            <h1><field name="curso_general_id" default_focus="1" placeholder="Título del curso" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open' : True}"/></h1>
+          </div>
+          <div>
+            <field name="name" invisible="1"/>
+            <field name="active" invisible="1"/>
+            <field name="tag_ids" widget="many2many_tags" placeholder="Etiquetas"/>
+          </div>
+          <notebook colspan="4">
+            <page name="content" string="Contenido">
+              <field name="slide_ids" colspan="4" nolabel="1" widget="slide_category_one2many" mode="tree,kanban" context="{'default_channel_id': active_id, 'form_view_ref' : 'website_slides.view_slide_slide_form_wo_channel_id'}">
+                <tree decoration-bf="is_category" editable="bottom">
+                  <field name="sequence" widget="handle"/>
+                  <field name="name"/>
+                  <field name="slide_type" attrs="{'invisible': [('slide_type', '=', 'category')]}"/>
+                  <field name="completion_time" attrs="{'invisible': [('slide_type', '=', 'category')]}" string="Duration" widget="float_time"/>
+                  <field name="total_views" attrs="{'invisible': [('slide_type', '=', 'category')]}"/>
+                  <field name="is_category" invisible="1"/>
+                  <control>
+                    <create name="add_slide_section" string="Añadir Sección" context="{'default_is_category': True}"/>
+                    <create name="add_slide_lesson" string="Añadir Contenido"/>
+                  </control>
+                </tree>
+              </field>
+            </page>
+            <page name="description" string="Descripción">
+              <field name="description" colspan="4" nolabel="1"/>
+            </page>
+            <page name="options" string="Opciones">
+              <group name="course" string="Curso">
+                <field string="Tipo" name="channel_type" widget="radio"/>
+                <field name="user_id" string="Profesor" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open' : True}"/>
+              </group>
+              <!-- <group name="access_rights" string="Access Rights"> <field name="enroll" widget="radio" options="{'horizontal': true}"/> <field name="upload_group_ids" widget="many2many_tags" groups="base.group_no_one"/> <field name="enroll_group_ids"
+              widget="many2many_tags" groups="base.group_no_one"/> </group> -->
+              <group>
+                <group name="communication" string="Comunicación">
+                  <field string="Permitir calificación" name="allow_comment"/>
+                  <field string="Foro del Curso" name="forum_id"/>
+                </group>
+                <group name="display" string="Mostrar en pantalla">
+                  <field name="visibility" widget="radio"/>
+                </group>
+              </group>
+            </page>
+            <page string="Reglas del karma" name="karma_rules">
+              <group>
+                <field name="karma_gen_channel_rank" string="Rank Course"/>
+                <field name="karma_gen_channel_finish" string="Finish Course"/>
+                <field name="karma_review" attrs="{'invisible': [('allow_comment', '!=', True)]}"/>
+                <field name="karma_slide_comment" attrs="{'invisible': [('allow_comment', '!=', True)]}"/>
+                <field name="karma_slide_vote" attrs="{'invisible': [('allow_comment', '!=', True)]}"/>
+              </group>
+            </page>
+            <page name="statistics" string="Estadísticas">
+              <group>
+                <group name="statistics_nbr" class="col-4">
+                  <field name="nbr_presentation"/>
+                  <field name="nbr_document"/>
+                  <field name="nbr_video"/>
+                  <field name="nbr_infographic"/>
+                  <field name="nbr_quiz" string="Quizzes"/>
+                  <field name="nbr_webpage"/>
+                </group>
+                <group name="view_stats">
+                  <field name="total_views" string="Visitas"/>
+                  <field string="Calificación" name="rating_avg" widget="field_float_rating"/>
+                  <label for="total_time" string="Tiempo de observación"/>
+                  <div>
+                    <field name="total_time"/>
+                    <span class="ml-2">Hours</span>
+                  </div>
+                </group>
+              </group>
+            </page>
+          </notebook>
+        </sheet>
+        <div class="oe_chatter">
+          <field name="message_follower_ids" widget="mail_followers"/>
+          <field name="message_ids" widget="mail_thread"/>
+        </div>
+      </form>
+    </field>
+  </record>
+
+</odoo>

@@ -1,0 +1,179 @@
+<?xml version="1.0"?>
+<odoo>
+
+<record id="informe_curso_action_tech" model="ir.actions.act_window">
+  <field name="name">Cursos</field>
+  <field name="res_model">slide.channel</field>
+  <field name="view_mode">tree,graph</field>
+  <field name="domain">[('company_id', '=', allowed_company_ids[0])]</field>
+  <field name="search_view_id" ref="website_slides.slide_channel_view_search"/>
+</record>
+
+
+<record model="ir.actions.act_window.view" id="informe_curso_elearning_action_2">
+  <field name="sequence" eval="2"/>
+  <field name="view_mode">tree</field>
+  <field name="view_id" ref="website_slides.slide_channel_view_tree_report"/>
+  <field name="act_window_id" ref="informe_curso_action_tech"/>
+</record>
+
+<record model="ir.actions.act_window.view" id="informe_curso_elearning_action_3">
+  <field name="sequence" eval="3"/>
+  <field name="view_mode">graph</field>
+  <field name="view_id" ref="website_slides.slide_channel_view_graph"/>
+  <field name="act_window_id" ref="informe_curso_action_tech"/>
+</record>
+
+
+<menuitem id="menu_informe"
+            name="Informes"
+            sequence="30"
+            parent="elearning_aprentech.menu_principal"/>
+
+
+<menuitem id="menu_informe_cursos"
+            name="Cursos"
+            action = "informe_curso_action_tech"
+            sequence="10"
+            parent="elearning_aprentech.menu_informe"/>
+
+
+  <record id="informe_contenido_action_tech" model="ir.actions.act_window">
+    <field name="name">Contenido</field>
+    <field name="res_model">slide.slide</field>
+    <field name="view_mode">graph,pivot</field>
+    <field name="domain">[('company_id', '=', allowed_company_ids[0])]</field>
+    <field name="search_view_id" ref="website_slides.view_slide_slide_search"/>
+  </record>
+
+
+  <record model="ir.actions.act_window.view" id="informe_curso_elearning_action_2">
+    <field name="sequence" eval="2"/>
+    <field name="view_mode">graph</field>
+    <field name="view_id" ref="website_slides.slide_slide_view_graph"/>
+    <field name="act_window_id" ref="informe_contenido_action_tech"/>
+  </record>
+
+  <record model="ir.actions.act_window.view" id="informe_curso_elearning_action_3">
+    <field name="sequence" eval="3"/>
+    <field name="view_mode">pivot</field>
+    <field name="view_id" ref="website_slides.slide_slide_view_pivot"/>
+    <field name="act_window_id" ref="informe_contenido_action_tech"/>
+  </record>
+
+
+  <menuitem id="menu_informe_contenido"
+      name="Contenidos"
+      action = "informe_contenido_action_tech"
+      sequence="20"
+      parent="elearning_aprentech.menu_informe"/>
+
+
+
+        <record id="informe_resena_action_tech" model="ir.actions.act_window">
+          <field name="name">Reseñas</field>
+          <field name="res_model">rating.rating</field>
+          <field name="view_mode">graph,pivot,tree</field>
+          <field name="domain">[('company_id', '=', allowed_company_ids[0])]</field>
+          <field name="search_view_id" ref="website_slides.rating_rating_view_search_slide_channel"/>
+        </record>
+
+
+        <record model="ir.actions.act_window.view" id="informe_resena_elearning_action_2">
+          <field name="sequence" eval="2"/>
+          <field name="view_mode">graph</field>
+          <field name="view_id" ref="website_slides.rating_rating_view_graph_slide_channel"/>
+          <field name="act_window_id" ref="informe_resena_action_tech"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="informe_resena_elearning_action_3">
+          <field name="sequence" eval="3"/>
+          <field name="view_mode">pivot</field>
+          <field name="view_id" ref="website_slides.rating_rating_view_pivot_slide_channel"/>
+          <field name="act_window_id" ref="informe_resena_action_tech"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="informe_resena_elearning_action_4">
+          <field name="sequence" eval="4"/>
+          <field name="view_mode">tree</field>
+          <field name="view_id" ref="rating.rating_rating_view_tree"/>
+          <field name="act_window_id" ref="informe_resena_action_tech"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="informe_resena_elearning_action_5">
+          <field name="sequence" eval="5"/>
+          <field name="view_mode">form</field>
+          <field name="view_id" ref="rating.rating_rating_view_form"/>
+          <field name="act_window_id" ref="informe_resena_action_tech"/>
+        </record>
+
+        <menuitem id="menu_informe_resena"
+                    name="Reseñas"
+                    action = "informe_resena_action_tech"
+                    sequence="30"
+                    parent="elearning_aprentech.menu_informe"/>
+
+
+        <record id="informe_quizzes_action_tech" model="ir.actions.act_window">
+          <field name="name">Quizzes</field>
+          <field name="res_model">slide.question</field>
+          <field name="view_mode">tree,form</field>
+          <field name="domain">[('company_id', '=', allowed_company_ids[0])]</field>
+          <field name="search_view_id" ref="website_slides.slide_question_view_search"/>
+        </record>
+
+
+        <record model="ir.actions.act_window.view" id="informe_quizzes_elearning_action_2">
+          <field name="sequence" eval="2"/>
+          <field name="view_mode">tree</field>
+          <field name="view_id" ref="website_slides.slide_question_view_tree_report"/>
+          <field name="act_window_id" ref="informe_quizzes_action_tech"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="informe_quizzes_elearning_action_3">
+          <field name="sequence" eval="3"/>
+          <field name="view_mode">form</field>
+          <field name="view_id" ref="website_slides.slide_question_view_form"/>
+          <field name="act_window_id" ref="informe_quizzes_action_tech"/>
+        </record>
+
+
+        <menuitem id="menu_informe_quizzes"
+                    name="Quizzes"
+                    action = "informe_quizzes_action_tech"
+                    sequence="40"
+                    parent="elearning_aprentech.menu_informe"/>
+
+
+    <record id="informe_foro_action_tech" model="ir.actions.act_window">
+      <field name="name">Foros</field>
+      <field name="res_model">forum.post</field>
+      <field name="view_mode">graph</field>
+      <field name="domain">[('company_id', '=', allowed_company_ids[0])]</field>
+      <field name="search_view_id" ref="website_forum.view_forum_post_search"/>
+    </record>
+
+
+    <record model="ir.actions.act_window.view" id="informe_foro_elearning_action_2">
+      <field name="sequence" eval="2"/>
+      <field name="view_mode">graph</field>
+      <field name="view_id" ref="website_slides_forum.forum_post_view_graph_slides"/>
+      <field name="act_window_id" ref="informe_foro_action_tech"/>
+    </record>
+
+
+    <menuitem id="menu_informe_foro"
+                name="Foros"
+                action = "informe_foro_action_tech"
+                sequence="50"
+                parent="elearning_aprentech.menu_informe"/>
+
+    <record id="informe_certificacion_action_tech" model="ir.actions.act_window">
+      <field name="name">Certificaciones</field>
+      <field name="res_model">survey.survey</field>
+      <field name="view_mode">graph</field>
+      <field name="domain">[('company_id', '=', allowed_company_ids[0])]</field>
+    </record>
+
+
+</odoo>

@@ -1,0 +1,175 @@
+.render-examen{
+  max-width: 100%;
+  height: 100vh;
+  width: 69%;
+  float: left;
+  display: flex;
+
+}
+.render-solucionario{
+  max-width: 100%;
+  height: 100vh;
+  width: 69%;
+  float: center;
+  display: flex;
+
+}
+.btn-entrega{
+  max-width: 100%;
+  float: center !important;
+  display: flex;
+
+}
+.seccion-preguntas{
+  width: 31%;
+  float: right;
+
+}
+
+.pregunta{
+  display: flex;
+
+}
+
+.alternativa{
+  height: 40px;
+  width: 55px;
+  margin: 5px;
+  padding: 3px;
+}
+.cronometro{
+  width: 50%;
+  float: center;
+}
+.counter-clock::after,
+.counter-clock__item::before {
+    content:"";
+    display:block
+}
+.counter-clock,.counter-clock *,
+.counter-clock ::after,
+.counter-clock ::before {
+    box-sizing:border-box
+}
+.counter-clock {
+    font-size:14px;
+}
+.counter-clock::after {
+    clear:both
+}
+.counter-clock__item {
+    margin:0 .3em 0 0;
+    line-height:1;
+    position:relative;
+}
+.counter-clock__item::before{
+    position:absolute;
+    width:100%;
+    top:50%;
+    margin-top:-1px;
+    left:0;
+}
+.counter-clock__info{
+    margin:0 0 1em;
+    font-weight:500;
+}
+/*
+=> Personalizacion
+*/
+/* Contador
+-------------------------------------*/
+.counter-clock__item {
+    background:#212121; /*fondo*/
+    color:#fff; /*color*/
+    font-size:1.2em; /*tamaño de fuente*/
+    padding:1em .5em; /*Relleno*/
+    box-shadow:0 60px 60px -30px rgba(255,255,255,.05) inset, 0 2px 1px 0 rgba(0,0,0,1);
+    border-radius:3px; /* Bordes redondeados */
+}
+.counter-clock__item::before{
+    border-top:1px solid rgba(0,0,0,.5); /* Borde medio superior */
+    border-bottom:1px solid rgba(255,255,255,.1); /* Borde medio inferior */
+    box-shadow:0 0 10px 0 rgba(0,0,0,.5); /* Sombra */
+}
+/* Informacion
+-------------------------------------*/
+.counter-clock__info{
+    padding:1em; /*Relleno*/
+    background:#e4e4e4; /*fondo*/
+    border-radius:3px; /* Bordes redondeados */
+    color:#757575; /*color*/
+}
+
+
+
+
+
+
+/*card for examenese*/
+
+.section-examenes {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.section-examenes .flex-col {
+  padding: 15px;
+}
+
+.section-examenes .flex-col .cards {
+  max-width: 380px;
+  height: 255px;
+  background-color: #fff;
+  padding: 30px;
+  align-items: center;
+
+  position: relative;
+  border-radius: 5px;
+  margin-bottom: 35px;
+  box-shadow: 1px 3px 12px 1px hsl(229, 6%, 66%);
+}
+
+.section-examenes .flex-col .cards h3 {
+  font-size: 1.5rem;
+}
+
+.section-examenes .flex-col .cards p {
+  margin-top: 10px;
+  line-height: 2;
+}
+
+.section-examenes .flex-col .cards img {
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+}
+
+.section-examenes .one {
+  border-top: 5px hsl(180, 62%, 55%) solid;
+}
+
+.section-examenes .two {
+  border-top: 5px hsl(0, 78%, 62%) solid;
+}
+
+.section-examenes .three {
+  border-top: 5px hsl(34, 97%, 64%) solid;
+}
+
+.section-examenes .four {
+  border-top: 5px hsl(212, 86%, 64%) solid;
+}
+
+@media (max-width: 960px) {
+  .section-examenes {
+    flex-direction: column;
+  }
+
+  .section-examenes .flex-col {
+    padding: 0 40px;
+  }
+
+
+}

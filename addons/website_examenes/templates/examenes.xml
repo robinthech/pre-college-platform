@@ -1,0 +1,182 @@
+<odoo>
+
+  <template id="examenes_layout" name="Examen">
+    <t t-call="website.layout">
+      <div class="examenes">
+        <div class="render-examen">
+          <t t-if="len(examen.exam_file_ids)>0">
+            <object t-attf-data="/web/content/{{examen.exam_file_ids[0].id}}#toolbar=0" type="application/pdf" width="100%" height="100%"/>
+          </t>
+          <t t-else="">
+            <div class="card text-center">
+              <div class="card-header">
+                ALERTA
+              </div>
+              <div class="card-body">
+                <p class="card-text">No se ha publicado el pdf</p>
+              </div>
+              <div class="card-footer text-muted"></div>
+            </div>
+          </t>
+        </div>
+        <div class="seccion-preguntas" t-att-data-respuesta_id="respuesta.id">
+          <div class="d-flex flex-column temporizador_container" t-att-data-duracion="evaluacion.duracion" t-att-data-create_date="respuesta.create_date">
+            <div class="d-flex mt-3 mb-1">
+              <span class="text-center   badge badge-danger pt-2 pb-2 msg-tempo" style="flex:1">FALTAN
+                <span class="tiempo-restante-horas">0</span>
+                H
+                <span class="tiempo-restante-minutos">0</span>
+                MINUTOS PARA QUE TERMINE EXAMEN</span>
+            </div>
+            <div class="d-flex flex-row justify-content-center">
+              <div class="d-flex flex-column ml-2 mr-2 align-items-center">
+                <span class="font-weight-bold h2 mb-0 tempo-horas">00</span>
+                <span class="font-weight-bold text-10">Horas</span>
+              </div>
+              <div class="d-flex flex-column ml-2 mr-2 align-items-center">
+                <span class="font-weight-bold h2 mb-0 tempo-minutos">00</span>
+                <span class="font-weight-bold text-10">Minutos</span>
+              </div>
+              <div class="d-flex flex-column ml-2 mr-2 align-items-center">
+                <span class="font-weight-bold h2 mb-0 tempo-segundos">00</span>
+                <span class="font-weight-bold text-10">Seg</span>
+              </div>
+            </div>
+          </div>
+          <t t-set="contador_a" t-value="0"/>
+          <t t-set="identificador_respuesta" t-value="0"/>
+          <div id="accordion">
+            <t t-foreach="respuesta.respuestas_ids" t-as="respuesta_line">
+              <t t-if="respuesta_line.is_curso">
+                <div class="card">
+                  <div class="card-header" t-attf-id="heading_{{respuesta_line.id}}">
+                    <h5 class="mb-0">
+                      <button class="btn btn-link" data-toggle="collapse" t-attf-data-target="#collapse_{{respuesta_line.id}}" aria-expanded="false" t-attf-aria-controls="collapse_{{respuesta_line.id}}">
+                        <t t-esc="respuesta_line.curso_general_id.name"/>
+                      </button>
+                    </h5>
+                    <t t-set="contador_a" t-value="contador_a+1"/>
+                    <t t-set="contador_b" t-value="0"/>
+                  </div>
+                  <div t-attf-id="collapse_{{respuesta_line.id}}" class="collapse" t-attf-aria-labelledby="heading_{{respuesta_line.id}}" data-parent="#accordion">
+                    <div class="card-body">
+                      <t t-foreach="respuesta.respuestas_ids" t-as="respuesta_line_2">
+                        <t t-if="respuesta_line_2.is_curso">
+                          <t t-set="contador_b" t-value="contador_b+1"/>
+                        </t>
+                        <t t-if="contador_b == contador_a">
+                          <t t-if="respuesta_line_2.is_curso"></t>
+                          <t t-else="">
+                            <t t-set="identificador_respuesta" t-value="identificador_respuesta+1"/>
+
+                            <div class="d-flex flex-row justify-content-between row-alternativas" t-att-data-pregunta_id="respuesta_line_2.id" t-att-data-sequence="identificador_respuesta">
+                              <div class=" alternativa">
+                                <span t-esc="respuesta_line_2.sequence"></span>
+                              </div>
+                              <div class=" alternativa">
+                                <t t-if="respuesta_line_2.respuesta_a">
+                                  <input type="radio" class="" t-attf-name="opcion_{{respuesta_line_2.id}}" t-attf-id="opcion_{{respuesta_line_2.id}}_a" t-att-data-alternativa="'A'" checked="1"/>
+                                  <label t-attf-for="opcion_{{respuesta_line_2.id}}_a">A</label>
+                                </t>
+                                <t t-else="">
+                                  <input type="radio" class="" t-attf-name="opcion_{{respuesta_line_2.id}}" t-attf-id="opcion_{{respuesta_line_2.id}}_a" t-att-data-alternativa="'A'"/>
+                                  <label t-attf-for="opcion_{{respuesta_line_2.id}}_a">A</label>
+                                </t>
+                              </div>
+                              <div class="alternativa ">
+                                <t t-if="respuesta_line_2.respuesta_b">
+                                  <input type="radio" class="" t-attf-name="opcion_{{respuesta_line_2.id}}" t-attf-id="opcion_{{respuesta_line_2.id}}_b" t-att-data-alternativa="'B'" checked="1"/>
+                                  <label t-attf-for="opcion_{{respuesta_line_2.id}}_b">B</label>
+                                </t>
+                                <t t-else="">
+                                  <input type="radio" class="" t-attf-name="opcion_{{respuesta_line_2.id}}" t-attf-id="opcion_{{respuesta_line_2.id}}_b" t-att-data-alternativa="'B'"/>
+                                  <label t-attf-for="opcion_{{respuesta_line_2.id}}_b">B</label>
+                                </t>
+
+                              </div>
+                              <div class=" alternativa">
+                                <t t-if="respuesta_line_2.respuesta_c">
+                                  <input type="radio" class="" t-attf-name="opcion_{{respuesta_line_2.id}}" t-attf-id="opcion_{{respuesta_line_2.id}}_c" t-att-data-alternativa="'C'" checked="1"/>
+                                  <label t-attf-for="opcion_{{respuesta_line_2.id}}_c">C</label>
+                                </t>
+                                <t t-else="">
+                                  <input type="radio" class="" t-attf-name="opcion_{{respuesta_line_2.id}}" t-attf-id="opcion_{{respuesta_line_2.id}}_c" t-att-data-alternativa="'C'"/>
+                                  <label t-attf-for="opcion_{{respuesta_line_2.id}}_c">C</label>
+                                </t>
+                              </div>
+                              <div class=" alternativa">
+                                <t t-if="respuesta_line_2.respuesta_d">
+                                  <input type="radio" class="" t-attf-name="opcion_{{respuesta_line_2.id}}" t-attf-id="opcion_{{respuesta_line_2.id}}_d" t-att-data-alternativa="'D'" checked="1"/>
+                                  <label t-attf-for="opcion_{{respuesta_line_2.id}}_d">D</label>
+                                </t>
+                                <t t-else="">
+                                  <input type="radio" class="" t-attf-name="opcion_{{respuesta_line_2.id}}" t-attf-id="opcion_{{respuesta_line_2.id}}_d" t-att-data-alternativa="'D'"/>
+                                  <label t-attf-for="opcion_{{respuesta_line_2.id}}_d">D</label>
+                                </t>
+                              </div>
+                              <div class="alternativa ">
+                                <t t-if="respuesta_line_2.respuesta_e">
+                                  <input type="radio" class="" t-attf-name="opcion_{{respuesta_line_2.id}}" t-attf-id="opcion_{{respuesta_line_2.id}}_e" t-att-data-alternativa="'E'" checked="1"/>
+                                  <label t-attf-for="opcion_{{respuesta_line_2.id}}_e">E</label>
+                                </t>
+                                <t t-else="">
+                                  <input type="radio" class="" t-attf-name="opcion_{{respuesta_line_2.id}}" t-attf-id="opcion_{{respuesta_line_2.id}}_e" t-att-data-alternativa="'E'"/>
+                                  <label t-attf-for="opcion_{{respuesta_line_2.id}}_e">E</label>
+
+                                </t>
+                              </div>
+                            </div>
+
+                          </t>
+                        </t>
+                      </t>
+
+                    </div>
+                  </div>
+
+                </div>
+              </t>
+            </t>
+          </div>
+
+          <div class="mx-auto row-center btn-entrega " t-att-data-respuesta_id="respuesta.id">
+            <a class="btn btn-success " role="button" href="/evaluaciones">ENTREGAR EXAMEN</a>
+          </div>
+        </div>
+
+      </div>
+    </t>
+  </template>
+
+  <template id="template_entregado" name="Examen Entregado">
+    <t t-call="website.layout">
+      <div class="card text-center">
+        <div class="card-header">
+          EXAMEN ENTREGADO
+        </div>
+        <div class="card-body">
+          <p class="card-text">SE HA ENTREGADO SU EXAMEN</p>
+          <a href="/evaluaciones" class="btn btn-primary">EVALUACIONES</a>
+        </div>
+        <div class="card-footer text-muted"></div>
+      </div>
+    </t>
+  </template>
+
+  <template id="template_tiempo_acabado" name="Tiempo Acabado">
+    <t t-call="website.layout">
+      <div class="card text-center">
+        <div class="card-header">
+          ALERTA
+        </div>
+        <div class="card-body">
+          <p class="card-text">YA NO CUENTA CON TIEMPO</p>
+          <a href="/evaluaciones" class="btn btn-primary">EVALUACIONES</a>
+        </div>
+        <div class="card-footer text-muted"></div>
+      </div>
+
+    </t>
+  </template>
+
+</odoo>

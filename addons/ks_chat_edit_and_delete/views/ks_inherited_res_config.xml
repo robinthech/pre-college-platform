@@ -1,0 +1,476 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+      <field name="name">res.config.settings.view.form.inherit.chat</field>
+      <field name="model">res.config.settings</field>
+      <field name="priority" eval="100"/>
+      <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+      <field name="arch" type="xml">
+        <xpath expr="//div[@id='business_documents']" position="before">
+          <div class="app_settings_custom">
+            <h2>Chat Edit/Delete</h2>
+          </div>
+          <div class="row mt16 o_settings_container">
+            <div class="col-12 col-lg-6 o_setting_box">
+              <div class="o_setting_left_pane">
+                <field name="ks_chat_enable"/>
+              </div>
+              <div class="o_setting_right_pane">
+                <span>Enable</span>
+              </div>
+            </div>
+            <div attrs="{'invisible':[('ks_chat_enable','=',False)]}" class="col-12 col-lg-6 o_setting_box">
+              <div class="o_setting_left_pane">
+                <field name="ks_admin_delete_access"/>
+              </div>
+              <div class="o_setting_right_pane">
+                <span>Allow Admin to delete any chat</span>
+              </div>
+            </div>
+          </div>
+        </xpath>
+      </field>
+    </record>
+
+
+
+    <record id="im_livechat_channel_view_kanban_chat" model="ir.ui.view">
+        <field name="name">im_livechat.channel.kanban</field>
+        <field name="model">im_livechat.channel</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="id"/>
+                <field name="name"/>
+                <field name="web_page" widget="url"/>
+                <field name="are_you_inside"/>
+                <field name="user_ids"/>
+                <field name="nbr_channel"/>
+                <field name="rating_percentage_satisfaction"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <div class="o_kanban_image">
+                                <img t-att-src="kanban_image('im_livechat.channel', 'image_128', record.id.raw_value)" class="img-fluid" alt="Channel"/>
+                            </div>
+                            <div class="oe_kanban_details">
+                                <div class="float-right">
+                                    <button t-if="record.are_you_inside.raw_value" name="action_quit" type="object" class="btn btn-primary">Salir</button>
+                                    <button t-if="!record.are_you_inside.raw_value" name="action_join" type="object" class="btn btn-primary">Unirse</button>
+                                </div>
+                                <strong class="o_kanban_record_title" style="word-wrap: break-word;"><field name="name"/></strong>
+                                <div>
+                                    <div>
+                                        <i class="fa fa-user" role="img" aria-label="User" title="User"></i>
+                                        <t t-esc="(record.user_ids.raw_value || []).length"/> Operadores
+                                        <br/>
+                                        <i class="fa fa-comments" role="img" aria-label="Comments" title="Comments"></i>
+                                        <t t-esc="record.nbr_channel.raw_value"/> Sesiones
+                                         <div class="float-right">
+                                            <t t-if="record.rating_percentage_satisfaction.raw_value &gt; 0">
+                                                <a type="action" name="%(im_livechat.rating_rating_action_view_livechat_rating)d" tabindex="10">
+                                                    <i class="fa fa-smile-o text-success" t-if="record.rating_percentage_satisfaction.raw_value &gt;= 70" title="Rating: Great" role="img" aria-label="Happy face"/>
+                                                    <i class="fa fa-meh-o text-warning" t-if="record.rating_percentage_satisfaction.raw_value &gt; 30 and record.rating_percentage_satisfaction.raw_value &lt; 70" title="Rating: Okay" role="img" aria-label="Neutral face"/>
+                                                    <i class="fa fa-frown-o text-danger" t-if="record.rating_percentage_satisfaction.raw_value &lt;= 30" title="Rating: Bad" role="img" aria-label="Sad face"/>
+                                                   <t t-esc="record.rating_percentage_satisfaction.raw_value"/>%
+                                               </a>
+                                            </t>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="im_livechat_channel_view_form_chat" model="ir.ui.view">
+        <field name="name">im_livechat.channel.form</field>
+        <field name="model">im_livechat.channel</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button type="object" name="action_join" class="oe_highlight" string="Unirme al Canal" attrs='{"invisible": [["are_you_inside", "=", True]]}'/>
+                    <button type="object" name="action_quit" string="Salir del Canal" attrs='{"invisible": [["are_you_inside", "=", False]]}'/>
+                    <field name="are_you_inside" invisible="1"/>
+                </header>
+            <sheet>
+                <div class="oe_button_box" name="button_box">
+                    <button class="oe_stat_button" type="action" attrs="{'invisible':[('nbr_channel','=', 0)]}" name="%(im_livechat.mail_channel_action_from_livechat_channel)d" icon="fa-comments">
+                        <field string="Sesiones" name="nbr_channel" widget="statinfo"/>
+                    </button>
+                    <button name="action_view_rating" attrs="{'invisible':[('rating_percentage_satisfaction','=', -1)]}" class="oe_stat_button" type="object" icon="fa-smile-o">
+                        <field string="% Felicidad" name="rating_percentage_satisfaction" widget="statinfo"/>
+                    </button>
+                </div>
+                <field name="image_128" widget="image" class="oe_avatar"/>
+                <div class="oe_title">
+                    <label for="name" class="oe_edit_only"/>
+                    <h1>
+                        <field name="name" placeholder="e.g. YourWebsite.com"/>
+                    </h1>
+                </div>
+                <notebook>
+                    <page string="Operadores">
+                        <group>
+                            <field name="user_ids" nolabel="1" colspan="2">
+                                <kanban>
+                                    <field name="id"/>
+                                    <field name="name"/>
+                                    <templates>
+                                        <t t-name="kanban-box">
+                                            <div class="oe_kanban_global_click">
+                                                <div class="o_kanban_image">
+                                                    <img t-att-src="kanban_image('res.users', 'image_1024', record.id.raw_value)" alt="User"/>
+                                                </div>
+                                                <div class="o_kanban_details">
+                                                    <h4 class="o_kanban_record_title"><field name="name"/></h4>
+                                                </div>
+                                            </div>
+                                        </t>
+                                    </templates>
+                                </kanban>
+                            </field>
+                            <p class="text-muted" style="padding-left: 8px">
+                            </p>
+                        </group>
+                    </page>
+                    <page string="Opciones">
+                        <group>
+                            <field name="button_text" placeholder="e.g. Integral Class"/>
+                            <field name="default_message" placeholder="e.g. Hello, how may I help you?"/>
+                            <field name="input_placeholder" placeholder="hola, cual es tu consulta"/>
+                        </group>
+                    </page>
+                    <page string="Reglas">
+                        <span class="text-muted">Define reglas para el canal</span>
+                        <group>
+                            <field name="rule_ids" nolabel="1"/>
+                        </group>
+                    </page>
+                    <page string="Widget">
+                        <group attrs='{"invisible": [["web_page", "!=", False]]}'>
+                            <div class="alert alert-warning mt4 mb16" role="alert">
+                          Guarda para obtener el link
+                            </div>
+                        </group>
+                        <group>
+                            <div attrs='{"invisible": [["web_page", "=", False]]}'>
+                                <separator string="Link para el canal"/>
+                                <!--p>
+                                    Copy and paste this code into your website, within the &lt;head&gt; tag:
+                                </p>
+                                <field name="script_external" readonly="1" widget="CopyClipboardText"/>
+                                <p>
+                                    or copy this url and send it by email to your customers or suppliers:
+                                </p-->
+                                <field name="web_page" readonly="1" widget="CopyClipboardChar"/>
+                                <p>Link para el canal</p>
+                            </div>
+                        </group>
+                    </page>
+                </notebook>
+            </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="im_livechat_channel_view_search_chat" model="ir.ui.view">
+        <field name="name">im.livechat.channel.view.search</field>
+        <field name="model">im_livechat.channel</field>
+        <field name="arch" type="xml">
+            <search string="LiveChat Channel Search">
+                <field name="name" string="Channel"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="im_livechat_channel_action_chat" model="ir.actions.act_window">
+        <field name="name">Canales</field>
+        <field name="res_model">im_livechat.channel</field>
+        <field name="view_mode">kanban,form</field>
+        <field name="search_view_id" ref="ks_chat_edit_and_delete.im_livechat_channel_view_search_chat"/>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+          Crea un nuevo canal
+          </p><p>
+            Crea canales y conversa con tus visitantes
+          </p>
+        </field>
+    </record>
+
+
+        <record model="ir.actions.act_window.view" id="canal_action_1">
+          <field name="sequence" eval="1"/>
+          <field name="view_mode">kanban</field>
+          <field name="view_id" ref="ks_chat_edit_and_delete.im_livechat_channel_view_kanban_chat"/>
+          <field name="act_window_id" ref="im_livechat_channel_action_chat"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="canal_action_2">
+          <field name="sequence" eval="3"/>
+          <field name="view_mode">form</field>
+          <field name="view_id" ref="ks_chat_edit_and_delete.im_livechat_channel_view_form_chat"/>
+          <field name="act_window_id" ref="im_livechat_channel_action_chat"/>
+        </record>
+
+
+
+        <!-- website visitor views -->
+        <record id="website_visitor_view_kanban_chat" model="ir.ui.view">
+            <field name="name">website.visitor.view.kanban</field>
+            <field name="model">website.visitor</field>
+            <field name="arch" type="xml">
+                <kanban class="o_wvisitor_kanban">
+                    <field name="id"/>
+                    <field name="country_id"/>
+                    <field name="email"/>
+                    <field name="is_connected"/>
+                    <field name="display_name"/>
+                    <field name="last_visited_page_id"/>
+                    <field name="page_ids"/>
+                    <field name="partner_id"/>
+                    <field name="partner_image"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click o_wvisitor_kanban_card">
+                                <!-- displayed in ungrouped mode -->
+                                <div class="o_kanban_detail_ungrouped row">
+                                    <div class="o_wvisitor_kanban_image">
+                                         <img t-if="record.partner_image.raw_value"
+                                            t-att-src="kanban_image('res.partner', 'image_128', record.partner_id.raw_value)"
+                                            width="54px" height="54px" alt="Visitor"/>
+                                         <img t-else=""
+                                            t-attf-src="/base/static/img/avatar_grey.png"
+                                            width="54px" height="54px" alt="Visitor"/>
+                                    </div>
+                                    <div class="col o_wvisitor_name">
+                                        <div>
+                                            <b><field name="display_name"/></b>
+                                            <div class="float-right">
+                                                <span class="fa fa-circle text-success" t-if="record.is_connected.raw_value" aria-label="Online" title="Online"/>
+                                                <span class="fa fa-circle text-danger" t-else="" aria-label="Offline" title="Offline"/>
+                                            </div>
+                                            <div>
+                                                <img t-if="record.country_id.raw_value"
+                                                 t-att-src="kanban_image('res.country', 'image', record.country_id.raw_value)"
+                                                 class="o_country_flag" alt="Country"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <b><field name="time_since_last_action"/></b>
+                                        <div>Ultima acción</div>
+                                    </div>
+                                    <div class="col">
+                                        <b><field name="visit_count"/></b>
+                                        <div>Visitas</div>
+                                    </div>
+                                    <div class="col">
+                                        <b><field name="last_visited_page_id"/></b>
+                                        <div>Última página</div>
+                                    </div>
+                                    <div id="wvisitor_visited_page" class="col">
+                                        <b><field name="page_count"/></b>
+                                        <div>Páginas Visitadas</div>
+                                    </div>
+                                    <div class="col-3 w_visitor_kanban_actions_ungrouped">
+                                        <button name="action_send_mail" type="object"
+                                                class="btn btn-secondary border" attrs="{'invisible': [('email', '=', False)]}">
+                                                Email
+                                        </button>
+                                    </div>
+                                </div>
+                                <!-- displayed in grouped mode -->
+                                <div class="oe_kanban_details">
+                                    <div class="float-right">
+                                        <span class="fa fa-circle text-success" t-if="record.is_connected.raw_value" aria-label="Online" title="Online"/>
+                                        <span class="fa fa-circle text-danger" t-else="" aria-label="Offline" title="Offline"/>
+                                    </div>
+                                    <strong>
+                                        <img t-if="record.country_id.raw_value"
+                                             t-att-src="kanban_image('res.country', 'image', record.country_id.raw_value)" class="o_country_flag" alt="Country"/>
+                                        <field name="display_name"/>
+                                    </strong>
+                                    <div class="mb-2">Activo <field name="time_since_last_action"/></div>
+                                    <div>Última página<span class="float-right font-weight-bold"><field name="last_visited_page_id"/></span></div>
+                                    <div>Visitas<span class="float-right font-weight-bold"><field name="visit_count"/></span></div>
+                                    <div id="o_page_count">Páginas Visitadas<span class="float-right font-weight-bold"><field name="page_count"/></span></div>
+                                    <div class="w_visitor_kanban_actions">
+                                        <button name="action_send_mail" type="object"
+                                                class="btn btn-secondary" attrs="{'invisible': [('email', '=', False)]}">
+                                                Email
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="website_visitor_view_form_chat" model="ir.ui.view">
+            <field name="name">website.visitor.view.form</field>
+            <field name="model">website.visitor</field>
+            <field name="arch" type="xml">
+                <form string="Website Visitor">
+                    <header>
+                        <button name="action_send_mail" type="object" class="btn btn-primary"
+                                attrs="{'invisible': [('email', '=', False)]}" string="Enviar Email"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button class="oe_stat_button o_stat_button_info" attrs="{'invisible': [('is_connected', '=', False)]}">
+                                <i class="fa fa-fw o_button_icon fa-circle text-success"/>
+                                <span>Conectado</span>
+                            </button>
+                            <button class="oe_stat_button o_stat_button_info" attrs="{'invisible': [('is_connected', '=', True)]}">
+                                <i class="fa fa-fw o_button_icon fa-circle text-danger"/>
+                                <span>Offline</span>
+                            </button>
+                            <button id="w_visitor_visit_counter" class="oe_stat_button o_stat_button_info" icon="fa-globe">
+                                <field name="visit_count" widget="statinfo" string="Visitas"/>
+                            </button>
+                            <button name="%(website.website_visitor_page_action)d" type="action"
+                                    class="oe_stat_button"
+                                    icon="fa-tags">
+                                <field name="visitor_page_count" widget="statinfo" string="Páginas Visitadas"/>
+                            </button>
+                        </div>
+                        <div class="float-right" attrs="{'invisible': [('country_id', '=', False)]}"><field name="country_flag" widget="image" options='{"size": [32, 32]}'/></div>
+                        <div class="oe_title">
+                            <h1><field name="display_name"/></h1>
+                        </div>
+                        <group id="general_info">
+                            <group string="Información">
+                                <field name="is_connected" invisible="1"/>
+                                <field name="partner_id" attrs="{'invisible': [('partner_id', '=', False)]}"/>
+                                <field name="email"/>
+                                <field name="mobile" class="o_force_ltr"/>
+                                <field name="country_id" attrs="{'invisible': [('country_id', '=', False)]}"/>
+                                <field name="lang_id" invisible="1"/>
+                            </group>
+                            <group id="visits" string="Visits">
+                                <field name="create_date"/>
+                                <field name="last_connection_datetime"/>
+                                <field name="page_ids" widget="many2many_tags"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="website_visitor_view_tree_chat" model="ir.ui.view">
+            <field name="name">website.visitor.view.tree</field>
+            <field name="model">website.visitor</field>
+            <field name="arch" type="xml">
+                <tree string="Web Visitors" decoration-success="is_connected" decoration-danger="not is_connected">
+                    <!--TODO DBE : Handle no_label in treeview-->
+                    <field name="country_flag" widget="image" options='{"size": [20, 20]}' string=" "/>
+                    <field name="display_name"/>
+                    <field name="create_date"/>
+                    <field name="last_connection_datetime"/>
+                    <field name="lang_id" invisible="1"/>
+                    <field name="visit_count"/>
+                    <field name="page_ids" widget="many2many_tags"/>
+                    <field name="is_connected" invisible="1"/>
+                    <field name="email" invisible="1"/>
+                    <button string="Send Email" name="action_send_mail" type="object"
+                        icon="fa-envelope" attrs="{'invisible': [('email', '=', False)]}"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="website_visitor_view_graph_chat" model="ir.ui.view">
+            <field name="name">website.visitor.view.graph</field>
+            <field name="model">website.visitor</field>
+            <field name="arch" type="xml">
+                <graph string="Visitors last connection">
+                    <field name="visit_count"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="website_visitor_view_search_chat" model="ir.ui.view">
+            <field name="name">website.visitor.view.search</field>
+            <field name="model">website.visitor</field>
+            <field name="arch" type="xml">
+                <search string="Search Visitor">
+                    <field name="name"/>
+                    <field name="lang_id"/>
+                    <field name="country_id"/>
+                    <field name="visit_count"/>
+                    <field name="page_ids"/>
+                    <filter string="Visitante" name="type_visitor" domain="[('partner_id', '=', False)]"/>
+                    <!--filter string="Customers" name="type_customer" domain="[('partner_id', '!=', False)]"/-->
+                    <separator/>
+                    <filter string="Archivado" name="is_archived" domain="[('active', '=', False)]"/>
+                    <separator/>
+                    <filter string="Conectado" name="is_connected" domain="[('last_connection_datetime', '&gt;', datetime.datetime.now() - datetime.timedelta(minutes=5))]"/>
+
+                    <group string="Group By">
+                        <filter string="País" name="group_by_country" context="{'group_by': 'country_id'}"/>
+                        <!--filter string="Language" name="group_by_lang" context="{'group_by': 'lang_id'}"/-->
+                    </group>
+                </search>
+            </field>
+        </record>
+
+
+
+        <record id="website_visitors_action_chat" model="ir.actions.act_window">
+            <field name="name">Visitors</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">website.visitor</field>
+            <field name="view_mode">kanban,tree,form,graph</field>
+            <field name="search_view_id" ref="ks_chat_edit_and_delete.website_visitor_view_search_chat"/>
+
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Historial de Visitantes
+              </p>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="website_visitor_action_1">
+          <field name="sequence" eval="1"/>
+          <field name="view_mode">kanban</field>
+          <field name="view_id" ref="ks_chat_edit_and_delete.website_visitor_view_kanban_chat"/>
+          <field name="act_window_id" ref="website_visitors_action_chat"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="website_visitor_action_2">
+          <field name="sequence" eval="3"/>
+          <field name="view_mode">tree</field>
+          <field name="view_id" ref="ks_chat_edit_and_delete.website_visitor_view_tree_chat"/>
+          <field name="act_window_id" ref="website_visitors_action_chat"/>
+        </record>
+        <record model="ir.actions.act_window.view" id="website_visitor_action_3">
+          <field name="sequence" eval="1"/>
+          <field name="view_mode">form</field>
+          <field name="view_id" ref="ks_chat_edit_and_delete.website_visitor_view_form_chat"/>
+          <field name="act_window_id" ref="website_visitors_action_chat"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="website_visitor_action_4">
+          <field name="sequence" eval="3"/>
+          <field name="view_mode">graph</field>
+          <field name="view_id" ref="ks_chat_edit_and_delete.website_visitor_view_graph_chat"/>
+          <field name="act_window_id" ref="website_visitors_action_chat"/>
+        </record>
+
+    <menuitem id="menu_root" name="Conversaciones" action="mail.action_discuss" web_icon="ks_chat_edit_and_delete,static/src/img/icon.png" groups="im_livechat.im_livechat_group_user" sequence="10"/>
+    <menuitem id="menu_canales" name="Chat's" parent="menu_root" sequence="15" groups="im_livechat.im_livechat_group_user"  action="im_livechat_channel_action_chat"/>
+    <menuitem id="menu_informe" name="Informe" parent="menu_root" sequence="20" groups="im_livechat.im_livechat_group_manager"  />
+    <menuitem id="menu_sesiones" name="Sesiones" parent="menu_root" sequence="10" groups="im_livechat.im_livechat_group_manager" action="im_livechat.mail_channel_action" />
+    <menuitem id="menu_estadistica" name="Estadísticas" parent="menu_informe" sequence="20" groups="im_livechat.im_livechat_group_manager" action="im_livechat.im_livechat_report_channel_action" />
+    <menuitem id="menu_calificacion" name="Calificación" parent="menu_informe" sequence="30" groups="im_livechat.im_livechat_group_manager" action="im_livechat.rating_rating_action_livechat_report" />
+    <menuitem id="menu_configuracion" parent="menu_root" name="Configuración" groups="im_livechat.im_livechat_group_user" sequence="30"/>
+    <menuitem id="menu_respuestas" parent="menu_configuracion" name="Respuestas Programadas" action="im_livechat.im_livechat_canned_response_action" groups="im_livechat.im_livechat_group_user" sequence="10"/>
+
+  </data>
+</odoo>

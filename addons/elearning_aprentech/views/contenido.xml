@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<odoo>
+  <!--domain de de campos-->
+
+  <record id="inherit_contenido_aprentech" model="ir.ui.view">
+     <field name="name">inherit.contenido.aprentech</field>
+     <field name="model">slide.slide</field>
+     <field name="inherit_id" ref="website_slides.view_slide_slide_form"/>
+     <field name="arch" type="xml">
+
+         <xpath expr="//field[@name='tag_ids']" position="replace">
+            <field name="tag_ids" widget="many2many_tags" placeholder="Etiquetas"  domain="[('company_id', '=', company_id)]" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True}"/>
+             <field name="company_id" invisible='1'/>
+     </xpath>
+
+         <xpath expr="//field[@name='channel_id']" position="replace">
+            <field name="channel_id" domain="[('company_id', '=', company_id)]" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open' : True}"/>
+      </xpath>
+      <xpath expr="//field[@name='user_id']" position="replace">
+         <field name="user_id" domain="[('company_id', '=', company_id)]" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open' : True}"/>
+   </xpath>
+
+     </field>
+   </record>
+
+
+    <record id="slide_slide_action_tech" model="ir.actions.act_window">
+      <field name="name">Contenidos</field>
+      <field name="res_model">slide.slide</field>
+      <field name="view_mode">kanban,tree,form</field>
+      <field name="domain">[('company_id', '=', allowed_company_ids[0])]</field>
+      <field name="search_view_id" ref="website_slides.view_slide_slide_search"/>
+
+    </record>
+
+    <record model="ir.actions.act_window.view" id="contenido_elearning_action_1">
+      <field name="sequence" eval="1"/>
+      <field name="view_mode">kanban</field>
+      <field name="view_id" ref="website_slides.slide_slide_view_kanban"/>
+      <field name="act_window_id" ref="slide_slide_action_tech"/>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="contenido_elearning_action_2">
+      <field name="sequence" eval="2"/>
+      <field name="view_mode">tree</field>
+      <field name="view_id" ref="website_slides.view_slide_slide_tree"/>
+      <field name="act_window_id" ref="slide_slide_action_tech"/>
+    </record>
+
+
+    <record model="ir.actions.act_window.view" id="contenido_elearning_action_3">
+      <field name="sequence" eval="3"/>
+      <field name="view_mode">form</field>
+      <field name="view_id" ref="website_slides.view_slide_slide_form"/>
+      <field name="act_window_id" ref="slide_slide_action_tech"/>
+    </record>
+
+
+    <menuitem id="menu_contenido"
+                name="Contenidos"
+                action = "slide_slide_action_tech"
+                sequence="20"
+                groups='group_elearning_user_tech,group_elearning_admin_tech,elearning_aprentech.group_control_acceso_superadmin,elearning_aprentech.group_control_acceso_admin,elearning_aprentech.group_control_acceso_editor,elearning_aprentech.group_control_acceso_observador'
+                parent="elearning_aprentech.menu_gestion"/>
+
+</odoo>

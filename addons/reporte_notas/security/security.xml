@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data noupdate="0">
+
+  <record id="model_access_user_interno_situacion_alumno" model="ir.model.access">
+       <field name="name">model.access.interno.situacion.alumno</field>
+       <field name="group_id" ref="base.group_user"/>
+       <field name="model_id" ref="reporte_notas.model_situacion_alumno"/>
+       <field name="perm_read" eval="1"/>
+       <field name="perm_create" eval="1"/>
+       <field name="perm_write" eval="1"/>
+       <field name="perm_unlink" eval="1"/>
+   </record>
+
+          <record id="model_access_situacion_alumno" model="ir.model.access">
+               <field name="name">model.access.situacion.alumno</field>
+               <field name="group_id" ref="website_examenes.group_evaluaciones_admin_tech"/>
+               <field name="model_id" ref="reporte_notas.model_situacion_alumno"/>
+               <field name="perm_read" eval="1"/>
+               <field name="perm_create" eval="1"/>
+               <field name="perm_write" eval="1"/>
+               <field name="perm_unlink" eval="1"/>
+           </record>
+
+           <record id="model_access_situacion_alumno" model="ir.model.access">
+                <field name="name">model.access.user.situacion.alumno</field>
+                <field name="group_id" ref="website_examenes.group_evaluaciones_user_tech"/>
+                <field name="model_id" ref="reporte_notas.model_situacion_alumno"/>
+                <field name="perm_read" eval="1"/>
+                <field name="perm_create" eval="1"/>
+                <field name="perm_write" eval="1"/>
+                <field name="perm_unlink" eval="1"/>
+            </record>
+
+            <record id="model_access_portal_situacion_alumno" model="ir.model.access">
+                   <field name="name">model.access.portal.situacion.alumno</field>
+                   <field name="group_id" ref="base.group_portal"/>
+                   <field name="model_id" ref="reporte_notas.model_situacion_alumno"/>
+                   <field name="perm_read" eval="1"/>
+                   <field name="perm_create" eval="1"/>
+                   <field name="perm_write" eval="1"/>
+                   <field name="perm_unlink" eval="1"/>
+               </record>
+
+
+      <record id="model_access_peso_evaluacion" model="ir.model.access">
+      <field name="name">model.access.peso.evaluacion</field>
+      <field name="group_id" ref="website_examenes.group_evaluaciones_admin_tech"/>
+      <field name="model_id" ref="reporte_notas.model_peso_evaluacion"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="1"/>
+      <field name="perm_write" eval="1"/>
+      <field name="perm_unlink" eval="1"/>
+      </record>
+
+      <record id="model_access_situacion_peso_evaluacion" model="ir.model.access">
+       <field name="name">model.access.user.peso.evaluacion</field>
+       <field name="group_id" ref="website_examenes.group_evaluaciones_user_tech"/>
+       <field name="model_id" ref="reporte_notas.model_peso_evaluacion"/>
+       <field name="perm_read" eval="1"/>
+       <field name="perm_create" eval="1"/>
+       <field name="perm_write" eval="1"/>
+       <field name="perm_unlink" eval="1"/>
+      </record>
+
+      <record id="model_access_portal_peso_evaluacion" model="ir.model.access">
+          <field name="name">model.access.portal.peso.evaluacion</field>
+          <field name="group_id" ref="base.group_portal"/>
+          <field name="model_id" ref="reporte_notas.model_peso_evaluacion"/>
+          <field name="perm_read" eval="1"/>
+          <field name="perm_create" eval="1"/>
+          <field name="perm_write" eval="1"/>
+          <field name="perm_unlink" eval="1"/>
+      </record>
+
+      <record id="model_access_interno_peso_evaluacion" model="ir.model.access">
+          <field name="name">model.access.interno.peso.evaluacion</field>
+          <field name="group_id" ref="base.group_user"/>
+          <field name="model_id" ref="reporte_notas.model_peso_evaluacion"/>
+          <field name="perm_read" eval="1"/>
+          <field name="perm_create" eval="1"/>
+          <field name="perm_write" eval="1"/>
+          <field name="perm_unlink" eval="1"/>
+      </record>
+
+
+</data>
+</odoo>

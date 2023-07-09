@@ -1,0 +1,270 @@
+<?xml version="1.0"?>
+<odoo>
+
+  <!--Etiquetas del CURSO-->
+  <record id="configurar_curso_action_tech" model="ir.actions.act_window">
+    <field name="name">Etiquetas del Curso</field>
+    <field name="res_model">slide.channel.tag.group</field>
+    <field name="view_mode">tree,form</field>
+    <field name="domain">[('company_id', '=', allowed_company_ids[0])]</field>
+    <field name="search_view_id" ref="website_slides.slide_channel_tag_group_view_search"/>
+  </record>
+
+  <record model="ir.actions.act_window.view" id="configurar_curso_elearning_action_2">
+    <field name="sequence" eval="2"/>
+    <field name="view_mode">tree</field>
+    <field name="view_id" ref="website_slides.slide_channel_tag_group_view_tree"/>
+    <field name="act_window_id" ref="configurar_curso_action_tech"/>
+  </record>
+
+  <record model="ir.actions.act_window.view" id="configurar_curso_elearning_action_3">
+    <field name="sequence" eval="3"/>
+    <field name="view_mode">form</field>
+    <field name="view_id" ref="website_slides.slide_channel_tag_group_view_form"/>
+    <field name="act_window_id" ref="configurar_curso_action_tech"/>
+  </record>
+
+  <menuitem id="menu_configurar" name="Etiquetas" sequence="70" parent="elearning_aprentech.menu_principal"/>
+
+  <menuitem id="menu_configurar_cursos" name="Etiquetas del Curso" action="configurar_curso_action_tech" sequence="10" parent="elearning_aprentech.menu_configurar"/>
+
+  <!--Etiquetas del CONTENIDO-->
+
+  <record id="configurar_contenido_action_tech" model="ir.actions.act_window">
+    <field name="name">Etiquetas del Contenido</field>
+    <field name="res_model">slide.tag</field>
+    <field name="view_mode">tree</field>
+    <field name="domain">[('company_id', '=', allowed_company_ids[0])]</field>
+  </record>
+
+  <record model="ir.actions.act_window.view" id="configurar_contenido_elearning_action_2">
+    <field name="sequence" eval="2"/>
+    <field name="view_mode">tree</field>
+    <field name="view_id" ref="website_slides.view_slide_tag_tree"/>
+    <field name="act_window_id" ref="configurar_contenido_action_tech"/>
+  </record>
+
+  <menuitem id="menu_configurar_contenido" name="Etiquetas de Contenido" action="configurar_contenido_action_tech" sequence="20" parent="elearning_aprentech.menu_configurar"/>
+
+  <!--Accion de usuarios de e-learning-->
+
+  <record id="inheri_user_webiste_lead_tree" model="ir.ui.view">
+    <field name="name">ELEARNING APRENTECH TREE</field>
+    <field name="model">res.users</field>
+    <field name="arch" type="xml">
+      <tree string="Users">
+        <field name="name"/>
+        <field name="login"/>
+        <field name="dni"/>
+        <field name="mobile"/>
+        <field name="login_date"/>
+      </tree>
+
+    </field>
+  </record>
+
+  <record id="inheri_user_webiste_lead_form" model="ir.ui.view">
+    <field name="name">ELEARNING APRENTECH FORM</field>
+    <field name="model">res.users</field>
+    <field name="arch" type="xml">
+      <form string="Users">
+        <header>
+          <button string="Reestablecer Contraseña" type="object" name="action_reset_password" attrs="{'invisible': [('state', '!=', 'active')]}"/>
+          <button string="Enviar email de Invitación" type="object" name="action_reset_password" context="{'create_user': 1}" attrs="{'invisible': [('state', '!=', 'new')]}"/>
+          <field name="state" widget="statusbar"/>
+        </header>
+        <sheet>
+
+          <field name="active_partner" required="0" readonly="1" invisible="1"/>
+          <field name="active" required="0" readonly="1" invisible="1"/>
+          <div
+            class="alert alert-info text-center o_form_header"
+            attrs="{'invisible': [                                 '|', '|',                                 '&amp;', ('active', '=', True), ('active_partner', '=', True),                                 '&amp;', ('active', '=', False), ('active_partner', '=', False),                                 '&amp;', ('active', '=', True), ('active_partner', '=', False),                             ]}"
+            role="alert">
+            <a class="close" data-dismiss="alert" href="#">x</a>
+            <div>
+              <strong>The contact linked to this user is still active</strong>
+            </div>
+            <div>You can archive the contact
+              <field name="partner_id" required="0" readonly="1"/>
+            </div>
+          </div>
+          <field name="image_1920" widget="image" class="oe_avatar" options="{&quot;preview_image&quot;: &quot;image_128&quot;}"/>
+          <div class="oe_title">
+            <label for="name" class="oe_edit_only"/>
+            <h1><field name="name" required="1"/></h1>
+            <field name="email" invisible="1"/>
+            <label for="login" class="oe_edit_only" string="Email Address"/>
+            <h2><field name="login"/></h2>
+
+          </div>
+          <group>
+            <field name="sel_groups_1_8_9" widget="radio"/>
+            <field name="company_id" widget="radio" invisible='1'/>
+
+          </group>
+          <group>
+            <field name="dni"/>
+            <field name="mobile"/>
+          </group>
+
+        </sheet>
+      </form>
+
+    </field>
+  </record>
+
+  <record id="view_users_search_alumnos" model="ir.ui.view">
+    <field name="name">res.users.search</field>
+    <field name="model">res.users</field>
+    <field name="arch" type="xml">
+      <search string="Profesores">
+        <field name="name" string="Nombre"/>
+        <field name="login" string="Correo"/>
+        <field name="dni" string="DNI"/>
+      </search>
+    </field>
+  </record>
+
+  <record id="elearning_user_action" model="ir.actions.act_window">
+    <field name="name">Alumnos</field>
+    <field name="res_model">res.users</field>
+    <field name="view_mode">tree,form</field>
+    <field name="domain">[('share', '=', True), ('company_id', '=', allowed_company_ids[0])]</field>
+    <field name="search_view_id" ref="view_users_search_alumnos"/>
+
+  </record>
+
+  <record model="ir.actions.act_window.view" id="elearning_action_2">
+    <field name="sequence" eval="2"/>
+    <field name="view_mode">tree</field>
+    <field name="view_id" ref="elearning_aprentech.inheri_user_webiste_lead_tree"/>
+    <field name="act_window_id" ref="elearning_user_action"/>
+  </record>
+
+  <record model="ir.actions.act_window.view" id="elearning_action_3">
+    <field name="sequence" eval="3"/>
+    <field name="view_mode">form</field>
+    <field name="view_id" ref="elearning_aprentech.inheri_user_webiste_lead_form"/>
+    <field name="act_window_id" ref="elearning_user_action"/>
+  </record>
+
+  <menuitem id="menu_estudiantes" name="Estudiantes" action="elearning_user_action" sequence="50" groups="elearning_aprentech.group_control_acceso_superadmin,elearning_aprentech.group_control_acceso_admin,elearning_aprentech.group_control_acceso_editor,elearning_aprentech.group_control_acceso_observador" parent="elearning_aprentech.menu_principal"/>
+
+  <record id="inheri_user_webiste_lead_tree_2" model="ir.ui.view">
+    <field name="name">ELEARNING APRENTECH TREE</field>
+    <field name="model">res.users</field>
+    <field name="arch" type="xml">
+      <tree string="Users">
+        <field name="name"/>
+        <field name="login"/>
+        <field name="dni"/>
+        <field name="mobile"/>
+        <field name="login_date"/>
+
+      </tree>
+
+    </field>
+  </record>
+
+  <record id="inheri_user_webiste_lead_form_2" model="ir.ui.view">
+    <field name="name">ELEARNING APRENTECH FORM</field>
+    <field name="model">res.users</field>
+    <field name="arch" type="xml">
+      <form string="Users">
+        <header>
+          <button string="Reestablecer Contraseña" type="object" name="action_reset_password" attrs="{'invisible': [('state', '!=', 'active')]}"/>
+          <button string="Enviar email de Invitación" type="object" name="action_reset_password" context="{'create_user': 1}" attrs="{'invisible': [('state', '!=', 'new')]}"/>
+          <field name="state" widget="statusbar"/>
+        </header>
+        <sheet>
+
+          <field name="active_partner" required="0" readonly="1" invisible="1"/>
+          <field name="active" required="0" readonly="1" invisible="1"/>
+          <div
+            class="alert alert-info text-center o_form_header"
+            attrs="{'invisible': [                                 '|', '|',                                 '&amp;', ('active', '=', True), ('active_partner', '=', True),                                 '&amp;', ('active', '=', False), ('active_partner', '=', False),                                 '&amp;', ('active', '=', True), ('active_partner', '=', False),                             ]}"
+            role="alert">
+            <a class="close" data-dismiss="alert" href="#">x</a>
+            <div>
+              <strong>The contact linked to this user is still active</strong>
+            </div>
+            <div>You can archive the contact
+              <field name="partner_id" required="0" readonly="1"/>
+            </div>
+          </div>
+          <field name="image_1920" widget="image" class="oe_avatar" options="{&quot;preview_image&quot;: &quot;image_128&quot;}"/>
+          <div class="oe_title">
+            <label for="name" class="oe_edit_only"/>
+            <h1><field name="name" required="1"/></h1>
+            <field name="email" invisible="1"/>
+            <label for="login" class="oe_edit_only" string="Email Address"/>
+            <h2><field name="login"/></h2>
+
+          </div>
+          <group>
+            <field name="sel_groups_1_8_9" widget="radio"/>
+            <field name="company_id" widget="radio" invisible='1'/>
+
+          </group>
+          <group>
+            <field name="dni"/>
+            <field name="mobile"/>
+            <field name="livechat_username"/>
+
+          </group>
+          <group>
+            <separator string="Evaluaciones " colspan="4"/>
+            <!-- <field name="in_group_15" attrs="{'readonly': [('sel_groups_1_8_9', '!=', 1)]}"/> -->
+            <!-- <field name="in_group_14" attrs="{'readonly': [('sel_groups_1_8_9', '!=', 1)]}"/> -->
+            <separator string="Elearning Tech" colspan="4"/>
+            <!-- <field name="in_group_22" attrs="{'readonly': [('sel_groups_1_8_9', '!=', 1)]}"/> -->
+            <!-- <field name="in_group_21" attrs="{'readonly': [('sel_groups_1_8_9', '!=', 1)]}"/> -->
+            <separator string="Chat " colspan="4"/>
+
+            <!-- <field name="sel_groups_23_24" attrs="{'readonly': [('sel_groups_1_8_9', '!=', 1)]}"/> -->
+
+          </group>
+
+        </sheet>
+      </form>
+
+    </field>
+  </record>
+
+  <record id="view_users_search_profesores" model="ir.ui.view">
+    <field name="name">res.users.search</field>
+    <field name="model">res.users</field>
+    <field name="arch" type="xml">
+      <search string="Profesores">
+        <field name="name" string="Nombre"/>
+        <field name="login" string="Correo"/>
+        <field name="dni" string="DNI"/>
+      </search>
+    </field>
+  </record>
+
+  <record id="elearning_user_action_2" model="ir.actions.act_window">
+    <field name="name">Usuarios</field>
+    <field name="res_model">res.users</field>
+    <field name="view_mode">tree,form</field>
+    <field name="domain">[('share', '!=', True),('id', '!=', 2), ('company_id', '=', allowed_company_ids[0])]</field>
+    <field name="search_view_id" ref="view_users_search_profesores"/>
+  </record>
+
+  <record model="ir.actions.act_window.view" id="elearning_action_profesor_2">
+    <field name="sequence" eval="2"/>
+    <field name="view_mode">tree</field>
+    <field name="view_id" ref="elearning_aprentech.inheri_user_webiste_lead_tree_2"/>
+    <field name="act_window_id" ref="elearning_user_action_2"/>
+  </record>
+
+  <record model="ir.actions.act_window.view" id="elearning_action_profesor_3">
+    <field name="sequence" eval="3"/>
+    <field name="view_mode">form</field>
+    <field name="view_id" ref="elearning_aprentech.inheri_user_webiste_lead_form_2"/>
+    <field name="act_window_id" ref="elearning_user_action_2"/>
+  </record>
+
+  <menuitem id="menu_profesores" name="Usuarios" action="elearning_user_action_2" sequence="50" parent="elearning_aprentech.menu_principal" groups="elearning_aprentech.group_control_acceso_superadmin,elearning_aprentech.group_control_acceso_admin,elearning_aprentech.group_control_acceso_editor,elearning_aprentech.group_control_acceso_observador"/>
+</odoo>

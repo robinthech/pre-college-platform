@@ -1,0 +1,512 @@
+<odoo>
+  <template id="template_horario" name="Reuniones">
+    <t t-call="website.layout">
+      <div class="container evapro">
+        <div class="row py-1">
+          <div class="col-12">
+            <div class="text-center">
+              <div class="page-header">
+                <h3>Bienvenido <t t-esc="usuario.name"/></h3>
+              </div>
+              <div class="alert alert-info" role="alert">
+                INGRESA PUNTUALMENTE A TUS CLASES
+              </div>
+            </div>
+            <div class="d-flex flex-row">
+              <div class="m-10" style="margin: 5px">
+                <a href="/horario" class="btn btn-primary" role="button">HORARIO</a>
+              </div>
+              <div class="m-10" style="margin: 5px">
+                <a href="/reuniones" class="btn btn-primary" role="button">
+                  REPROGRAMADAS</a>
+              </div>
+
+            </div>
+            <div class="horario">
+
+              <div class="schedule">
+
+                <div class="schedule_header">
+                  <span class="dl">Hora</span>
+                  <span class="ds">H</span>
+                </div>
+                <!-- week-->
+                <div class="schedule_header schedule-lunes">
+                  <span class="dl">LUNES</span>
+                  <span class="ds">L</span>
+                </div>
+                <div class="schedule_header schedule-martes">
+                  <span class="dl">MARTES</span>
+                  <span class="ds">M</span>
+                </div>
+                <div class="schedule_header schedule-miercoles">
+                  <span class="dl">MIERCOLES</span>
+                  <span class="ds">W</span>
+                </div>
+                <div class="schedule_header schedule-jueves">
+                  <span class="dl">JUEVES</span>
+                  <span class="ds">J</span>
+                </div>
+                <div class="schedule_header schedule-viernes">
+                  <span class="dl">VIERNES</span>
+                  <span class="ds">V</span>
+                </div>
+                <div class="schedule_header schedule-sabado">
+                  <span class="dl">SABADO</span>
+                  <span class="ds">S</span>
+                </div>
+                <div class="schedule_header schedule-domingo">
+                  <span class="dl">DOMINGO</span>
+                  <span class="ds">D</span>
+                </div>
+
+                <!-- Time-->
+                <!-- Time-->
+                <div class="schedule_time time-from-7">07:00</div>
+                <div class="schedule_time time-from-8">08:00</div>
+                <div class="schedule_time time-from-9">09:00</div>
+                <div class="schedule_time time-from-10">10:00</div>
+                <div class="schedule_time time-from-11">11:00</div>
+
+                <div class="schedule_time time-from-12">12:00</div>
+                <div class="schedule_time time-from-13">13:00</div>
+                <div class="schedule_time time-from-14">14:00</div>
+                <div class="schedule_time time-from-15">15:00</div>
+
+                <div class="schedule_time time-from-16">16:00</div>
+                <div class="schedule_time time-from-17">17:00</div>
+                <div class="schedule_time time-from-18">18:00</div>
+                <div class="schedule_time time-from-19">19:00</div>
+
+                <div class="schedule_time time-from-20">20:00</div>
+                <div class="schedule_time time-from-21">21:00</div>
+                <div class="schedule_time time-from-22">22:00</div>
+                <div class="schedule_time time-from-23">23:00</div>
+
+                <!-- Grid Rows-->
+                <div class="grid time-from-7 time-to-8 schedule-row-from-lunes schedule-row-to-domingo"></div>
+                <div class="grid time-from-8 time-to-9 schedule-row-from-lunes schedule-row-to-domingo"></div>
+                <div class="grid time-from-9 time-to-10 schedule-row-from-lunes schedule-row-to-domingo"></div>
+                <div class="grid time-from-10 time-to-11 schedule-row-from-lunes schedule-row-to-domingo"></div>
+                <div class="grid time-from-11 time-to-12 schedule-row-from-lunes schedule-row-to-domingo"></div>
+
+                <div class="grid time-from-12 time-to-13 schedule-row-from-lunes schedule-row-to-domingo"></div>
+                <div class="grid time-from-13 time-to-14 schedule-row-from-lunes schedule-row-to-domingo"></div>
+                <div class="grid time-from-14 time-to-15 schedule-row-from-lunes schedule-row-to-domingo"></div>
+                <div class="grid time-from-15 time-to-16 schedule-row-from-lunes schedule-row-to-domingo"></div>
+
+                <div class="grid time-from-16 time-to-17 schedule-row-from-lunes schedule-row-to-domingo"></div>
+                <div class="grid time-from-17 time-to-18 schedule-row-from-lunes schedule-row-to-domingo"></div>
+                <div class="grid time-from-18 time-to-19 schedule-row-from-lunes schedule-row-to-domingo"></div>
+                <div class="grid time-from-19 time-to-20 schedule-row-from-lunes schedule-row-to-domingo"></div>
+
+                <div class="grid time-from-20 time-to-21 schedule-row-from-lunes schedule-row-to-domingo"></div>
+                <div class="grid time-from-21 time-to-22 schedule-row-from-lunes schedule-row-to-domingo"></div>
+                <div class="grid time-from-22 time-to-23 schedule-row-from-lunes schedule-row-to-domingo"></div>
+                <div class="grid grid-last time-from-23 time-to-23 schedule-row-from-lunes schedule-row-to-domingo"></div>
+                <!-- ./Grid Rows-->
+
+                <div class="grid schedule-lunes time-from-7 time-to-23"></div>
+                <div class="grid grid-last schedule-lunes time-from-23 time-to-23"></div>
+                <div class="grid schedule-martes time-from-7 time-to-23"></div>
+                <div class="grid grid-last schedule-martes time-from-23 time-to-23"></div>
+
+                <div class="grid schedule-miercoles time-from-7 time-to-23"></div>
+                <div class="grid grid-last schedule-miercoles time-from-23 time-to-23"></div>
+
+                <div class="grid schedule-jueves time-from-7 time-to-23"></div>
+                <div class="grid grid-last schedule-jueves time-from-23 time-to-23"></div>
+
+                <div class="grid schedule-viernes time-from-7 time-to-23"></div>
+                <div class="grid grid-last schedule-viernes time-from-23 time-to-23"></div>
+
+                <div class="grid schedule-sabado time-from-7 time-to-23"></div>
+                <div class="grid grid-last schedule-sabado time-from-23 time-to-23"></div>
+
+                <div class="grid schedule-domingo time-from-7 time-to-23"></div>
+                <div class="grid grid-last schedule-domingo time-from-23 time-to-23"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </t>
+  </template>
+
+  <template id="template_aula_virtual" name="Aula Virtual">
+    <t t-call="website.layout">
+      <div class="container evapro">
+        <div class="row py-1">
+          <div class="col-12">
+            <div class="text-center">
+              <div class="page-header">
+                <h3>Bienvenido <t t-esc="usuario.name"/></h3>
+              </div>
+              <div class="alert alert-info" role="alert">
+                INGRESA PUNTUALMENTE A TUS CLASES
+              </div>
+            </div>
+            <div class="d-flex flex-row">
+              <div class="m-10" style="margin: 5px">
+                <a href="/horario" class="btn btn-primary" role="button">HORARIO</a>
+              </div>
+              <div class="m-10" style="margin: 5px">
+                <a href="/reuniones" class="btn btn-primary" role="button">
+                  REPROGRAMADAS</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </t>
+  </template>
+
+  <template id="template_schedule" name="HORARIO">
+    <t t-call="website.layout">
+      <t t-set="no_footer" t-value="True"/>
+      <!-- <div class="row m-5 text-center"> <div class="page-header"> <h3>Bienvenido <t t-esc="usuario.name"/></h3> </div> <div class="alert alert-info" role="alert"> INGRESA PUNTUALMENTE A TUS CLASES </div> </div> -->
+      <div class="row">
+        <div class="col-12">
+          <div class="text-center">
+            <div class="page-header">
+              <h3>Bienvenido <t t-esc="usuario.name"/></h3>
+            </div>
+            <div class="alert alert-info" role="alert">
+              INGRESA PUNTUALMENTE A TUS CLASES
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class=" schedule-template-elearning horario">
+        <div class="cd-schedule loading">
+          <div class="timeline">
+            <ul>
+              <li>
+                <span>07:00</span>
+              </li>
+              <li>
+                <span>07:30</span>
+              </li>
+              <li>
+                <span>08:00</span>
+              </li>
+              <li>
+                <span>08:30</span>
+              </li>
+              <li>
+                <span>09:00</span>
+              </li>
+              <li>
+                <span>09:30</span>
+              </li>
+              <li>
+                <span>10:00</span>
+              </li>
+              <li>
+                <span>10:30</span>
+              </li>
+              <li>
+                <span>11:00</span>
+              </li>
+              <li>
+                <span>11:30</span>
+              </li>
+              <li>
+                <span>12:00</span>
+              </li>
+              <li>
+                <span>12:30</span>
+              </li>
+              <li>
+                <span>13:00</span>
+              </li>
+              <li>
+                <span>13:30</span>
+              </li>
+              <li>
+                <span>14:00</span>
+              </li>
+              <li>
+                <span>14:30</span>
+              </li>
+              <li>
+                <span>15:00</span>
+              </li>
+              <li>
+                <span>15:30</span>
+              </li>
+              <li>
+                <span>16:00</span>
+              </li>
+              <li>
+                <span>16:30</span>
+              </li>
+              <li>
+                <span>17:00</span>
+              </li>
+              <li>
+                <span>17:30</span>
+              </li>
+              <li>
+                <span>18:00</span>
+              </li>
+              <li>
+                <span>18:30</span>
+              </li>
+              <li>
+                <span>19:00</span>
+              </li>
+              <li>
+                <span>19:30</span>
+              </li>
+              <li>
+                <span>20:00</span>
+              </li>
+              <li>
+                <span>20:30</span>
+              </li>
+              <li>
+                <span>21:00</span>
+              </li>
+              <li>
+                <span>21:30</span>
+              </li>
+              <li>
+                <span>22:00</span>
+              </li>
+              <li>
+                <span>22:30</span>
+              </li>
+              <li>
+                <span>23:00</span>
+              </li>
+            </ul>
+          </div>
+          <!-- .timeline -->
+          <t t-set="idhorario" t-value="1"/>
+          <div class="events">
+            <ul>
+              <li class="events-group">
+                <div class="top-info">
+                  <span>LUNES</span>
+                </div>
+
+                <ul>
+                  <t t-foreach="lunes_data" t-as="lunes">
+                    <li class="single-event" t-att-data-start="lunes['start']" t-att-data-end="lunes['end']" t-att-data-content="idhorario" t-att-data-event="idhorario" t-att-data-color="lunes['color']">
+                      <a href="#0">
+                        <em class="event-name">
+                          <t t-esc="lunes['name']"></t>
+                        </em>
+                      </a>
+                    </li>
+                    <t t-set="idhorario" t-value="idhorario + 1"/>
+                  </t>
+                </ul>
+              </li>
+
+              <li class="events-group">
+                <div class="top-info">
+                  <span>MARTES</span>
+                </div>
+
+                <ul>
+                  <t t-foreach="martes_data" t-as="lunes">
+                    <li class="single-event" t-att-data-start="lunes['start']" t-att-data-end="lunes['end']" t-att-data-content="idhorario" t-att-data-event="idhorario" t-att-data-color="lunes['color']">
+                      <a href="#0">
+                        <em class="event-name">
+                          <t t-esc="lunes['name']"></t>
+                        </em>
+                      </a>
+                    </li>
+                    <t t-set="idhorario" t-value="idhorario + 1"/>
+
+                  </t>
+                </ul>
+              </li>
+
+              <li class="events-group">
+                <div class="top-info">
+                  <span>MIÉRCOLES</span>
+                </div>
+
+                <ul>
+                  <t t-foreach="miercoles_data" t-as="lunes">
+                    <li class="single-event" t-att-data-start="lunes['start']" t-att-data-end="lunes['end']" t-att-data-content="idhorario" t-att-data-event="idhorario" t-att-data-color="lunes['color']">
+                      <a href="#0">
+                        <em class="event-name">
+                          <t t-esc="lunes['name']"></t>
+                        </em>
+                      </a>
+                    </li>
+                    <t t-set="idhorario" t-value="idhorario + 1"/>
+
+                  </t>
+                </ul>
+              </li>
+
+              <li class="events-group">
+                <div class="top-info">
+                  <span>JUEVES</span>
+                </div>
+
+                <ul>
+                  <t t-foreach="jueves_data" t-as="lunes">
+                    <li class="single-event" t-att-data-start="lunes['start']" t-att-data-end="lunes['end']" t-att-data-content="idhorario" t-att-data-event="idhorario" t-att-data-color="lunes['color']">
+                      <a href="#0">
+                        <em class="event-name">
+                          <t t-esc="lunes['name']"></t>
+                        </em>
+                      </a>
+                    </li>
+                    <t t-set="idhorario" t-value="idhorario + 1"/>
+
+                  </t>
+                </ul>
+              </li>
+
+              <li class="events-group">
+                <div class="top-info">
+                  <span>VIERNES</span>
+                </div>
+
+                <ul>
+                  <t t-foreach="viernes_data" t-as="lunes">
+                    <li class="single-event" t-att-data-start="lunes['start']" t-att-data-end="lunes['end']" t-att-data-content="idhorario" t-att-data-event="idhorario" t-att-data-color="lunes['color']">
+                      <a href="#0">
+                        <em class="event-name">
+                          <t t-esc="lunes['name']"></t>
+                        </em>
+                      </a>
+                    </li>
+                    <t t-set="idhorario" t-value="idhorario + 1"/>
+
+                  </t>
+                </ul>
+              </li>
+              <li class="events-group">
+                <div class="top-info">
+                  <span>SABADO</span>
+                </div>
+
+                <ul>
+                  <t t-foreach="sabado_data" t-as="lunes">
+                    <li class="single-event" t-att-data-start="lunes['start']" t-att-data-end="lunes['end']" t-att-data-content="idhorario" t-att-data-event="idhorario" t-att-data-color="lunes['color']">
+                      <a href="#0">
+                        <em class="event-name">
+                          <t t-esc="lunes['name']"></t>
+                        </em>
+                      </a>
+                    </li>
+                    <t t-set="idhorario" t-value="idhorario + 1"/>
+
+                  </t>
+                </ul>
+              </li>
+              <li class="events-group">
+                <div class="top-info">
+                  <span>DOMINGO</span>
+                </div>
+
+                <ul>
+                  <t t-foreach="domingo_data" t-as="lunes">
+                    <li class="single-event" t-att-data-start="lunes['start']" t-att-data-end="lunes['end']" t-att-data-content="idhorario" t-att-data-event="idhorario" t-att-data-color="lunes['color']">
+                      <a href="#0">
+                        <em class="event-name">
+                          <t t-esc="lunes['name']"></t>
+                        </em>
+                      </a>
+                    </li>
+                    <t t-set="idhorario" t-value="idhorario + 1"/>
+
+                  </t>
+                </ul>
+              </li>
+            </ul>
+          </div>
+
+          <div class="event-modal">
+            <header class="header">
+              <div class="content">
+                <span class="event-date"></span>
+                <h3 class="event-name"></h3>
+              </div>
+
+              <div class="header-bg"></div>
+            </header>
+
+            <div class="body">
+              <div class="event-info">
+                <t t-set="idhorario" t-value="1"/>
+                <t t-foreach="horarios" t-as="horario">
+
+                <div t-att-data-horario_data_id="idhorario" class="event-content-informacion event-content-info">
+                  <div class="row text-left">
+                    <div class="col-6" data-="">
+                      <h6 style="color:blue;">AULA</h6>
+                    </div>
+                    <div class="col-6" >
+                      <span>  <t t-esc="horario['aula']"/></span>
+                    </div>
+                  </div>
+                  <hr/>
+                  <div class="row text-left">
+                    <div class="col-6">
+                      <h6 style="color:blue;">CURSO</h6>
+                    </div>
+                    <div class="col-6" >
+                      <span><t t-esc="horario['curso']"/></span>
+                    </div>
+                  </div>
+                  <hr/>
+                  <div class="row text-left">
+                    <div class="col-6">
+                      <h6 style="color:blue;">DOCENTE</h6>
+                    </div>
+                    <div class="col-6" >
+                      <span><t t-esc="horario['docente']"/></span>
+                    </div>
+                  </div>
+                  <hr/>
+                  <div class="row text-left">
+                    <div class="col-3 text-left">
+                      <h6 style="color:blue;">DESDE</h6>
+                    </div>
+                    <div class="col-3">
+                      <span><t t-esc="horario['start']"/></span>
+                    </div>
+                    <div class="col-3 text-left">
+                      <h6 style="color:blue;">HASTA</h6>
+                    </div>
+                    <div class="col-3">
+                      <span><t t-esc="horario['end']"/></span>
+                    </div>
+                  </div>
+                  <div class="div-asistencia">
+                    <a class="btn btn-primary registrar-asistencia" role="button" t-att-data-horario_id="horario['id']" t-att-href="horario['link']">
+                      <span>INGRESAR</span></a>
+                  </div>
+
+                </div>
+                <t t-set="idhorario" t-value="idhorario + 1"/>
+
+              </t>
+
+              </div>
+              <div class="body-bg"></div>
+            </div>
+
+            <a href="#0" class="close"></a>
+          </div>
+
+          <div class="cover-layer"></div>
+        </div>
+      </div>
+
+    </t>
+  </template>
+
+</odoo>

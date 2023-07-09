@@ -1,0 +1,121 @@
+<?xml version="1.0"?>
+<odoo>
+
+   <!--Accion de company de e-learning-->
+
+
+      <record id="res_company_tech_tree" model="ir.ui.view">
+      <field name="name">Compañia</field>
+      <field name="model">res.company</field>
+      <field name="arch" type="xml">
+        <tree string="Compañia" create="false" delete="false">
+               <field name="name"/>
+           </tree>
+
+      </field>
+      </record>
+
+      <record id="res_company_tech_form" model="ir.ui.view">
+      <field name="name">Compañia</field>
+      <field name="model">res.company</field>
+      <field name="arch" type="xml">
+      <form string="Users"  create="false" delete="false">
+          <sheet>
+             <field name="logo" widget="image" class="oe_avatar"/>
+             <div class="oe_title">
+                 <label for="name" class="oe_edit_only"/>
+                 <h1>
+                     <field name="name"/>
+                 </h1>
+             </div>
+
+           <notebook colspan="4">
+               <page string="General Information">
+                       <group>
+                           <label for="street" string="Address"/>
+                           <div class="o_address_format">
+                               <field name="street" placeholder="Street..." class="o_address_street"/>
+                               <field name="street2" placeholder="Street 2..." class="o_address_street"/>
+                               <field name="city" placeholder="City" class="o_address_city"/>
+                               <field name="state_id" class="o_address_state" placeholder="State" options="{&quot;no_open&quot;: True}"/>
+                               <field name="zip" placeholder="ZIP" class="o_address_zip"/>
+                               <field name="country_id" placeholder="Country" class="o_address_country" options="{&quot;no_open&quot;: True}"/>
+                           </div>
+                           <field name="phone" class="o_force_ltr"/>
+                           <field name="email"/>
+                           <field name="favicon" widget="image" class="float-left oe_avatar" />
+                       </group>
+                  </page>
+
+                  <page string="Zoom">
+                     <separator name="configuration" string="Zoom Meet Configuration"/>
+                         <div class="row">
+                            <div class="col-md-4" align="center">
+                                <button string="Authenticate" type="object" name="login" class="oe_highlight" icon="fa-plug"/>
+                            </div>
+
+                            <div class="col-md-4" align="center">
+                                 <button string="Refresh Token" type="object" name="refresh_token_from_access_token" class="oe_highlight" icon="fa-refresh"/>
+                             </div>
+                           </div>
+                           <group string="Credentials">
+                             <field name="zoom_client_id"/>
+                             <field name="zoom_client_secret"/>
+                             <field name="zoom_auth_base_url"/>
+                             <field name="zoom_access_token_url"/>
+                             <field name="zoom_request_token_url"/>
+                             <field name="zoom_auth_code"/>
+                             <field name="zoom_access_token"/>
+                               <field name="zoom_refresh_token"/>
+                           </group>
+                 </page>
+
+           </notebook>
+         </sheet>
+      </form>
+
+      </field>
+      </record>
+
+
+      <record id="elearning_compania_action" model="ir.actions.act_window">
+      <field name="name">Compañia</field>
+      <field name="res_model">res.company</field>
+      <field name="view_mode">tree,form</field>
+      <field name="domain">[('id', '=', allowed_company_ids[0])]</field>
+
+      </record>
+
+
+      <record model="ir.actions.act_window.view" id="elearning_compania_2">
+      <field name="sequence" eval="2"/>
+      <field name="view_mode">tree</field>
+      <field name="view_id" ref="elearning_aprentech.res_company_tech_tree"/>
+      <field name="act_window_id" ref="elearning_compania_action"/>
+      </record>
+
+
+      <record model="ir.actions.act_window.view" id="elearning_compania_3">
+      <field name="sequence" eval="3"/>
+      <field name="view_mode">form</field>
+      <field name="view_id" ref="elearning_aprentech.res_company_tech_form"/>
+      <field name="act_window_id" ref="elearning_compania_action"/>
+      </record>
+
+      <menuitem id="menu_configuracion_add"
+           name="Configuración"
+           sequence="90"
+           parent="elearning_aprentech.menu_principal"/>
+
+
+
+      <menuitem id="menu_compania"
+           name="Institución"
+           action = "elearning_compania_action"
+           groups='group_elearning_admin_tech,elearning_aprentech.group_control_acceso_superadmin'
+           sequence="50"
+
+           parent="elearning_aprentech.menu_configuracion_add"/>
+
+
+ </odoo>

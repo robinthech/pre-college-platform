@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+  <t t-name="reporte_notas.reporte_notas_situacion_robin">
+    <div class="text-center">
+      <div class="alert alert-success p-1" role="alert">
+          <t t-if="desde">
+            <strong>DESDE</strong>   <span t-esc="desde"/>
+          </t>
+          <t t-if="hasta">
+            <strong>HASTA</strong><span t-esc="hasta"/>
+          </t>
+          <br/>
+          <t t-if="situacion">
+
+          <strong>NIVEL:<span t-esc="situacion"/></strong>
+        </t>
+        <br/>
+        </div>
+
+    </div>
+  </t>
+
+    <t t-name="reporte_notas.reporte_notas_semanal_robin">
+      <div>
+        <table class="table table-bordered" style="table-layout: auto;">
+          <tbody>
+            <t t-set="contador_filas" t-value="0"/>
+            <t t-set="contador_columnas" t-value="0"/>
+            <t t-foreach="matriz_semanal" t-as="filas">
+                <tr class="text-center">
+                  <t t-if="contador_filas==4">
+                    <t t-foreach="filas" t-as="columnas">
+                      <t t-if="matriz_semanal[0][contador_columnas]!=0" >
+                          <td class="table-primary" style="vertical-align:middle">
+                            <span t-esc="columnas"/>
+                          </td>
+                      </t>
+                      <t t-set="contador_columnas" t-value="contador_columnas + 1"/>
+                    </t>
+                  </t>
+                  <t t-if="contador_filas>4">
+                    <t t-foreach="filas" t-as="columnas">
+                      <t t-if="matriz_semanal[0][contador_columnas]!=0" >
+                          <t t-if="contador_columnas==1">
+                            <td style="vertical-align:middle" class="table-primary">
+                              <span t-esc="columnas"/>
+                            </td>
+                          </t>
+                          <t t-if="contador_columnas!=1">
+                            <td style="vertical-align:middle">
+                              <span t-esc="columnas"/>
+                            </td>
+                          </t>
+                      </t>
+                      <t t-set="contador_columnas" t-value="contador_columnas + 1"/>
+                    </t>
+                  </t>
+                  <t t-set="contador_columnas" t-value="0"/>
+                </tr>
+              <t t-set="contador_filas" t-value="contador_filas + 1"/>
+            </t>
+          </tbody>
+        </table>
+
+      </div>
+    </t>
+    <t t-name="reporte_notas.reporte_notas_diario_robin">
+      <div >
+        <table class="table table-bordered" style="table-layout: auto;">
+          <tbody>
+            <t t-set="contador_filas" t-value="0"/>
+            <t t-set="contador_columnas" t-value="0"/>
+            <t t-foreach="matriz" t-as="filas">
+                <tr class="text-center">
+                  <t t-if="contador_filas==4">
+                    <t t-foreach="filas" t-as="columnas">
+                      <t t-if="matriz[0][contador_columnas]!=0" >
+                          <td class="table-primary" style="vertical-align:middle">
+                            <span t-esc="columnas"/>
+                          </td>
+                      </t>
+                      <t t-set="contador_columnas" t-value="contador_columnas + 1"/>
+                    </t>
+                  </t>
+                  <t t-if="contador_filas>4">
+                    <t t-foreach="filas" t-as="columnas">
+                      <t t-if="matriz[0][contador_columnas]!=0" >
+                          <t t-if="contador_columnas==1">
+                            <td style="vertical-align:middle" class="table-primary">
+                              <span t-esc="columnas"/>
+                            </td>
+                          </t>
+                          <t t-if="contador_columnas!=1">
+                            <td style="vertical-align:middle">
+                              <span t-esc="columnas"/>
+                            </td>
+                          </t>
+                      </t>
+                      <t t-set="contador_columnas" t-value="contador_columnas + 1"/>
+                    </t>
+                  </t>
+                  <t t-set="contador_columnas" t-value="0"/>
+                </tr>
+              <t t-set="contador_filas" t-value="contador_filas + 1"/>
+            </t>
+          </tbody>
+        </table>
+
+      </div>
+    </t>
+
+    <t t-name="reporte_notas.reporte_notas_simulacro_robin">
+      <div>
+        <table class="table table-bordered" style="table-layout: auto;">
+          <thead class="thead-primary">
+            <tr  class="text-center">
+              <th scope="col" rowspan="2" class="text-center table-primary table-primary align-middle">FECHA</th>
+              <th   scope="col" colspan="16" class="text-center table-primary table-primary align-middle">FASES</th>
+              <th  scope="col" rowspan="2"  class="text-center table-primary table-primary align-middle">PUNTAJE TOTAL SIMULACRO</th>
+            </tr>
+            <tr  class="text-center">
+              <th   scope="col" colspan="4" class="text-center table-secondary">FASE 1</th>
+              <th   scope="col" colspan="4" class="text-center table-secondary">FASE 2</th>
+              <th   scope="col" colspan="4" class="text-center table-secondary">FASE 3</th>
+              <th   scope="col" colspan="4" class="text-center table-secondary">FASE 4</th>
+            </tr>
+          </thead>
+          <tbody>
+            <t t-set="contador_filas" t-value="0"/>
+            <t t-set="contador_columnas" t-value="0"/>
+            <t t-foreach="matriz_simulacro" t-as="filas">
+
+              <t t-if="contador_filas==0">
+                <tr class="m-0 p-0 text-center">
+                    <t t-foreach="filas" t-as="columnas">
+                      <t t-if="contador_columnas==0">
+                        <td scope="col" rowspan="3" class="m-0 p-0"  style="vertical-align:middle">
+                          <span t-esc="columnas"/>
+                        </td>
+                      </t>
+                      <t t-if="contador_columnas==1">
+                        <td  scope="col" colspan="4" class="m-0 p-0"  style="vertical-align:middle">
+                          <span t-esc="columnas"/>
+                        </td>
+                      </t>
+                      <t t-if="contador_columnas==5">
+                        <td  scope="col" colspan="4" class="m-0 p-0"  style="vertical-align:middle">
+                          <span t-esc="columnas"/>
+                        </td>
+                      </t>
+                      <t t-if="contador_columnas==9">
+                        <td  scope="col" colspan="4" class="m-0 p-0"  style="vertical-align:middle">
+                          <span t-esc="columnas"/>
+                        </td>
+                      </t>
+                      <t t-if="contador_columnas==13">
+                        <td  scope="col" colspan="4" class="m-0 p-0"  style="vertical-align:middle">
+                          <span t-esc="columnas"/>
+                        </td>
+                      </t>
+                      <t t-if="contador_columnas==17">
+                        <td  scope="col" rowspan="3" class="m-0 p-0"  style="vertical-align:middle">
+                          <span t-esc="columnas"/>
+                        </td>
+                      </t>
+                        <t t-set="contador_columnas" t-value="contador_columnas + 1"/>
+                    </t>
+                    <t t-set="contador_filas" t-value="2"/>
+
+                </tr>
+              </t>
+              <t t-else="">
+                <tr class="m-0 p-0 text-center">
+                    <t t-foreach="filas" t-as="columnas">
+                      <t t-if="contador_columnas==0 or contador_columnas==17">
+
+                      </t>
+                      <t t-else="">
+                        <td class="m-0 p-0"  style="vertical-align:middle">
+                          <span t-esc="columnas"/>
+                        </td>
+                      </t>
+                        <t t-set="contador_columnas" t-value="contador_columnas + 1"/>
+                    </t>
+                </tr>
+                <t t-set="contador_filas" t-value="contador_filas - 1"/>
+
+              </t>
+
+
+              <t t-set="contador_columnas" t-value="0"/>
+            </t>
+          </tbody>
+        </table>
+        <br/>
+
+      </div>
+    </t>
+</templates>

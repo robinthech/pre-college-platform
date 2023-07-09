@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- =========================Zoom Meet========================= -->
+        <!--  =========================This is for Zoom Meet form view ========================= -->
+        <record id="zoom_form_id" model="ir.ui.view">
+            <field name="name">Zoom Meet View</field>
+            <field name="model">calendar.event</field>
+            <field name="inherit_id" ref="calendar.view_calendar_event_form"/>
+            <field name="arch" type="xml">
+<xpath expr="//field[@name='name']" position="after">
+    <group class="oe_subtotal_footer oe_right">
+
+                   <button string='Join Zoom Meet' type="object" name="post_request_meet"
+                                    class="oe_highlight" icon="fa-mobile"
+attrs="{'invisible':[('meet_url', '=', False)]}"
+/>
+        </group>
+
+                </xpath>
+
+                <xpath expr="//field[@name='start_date']" position="before">
+                    <field name="password" attrs="{'invisible':[('meet_flag', '=', False)],'required': [('meet_flag','=',True)]}"/>
+                    <field name="meet_flag"/>
+                </xpath>
+                <xpath expr="//field[@name='stop_datetime']" position="before">
+                    <field name="end_date_time" attrs="{'invisible':[('meet_flag', '=', False)],'required': [('meet_flag','=',True)]}"/>
+                </xpath>
+
+<xpath expr="//field[@name='description']" position="attributes">
+                  <attribute name="attrs">{'required': [('meet_flag','=',True)]}</attribute>
+              </xpath>
+
+
+<!--                <xpath expr="//field[@name='start_date']" position="replace">-->
+<!--                    <field name="start_date" string="Starting at" attrs="{'required': ['|',('allday','=',True),('meet_flag','=',True)], 'invisible': ['|',('allday','=',False),('meet_flag', '=', False)], 'readonly': [('id', '!=', False), ('recurrency','=',True)]}" force_save="1"/>-->
+
+<!--                </xpath>-->
+<!--                <xpath expr="//field[@name='stop_date']" position="replace">-->
+<!--                        <field name="stop_date" string="Ending at" attrs="{'required': ['|',('allday','=',True),('meet_flag','=',True)],'invisible': ['|',('allday','=',False),('meet_flag', '=', False)], 'readonly': [('id', '!=', False), ('recurrency','=',True)]}" force_save="1"/>-->
+
+<!--                </xpath>-->
+
+                    <xpath expr="//page[1]" position="after">
+
+             <page string="Zoom Meet">
+ <group>
+
+                        <group>
+
+<!--                            <field name="topic_name" required="True"/>-->
+<!--                            <field name="start_time" required="True"/>-->
+<!--                            <field name="password" required="True"/>-->
+<!--                            <field name="agenda" required="True"/>-->
+                            <field name="create_flag" readonly="True"/>
+<!--                            <field name="meet_data" readonly="True"/>-->
+                            <field name="meet_id" readonly="True"/>
+                            <field name="meet_pwd" readonly="True"/>
+                            <field name="meet_url" readonly="True" attrs="{'invisible':[('create_flag', '=', False)]}"/>
+
+
+
+  </group>
+                    </group>
+            </page>
+
+         </xpath>
+
+            </field>
+        </record>
+
+
+<!--        &lt;!&ndash;  =========================This is for Zoom Meet tree view ========================= &ndash;&gt;-->
+<!--        <record id="zoom_tree_id" model="ir.ui.view">-->
+<!--            <field name="name">Zoom Meet Tree View</field>-->
+<!--            <field name="model">zoom.meet</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <tree>-->
+
+
+<!--                            <field name="topic_name" required="True"/>-->
+<!--                            <field name="start_time" required="True"/>-->
+<!--                            <field name="password" required="True"/>-->
+<!--                            <field name="agenda" required="True"/>-->
+<!--                            <field name="end_date_time" required="True"/>-->
+
+<!--                </tree>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--        &lt;!&ndash; =========================this is for Zoom Meet action ========================= &ndash;&gt;-->
+<!--        <record model="ir.actions.act_window" id="zoom_action_id">-->
+<!--            <field name="name">Zoom Meet Details</field>-->
+<!--            <field name="res_model">zoom.meet</field>-->
+<!--            <field name="view_mode">tree,form</field>-->
+<!--        </record>-->
+
+<!--        &lt;!&ndash;  =========================top level menu: =========================  &ndash;&gt;-->
+<!--        <menuitem id="main_menu" name="Zoom Meet"/>-->
+<!--        &lt;!&ndash;  =========================sub menu  ========================= &ndash;&gt;-->
+<!--        <menuitem id="sub_menu_zoom" name="Zoom Meet Details" parent="main_menu"-->
+<!--                  action="zoom_action_id"/>-->
+
+
+    </data>
+</odoo>

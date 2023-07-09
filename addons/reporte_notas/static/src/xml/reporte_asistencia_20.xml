@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+  <!-- TEMPLATE PARA LA TABLA DE ASISTENCIA -->
+
+  <t t-name="reporte_notas.reporte_asistencia_alumno">
+    <div class="text-center">
+      <div class="alert alert-success p-1" role="alert">
+        ASISTENCIA
+
+      </div>
+    </div>
+    <table class="table table-bordered" style="table-layout: auto;">
+      <tbody>
+        <t t-foreach="matriz" t-as="filas">
+          <tr class="text-center">
+            <t t-foreach="filas" t-as="columnas">
+              <td style="vertical-align:middle">
+                <span t-esc="columnas"/>
+
+              </td>
+            </t>
+          </tr>
+        </t>
+    </tbody>
+    </table>
+
+  </t>
+  <!-- TEMPLATE ASISTENCIA POR ALUMNO :VISTA PARA ADMINISTRADOR-->
+
+  <t t-name="reporte_notas.reporte_asistencia_por_alumno_10">
+    <div class="text-center">
+      <div class="alert alert-success p-1" role="alert">
+        ASISTENCIA
+
+      </div>
+    </div>
+    <table class="table table-bordered" style="table-layout: auto;">
+      <tbody>
+        <t t-foreach="matriz" t-as="filas">
+          <tr class="text-center">
+            <t t-foreach="filas" t-as="columnas">
+              <td style="vertical-align:middle">
+                <span t-esc="columnas"/>
+
+              </td>
+            </t>
+          </tr>
+        </t>
+    </tbody>
+    </table>
+
+  </t>
+
+  <t t-name="reporte_notas.reporte_asistencia_por_aula_20">
+    <div class="text-center">
+      <div class="alert alert-success p-1" role="alert">
+        ASISTENCIA
+
+      </div>
+    </div>
+    <table class="table table-bordered" style="table-layout: auto;">
+      <tbody>
+        <t t-foreach="matriz" t-as="filas">
+          <tr class="text-center">
+            <t t-foreach="filas" t-as="columnas">
+              <td style="vertical-align:middle">
+                <span t-esc="columnas"/>
+
+              </td>
+            </t>
+          </tr>
+        </t>
+    </tbody>
+    </table>
+
+  </t>
+
+</templates>

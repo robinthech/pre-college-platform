@@ -1,0 +1,219 @@
+.schedule{
+  margin:1rem .5rem;
+  background-color: #fff;
+  border-radius: .2rem;
+  padding: .5rem;
+  display: grid;
+  width: auto;
+  grid-gap: 0;
+	overflow: hidden;
+  border: 1px solid #dfe3e6;
+  justify-self: center;
+/*   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); */
+  grid-template-columns: [time] 100px
+    [lunes] minmax(auto, auto)
+    [martes] minmax(auto, auto)
+    [miercoles] minmax(auto, auto)
+    [jueves] minmax(auto, auto)
+    [viernes]minmax(auto, auto)
+    [sabado] minmax(auto, auto)
+    [domingo] minmax(auto, auto) ;
+  grid-template-rows: [header] auto
+    [7] 40px
+    [8] 40px
+    [9] 40px
+    [10] 40px
+    [11] 40px
+    [12] 40px
+    [13] 40px
+    [14] 40px
+    [15] 40px
+    [16] 40px
+    [17] 40px
+    [18] 40px
+    [19] 40px
+    [20] 40px
+    [21] 40px
+    [22] 40px
+    [23] 40px;
+}
+
+.schedule_header{
+  display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	padding: 0.5rem 1rem;
+	border: 1px solid #dfe3e6;
+/* 	background-color: white;	 */
+  color: #17394d;
+	text-align: center;
+}
+
+.schedule_time{
+  position: relative;
+	padding: 0.5rem 0.25rem;
+	border: 1px solid #dfe3e6;
+  color: #17394d;
+	font-weight: bold;
+	text-align: center;
+}
+
+.grid{
+	border:1px solid #dfe3e6;
+}
+
+.schedule-item{
+  background-color: white;
+  border-radius: .25rem;
+/*   box-shadow: 0 1px 0 rgba(9,45,66,.25); */
+  padding: .5rem;
+  margin: .25em;
+}
+
+.bg-red{
+  background: #eb5a46b8;
+  color: #8e3224;
+  border: 2px solid #b95344;
+}
+
+.bg-blue{
+  background: #08b7d29e;
+  color: #104a53;
+  border: 2px solid #157786;
+}
+
+.bg-purple{
+  background: #a251bfb8;
+  color: #633673;
+  border: 2px solid #a24cc1;
+}
+
+.bg-yellow{
+  background: #f0d50794;
+  color: #847927;
+  border: 2px solid #e1c700;
+}
+
+.bg-green{
+  background: #61bd4fa1;
+  color: #3c882d;
+  border: 2px solid #61bd4f;
+}
+
+.schedule-lunes { grid-column: lunes / span 1; }
+.schedule-martes { grid-column: martes / span 1; }
+.schedule-miercoles { grid-column: miercoles / span 1; }
+.schedule-jueves { grid-column: jueves / span 1; }
+.schedule-viernes { grid-column: viernes / span 1; }
+.schedule-sabado { grid-column: sabado / span 1; }
+.schedule-domingo { grid-column: domingo / span 1; }
+
+.schedule-row-from-lunes { grid-column: lunes / span 7;}
+/* .schedule-row-to-domingo { grid-column-end: domingo; } */
+
+.time-from-7 { grid-row-start: 7; }
+.time-from-8 { grid-row-start: 8; }
+.time-from-9 { grid-row-start: 9; }
+.time-from-10 { grid-row-start: 10; }
+.time-from-11 { grid-row-start: 11; }
+
+.time-from-12 { grid-row-start: 12; }
+.time-from-13 { grid-row-start: 13; }
+.time-from-14 { grid-row-start: 14; }
+.time-from-15 { grid-row-start: 15; }
+
+.time-from-16 { grid-row-start: 16; }
+.time-from-17 { grid-row-start: 17; }
+.time-from-18 { grid-row-start: 18; }
+.time-from-19 { grid-row-start: 19; }
+
+.time-from-20 { grid-row-start: 20; }
+.time-from-21 { grid-row-start: 21; }
+.time-from-22 { grid-row-start: 22; }
+.time-from-23 { grid-row-start: 23; }
+
+
+/*  End */
+.time-to-7 { grid-row-end: 7; }
+.time-to-8 { grid-row-end: 8; }
+.time-to-9 { grid-row-end: 9; }
+.time-to-10 { grid-row-end: 10; }
+.time-to-11 { grid-row-end: 11; }
+
+.time-to-12 { grid-row-end: 12; }
+.time-to-13 { grid-row-end: 13; }
+.time-to-14 { grid-row-end: 14; }
+.time-to-15 { grid-row-end: 15; }
+
+.time-to-16 { grid-row-end: 16; }
+.time-to-17 { grid-row-end: 17; }
+.time-to-18 { grid-row-end: 18; }
+.time-to-19 { grid-row-end: 19; }
+
+.time-to-20 { grid-row-end: 20; }
+.time-to-21 { grid-row-end: 21; }
+.time-to-22 { grid-row-end: 22; }
+.time-to-23 { grid-row-end: 23; }
+
+.ds{
+  display: none;
+}
+@media (max-width: 800px) {
+  .schedule{
+      display: inline-grid;
+      overflow: hidden;
+      grid-template-columns: [time] 40px
+        [lunes] minmax(auto, 125px)
+        [martes] minmax(auto, 125px)
+        [miercoles] minmax(auto, 125px)
+        [jueves] minmax(auto, 125px)
+        [viernes]minmax(auto, 125px)
+        [sabado] minmax(auto, 125px)
+        [domingo] minmax(auto, 125px) ;
+      grid-template-rows: [header] 40px
+        [7] 40px 59px
+        [8] 40px 59px
+        [9] 40px 59px
+        [10] 40px 59px
+        [11] 40px 59px
+        [12] 40px 59px
+        [13] 40px 59px
+        [14] 40px 59px
+        [15] 40px 59px
+        [16] 40px 59px
+        [17] 40px 59px
+        [18] 40px 59px
+        [19] 40px 59px
+        [20] 40px 59px
+        [21] 40px 59px
+        [22] 40px 59px
+        [23] 40px 59px;
+
+    }
+
+    .schedule_time {
+      -ms-transform: rotate(-90deg) translate(-100px);
+      -webkit-transform: rotate(-90deg) translate(-100px);
+      transform: rotate(-90deg) translate(-100px);
+      -webkit-transform-origin: left 50%;
+      -ms-transform-origin: left 50%;
+      transform-origin: left top;
+      width:90px;
+    }
+
+    .dl {
+       display:none;
+    }
+
+    .ds{
+      display: block;
+    }
+/*     .schedule-item {
+      height: 70px;
+    } */
+
+  .grid-last{
+    height:98px;
+  }
+}

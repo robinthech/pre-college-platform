@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<odoo>
+  <record id="foro_foro_action_tech" model="ir.actions.act_window">
+    <field name="name">Foros</field>
+    <field name="res_model">forum.forum</field>
+    <field name="view_mode">tree,form</field>
+    <field name="domain">[('company_id', '=', allowed_company_ids[0])]</field>
+
+  </record>
+
+
+  <record model="ir.actions.act_window.view" id="foro_elearning_action_2">
+    <field name="sequence" eval="2"/>
+    <field name="view_mode">tree</field>
+    <field name="view_id" ref="website_forum.view_forum_forum_list"/>
+    <field name="act_window_id" ref="foro_foro_action_tech"/>
+  </record>
+
+
+  <record model="ir.actions.act_window.view" id="foro_elearning_action_3">
+    <field name="sequence" eval="3"/>
+    <field name="view_mode">form</field>
+    <field name="view_id" ref="website_forum.view_forum_forum_form"/>
+    <field name="act_window_id" ref="foro_foro_action_tech"/>
+  </record>
+
+
+  <menuitem id="menu_foro_post"
+              name="Foros"
+              sequence="20"
+                groups='group_elearning_user_tech,group_elearning_admin_tech,elearning_aprentech.group_control_acceso_superadmin,elearning_aprentech.group_control_acceso_admin,elearning_aprentech.group_control_acceso_editor,elearning_aprentech.group_control_acceso_observador'
+              parent="elearning_aprentech.menu_principal"/>
+
+  <menuitem id="menu_foro"
+              name="Foros"
+              action = "foro_foro_action_tech"
+              sequence="10"
+                groups='group_elearning_user_tech,group_elearning_admin_tech,elearning_aprentech.group_control_acceso_superadmin,elearning_aprentech.group_control_acceso_admin,elearning_aprentech.group_control_acceso_editor,elearning_aprentech.group_control_acceso_observador'
+              parent="elearning_aprentech.menu_foro_post"/>
+
+  <record id="post_post_action_tech" model="ir.actions.act_window">
+    <field name="name">Posts en los Foros</field>
+    <field name="res_model">forum.post</field>
+    <field name="view_mode">tree,form</field>
+    <field name="domain">[('company_id', '=', allowed_company_ids[0])]</field>
+    <field name="search_view_id" ref="website_forum.view_forum_post_search"/>
+
+  </record>
+
+
+  <record model="ir.actions.act_window.view" id="posts_elearning_action_2">
+    <field name="sequence" eval="2"/>
+    <field name="view_mode">tree</field>
+    <field name="view_id" ref="website_forum.view_forum_post_list"/>
+    <field name="act_window_id" ref="post_post_action_tech"/>
+  </record>
+
+
+  <record model="ir.actions.act_window.view" id="posts_elearning_action_3">
+    <field name="sequence" eval="3"/>
+    <field name="view_mode">form</field>
+    <field name="view_id" ref="website_forum.view_forum_post_form"/>
+    <field name="act_window_id" ref="post_post_action_tech"/>
+  </record>
+
+
+    <menuitem id="menu_post"
+                name="Post"
+                action = "post_post_action_tech"
+                sequence="20"
+                  groups='group_elearning_user_tech,group_elearning_admin_tech,elearning_aprentech.group_control_acceso_superadmin,elearning_aprentech.group_control_acceso_admin,elearning_aprentech.group_control_acceso_editor,elearning_aprentech.group_control_acceso_observador'
+                parent="elearning_aprentech.menu_foro_post"/>
+
+
+</odoo>

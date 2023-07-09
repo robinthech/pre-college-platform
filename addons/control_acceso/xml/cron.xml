@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record forcecreate="True" id="ir_cron_fecha_fin_action" model="ir.cron">
+            <field name="name">Archivar Usuarios de un ciclo</field>
+            <field name="model_id" ref="model_ciclo"/>
+            <field name="state">code</field>
+            <field name="code">model.cron_archivar_ciclo()</field>
+            <field name="interval_number">60</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">-1</field>
+        </record>
+    </data>
+</odoo>

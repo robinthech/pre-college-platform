@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data noupdate="0">
+
+    <record  id="category_evaluaciones_tech" model="ir.module.category">
+      <field name="name">Evaluaciones </field>
+    </record>
+
+   <record id="group_evaluaciones_user_tech" model="res.groups">
+       <field name="name">Profesor</field>
+       <field name="category_id" ref="category_evaluaciones_tech" />
+   </record>
+
+    <record id="group_evaluaciones_admin_tech" model="res.groups">
+     <field name="name">Administrator</field>
+     <field name="category_id" ref="category_evaluaciones_tech"/>
+    </record>
+
+    <record id="model_access_evaluacion" model="ir.model.access">
+           <field name="name">model.access.evaluacion</field>
+           <field name="group_id" ref="website_examenes.group_evaluaciones_admin_tech"/>
+           <field name="model_id" ref="website_examenes.model_evaluacion"/>
+           <field name="perm_read" eval="1"/>
+           <field name="perm_create" eval="1"/>
+           <field name="perm_write" eval="1"/>
+           <field name="perm_unlink" eval="1"/>
+       </record>
+
+   <record id="model_access_evaluacion_line" model="ir.model.access">
+          <field name="name">model.access.evaluacion.line</field>
+          <field name="group_id" ref="website_examenes.group_evaluaciones_admin_tech"/>
+          <field name="model_id" ref="website_examenes.model_evaluacion_line"/>
+          <field name="perm_read" eval="1"/>
+          <field name="perm_create" eval="1"/>
+          <field name="perm_write" eval="1"/>
+          <field name="perm_unlink" eval="1"/>
+      </record>
+
+  <record id="model_access_grupo_alumnos" model="ir.model.access">
+         <field name="name">model.access.grupo.alumnos</field>
+         <field name="group_id" ref="website_examenes.group_evaluaciones_admin_tech"/>
+         <field name="model_id" ref="website_examenes.model_grupo_alumnos"/>
+         <field name="perm_read" eval="1"/>
+         <field name="perm_create" eval="1"/>
+         <field name="perm_write" eval="1"/>
+         <field name="perm_unlink" eval="1"/>
+     </record>
+
+
+   <record id="model_access_res_users_line" model="ir.model.access">
+          <field name="name">model.access.res.users.line</field>
+          <field name="group_id" ref="website_examenes.group_evaluaciones_admin_tech"/>
+          <field name="model_id" ref="website_examenes.model_res_users_line"/>
+          <field name="perm_read" eval="1"/>
+          <field name="perm_create" eval="1"/>
+          <field name="perm_write" eval="1"/>
+          <field name="perm_unlink" eval="1"/>
+      </record>
+
+  <record id="model_access_plantilla_slide" model="ir.model.access">
+         <field name="name">model.access.plantilla.slide</field>
+         <field name="group_id" ref="website_examenes.group_evaluaciones_admin_tech"/>
+         <field name="model_id" ref="website_examenes.model_plantilla_slide"/>
+         <field name="perm_read" eval="1"/>
+         <field name="perm_create" eval="1"/>
+         <field name="perm_write" eval="1"/>
+         <field name="perm_unlink" eval="1"/>
+     </record>
+
+    <record id="model_access_plantilla" model="ir.model.access">
+      <field name="name">model.access.plantilla</field>
+      <field name="group_id" ref="website_examenes.group_evaluaciones_admin_tech"/>
+      <field name="model_id" ref="website_examenes.model_plantilla"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="1"/>
+      <field name="perm_write" eval="1"/>
+      <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record id="model_access_examen" model="ir.model.access">
+         <field name="name">model.access.examen</field>
+         <field name="group_id" ref="website_examenes.group_evaluaciones_admin_tech"/>
+         <field name="model_id" ref="website_examenes.model_examen"/>
+         <field name="perm_read" eval="1"/>
+         <field name="perm_create" eval="1"/>
+         <field name="perm_write" eval="1"/>
+         <field name="perm_unlink" eval="1"/>
+     </record>
+
+     <record id="model_access_claves" model="ir.model.access">
+          <field name="name">model.access.claves</field>
+          <field name="group_id" ref="website_examenes.group_evaluaciones_admin_tech"/>
+          <field name="model_id" ref="website_examenes.model_claves"/>
+          <field name="perm_read" eval="1"/>
+          <field name="perm_create" eval="1"/>
+          <field name="perm_write" eval="1"/>
+          <field name="perm_unlink" eval="1"/>
+      </record>
+
+      <record id="model_access_respuestas" model="ir.model.access">
+           <field name="name">model.access.respuesta</field>
+           <field name="group_id" ref="website_examenes.group_evaluaciones_admin_tech"/>
+           <field name="model_id" ref="website_examenes.model_respuesta"/>
+           <field name="perm_read" eval="1"/>
+           <field name="perm_create" eval="1"/>
+           <field name="perm_write" eval="1"/>
+           <field name="perm_unlink" eval="1"/>
+       </record>
+
+       <record id="model_access_respuestas_lin" model="ir.model.access">
+            <field name="name">model.access.respuesta.line</field>
+            <field name="group_id" ref="website_examenes.group_evaluaciones_admin_tech"/>
+            <field name="model_id" ref="website_examenes.model_respuesta_line"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+        </record>
+
+        <record id="model_access_respuestas_slide" model="ir.model.access">
+             <field name="name">model.access.respuesta.slide</field>
+             <field name="group_id" ref="website_examenes.group_evaluaciones_admin_tech"/>
+             <field name="model_id" ref="website_examenes.model_respuesta_slide"/>
+             <field name="perm_read" eval="1"/>
+             <field name="perm_create" eval="1"/>
+             <field name="perm_write" eval="1"/>
+             <field name="perm_unlink" eval="1"/>
+         </record>
+
+         <record id="model_access_respuestas_simulacro" model="ir.model.access">
+              <field name="name">model.access.respuesta.simulacro</field>
+              <field name="group_id" ref="website_examenes.group_evaluaciones_admin_tech"/>
+              <field name="model_id" ref="website_examenes.model_respuesta_simulacro"/>
+              <field name="perm_read" eval="1"/>
+              <field name="perm_create" eval="1"/>
+              <field name="perm_write" eval="1"/>
+              <field name="perm_unlink" eval="1"/>
+          </record>
+
+          <record id="model_access_curso_general" model="ir.model.access">
+               <field name="name">model.access.curso.general</field>
+               <field name="group_id" ref="website_examenes.group_evaluaciones_admin_tech"/>
+               <field name="model_id" ref="website_examenes.model_curso_general"/>
+               <field name="perm_read" eval="1"/>
+               <field name="perm_create" eval="1"/>
+               <field name="perm_write" eval="1"/>
+               <field name="perm_unlink" eval="1"/>
+           </record>
+</data>
+</odoo>

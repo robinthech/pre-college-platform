@@ -1,0 +1,412 @@
+<?xml version="1.0"?>
+<odoo>
+  <!--domain de de campos-->
+
+  <record id="inherit_cursos_aprentech" model="ir.ui.view">
+     <field name="name">inherit.curso.aprentech</field>
+     <field name="model">slide.channel</field>
+     <field name="inherit_id" ref="website_slides.view_slide_channel_form"/>
+     <field name="arch" type="xml">
+
+         <xpath expr="//field[@name='tag_ids']" position="replace">
+            <field name="tag_ids" widget="many2many_tags" placeholder="Etiquetas"  domain="[('company_id', '=', company_id)]" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True}"/>
+             <field name="company_id" invisible='1'/>
+     </xpath>
+
+         <xpath expr="//field[@name='user_id']" position="replace">
+            <field name="user_id" domain="[('company_id', '=', company_id)]" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open' : True}"/>
+      </xpath>
+
+      <xpath expr="//field[@name='forum_id']" position="replace">
+        <field name="forum_id" domain="[('company_id', '=', company_id)]" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open' : True}"/>
+      </xpath>
+     </field>
+   </record>
+
+   <record id="inherit_calendar_aprentech" model="ir.ui.view">
+      <field name="name">inherit.calendar.aprentech</field>
+      <field name="model">calendar.event</field>
+      <field name="inherit_id" ref="calendar.view_calendar_event_form"/>
+      <field name="arch" type="xml">
+
+          <xpath expr="//field[@name='partner_ids']" position="replace">
+            <field name="partner_ids" widget="many2manyattendee" placeholder="Select attendees..." context="{'force_email':True}" class="oe_inline"  options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True}"/>
+              <field name="company_id" invisible='1'/>
+      </xpath>
+
+          <xpath expr="//field[@name='categ_ids']" position="replace">
+             <field name="categ_ids" invisible='1'/>
+       </xpath>
+       <xpath expr="//field[@name='alarm_ids']" position="replace">
+          <field name="alarm_ids" invisible='1'/>
+    </xpath>
+       <xpath expr="//field[@name='location']" position="replace">
+         <field name="location" invisible='1' />
+       </xpath>
+       <xpath expr="//page[@name='page_misc']" position="replace">
+          <field name="user_id" invisible='1'/>
+    </xpath>
+
+      </field>
+    </record>
+   <!--domain in wizard-->
+
+   <record id="inherit_cursos_aprentech_wizard" model="ir.ui.view">
+      <field name="name">inherit.curso.aprentech.wizard</field>
+      <field name="model">slide.channel.invite</field>
+      <field name="inherit_id" ref="website_slides.slide_channel_invite_view_form"/>
+      <field name="arch" type="xml">
+
+          <xpath expr="//field[@name='partner_ids']" position="replace">
+            <field name="partner_ids"  widget="many2many_tags_email" placeholder="Add existing contacts..."  context="{'force_email':True, 'show_email':True, 'no_create_edit': True}" />
+              <field name="company_id" invisible='1'/>
+      </xpath>
+      <xpath expr="//field[@name='template_id']" position="replace">
+        <field name="template_id" invisible='1'/>
+      </xpath>
+
+      </field>
+    </record>
+
+    <record id="view_l10n_cu_calendar_event_calendar" model="ir.ui.view">
+       <field name="name">calendar.event.calendar</field>
+       <field name="model">calendar.event</field>
+       <field name="inherit_id" ref="calendar.view_calendar_event_calendar"/>
+       <field name="arch" type="xml">
+           <data>
+                  <field name="partner_ids" position="replace" >
+                       <field name="partner_ids" domain="[('company_id', '=', company_id)]"/>
+                       <field name="company_id" invisible='1'/>
+
+                   </field>
+                   <field name="partner_id" position="replace" >
+                        <field name="partner_id"/>
+                    </field>
+           </data>
+       </field>
+   </record>
+
+    <!--domain de compañia-->
+
+      <record id="cursos_aula_elearning_tree_1" model="ir.ui.view">
+        <field name="name">elearning.aula.curso.tree</field>
+        <field name="model">slide.channel</field>
+        <field name="arch" type="xml">
+
+          <tree string="Cursos" create="false" delete="false">
+            <field name="name"/>
+            <field name="channel_type"/>
+            <field name="visibility"/>
+            <field name="user_id" string="Profesor"/>
+            <field name="active" invisible="1"/>
+          </tree>
+        </field>
+
+      </record>
+
+      <record id="cursos_aula_elearning_kanban_1" model="ir.ui.view">
+        <field name="name">elearning.aula.curso.kanban</field>
+        <field name="model">slide.channel</field>
+        <field name="arch" type="xml">
+
+          <kanban string="eLearning Overview" class="o_emphasize_colors o_kanban_dashboard o_slide_kanban breadcrumb_item active" edit="false" create="false" delete="false">
+            <field name="color"/>
+            <field name="website_published"/>
+            <templates>
+              <t t-name="kanban-box">
+                <div t-attf-class="oe_kanban_color_#{kanban_getcolor(record.color.raw_value)} oe_kanban_card oe_kanban_global_click">
+                  <div class="o_dropdown_kanban dropdown">
+                    <a role="button" class="dropdown-toggle o-no-caret btn" data-toggle="dropdown" href="#" aria-label="Dropdown menu" title="Dropdown menu">
+                      <span class="fa fa-ellipsis-v" aria-hidden="false"/>
+                    </a>
+                    <div class="dropdown-menu" role="menu">
+                      <ul class="oe_kanban_colorpicker" data-field="color"/>
+                      <t t-if="widget.deletable">
+                        <a class="dropdown-item" role="menuitem" type="delete">Delete</a>
+                      </t>
+                      <a class="dropdown-item" role="menuitem" type="edit">
+                        Edit
+                      </a>
+                      <a class="dropdown-item" name="action_view_slides" role="menuitem" type="object">
+                        Lessons
+                      </a>
+                      <a class="dropdown-item" name="action_channel_invite" role="menuitem" type="object">
+                        Invite
+                      </a>
+                    </div>
+                  </div>
+                  <div class="o_kanban_card_header">
+                    <div class="o_kanban_card_header_title mb16">
+                      <div class="o_primary">
+                        <a type="edit" class="mr-auto">
+                          <span><field name="name" class="o_primary"/></span>
+                        </a>
+                      </div>
+                      <div t-if="record.tag_ids">
+                        <field name="tag_ids" widget="many2many_tags"/>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="container o_kanban_card_content mt0">
+                    <div class="row mb16">
+                      <div class="col-6 o_kanban_primary_left">
+                        <button class="btn btn-primary" name="open_website_url" type="object">Ver Curso</button>
+                      </div>
+                      <div class="col-6 o_kanban_primary_right">
+                        <div class="d-flex" t-if="record.rating_count.raw_value">
+                          <a name="action_view_ratings" type="object" class="mr-auto"><field name="rating_count"/>
+                            reviews</a>
+                          <span><field name="rating_avg_stars"/>
+                            / 5</span>
+                        </div>
+                        <div class="d-flex">
+                          <span class="mr-auto">
+                            <label for="total_views" class="mb0">Vistas</label>
+                          </span>
+                          <field name="total_views"/>
+                        </div>
+                        <div class="d-flex" name="info_total_time">
+                          <span class="mr-auto">
+                            <label for="total_time" class="mb0">Duración</label>
+                          </span>
+                          <field name="total_time" widget="float_time"/>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row mt3">
+                      <div class="col-4 border-right">
+                        <a name="action_view_slides" type="object" class="d-flex flex-column align-items-center">
+                          <span class="font-weight-bold"><field name="total_slides"/></span>
+                          <span class="text-muted">Contenidos</span>
+                        </a>
+                      </div>
+                      <div class="col-4 border-right">
+                        <a name="action_redirect_to_members" type="object" class="d-flex flex-column align-items-center">
+                          <span class="font-weight-bold"><field name="members_count"/></span>
+                          <span class="text-muted">Asistentes</span>
+                        </a>
+                      </div>
+                      <div class="col-4">
+                        <a name="action_redirect_to_done_members" type="object" class="d-flex flex-column align-items-center">
+                          <span class="font-weight-bold"><field name="members_done_count"/></span>
+                          <span name="done_members_count_label" class="text-muted">Finalizados</span>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </t>
+            </templates>
+          </kanban>
+        </field>
+
+      </record>
+
+      <record id="cursos_aula_elearning_form_1" model="ir.ui.view">
+        <field name="name">elearning.aula.curso.form</field>
+        <field name="model">slide.channel</field>
+        <field name="arch" type="xml">
+          <form string="Channels" create="false" delete="false">
+            <sheet>
+              <div class="oe_button_box" name="button_box">
+                <button name="action_view_slides" type="object" icon="fa-files-o" class="oe_stat_button" groups="website.group_website_publisher">
+                  <div class="o_field_widget o_stat_info">
+                    <span class="o_stat_value"><field name="total_slides" nolabel="1"/></span>
+                    <span name="total_slides_label" class="o_stat_text">Contenido</span>
+                  </div>
+                </button>
+                <button name="action_redirect_to_done_members" type="object" icon="fa-trophy" class="oe_stat_button" groups="website.group_website_publisher">
+                  <div class="o_field_widget o_stat_info">
+                    <span class="o_stat_value"><field name="members_done_count" nolabel="1"/></span>
+                    <span name="members_done_count_label" class="o_stat_text">Finalizado</span>
+                  </div>
+                </button>
+                <button name="action_redirect_to_members" type="object" icon="fa-users" class="oe_stat_button" groups="website.group_website_publisher">
+                  <field name="members_count" string="Participantes" widget="statinfo"/>
+                </button>
+                <button name="action_view_ratings" type="object" icon="fa-star" class="oe_stat_button" groups="website.group_website_publisher" attrs="{'invisible': [('allow_comment', '=', False)]}">
+                  <field name="rating_count" string="Reseñas" widget="statinfo"/>
+                </button>
+                <button name="action_redirect_to_forum" type="object" class="oe_stat_button" attrs="{'invisible': [('forum_id', '=', False)]}" icon="fa-comment">
+                  <field string="Post del Foro" name="forum_total_posts" widget="statinfo"/>
+                </button>
+                <field name="is_published" widget="website_redirect_button"/>
+              </div>
+              <widget name="web_ribbon" title="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}"/>
+              <field name="image_1920" widget="image" class="oe_avatar" options="{'preview_image': 'image_128'}"/>
+              <div class="oe_title">
+                <label for="name" class="oe_edit_only" string="Título del curso"/>
+                <h1><field name="name" default_focus="1" placeholder="Título del curso" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open' : True}"/></h1>
+              </div>
+              <div>
+                <field name="name" invisible="1"/>
+                <field name="active" invisible="1"/>
+                <field name="tag_ids" widget="many2many_tags" placeholder="Etiquetas"/>
+              </div>
+              <notebook colspan="4">
+                <page name="content" string="Contenido">
+                  <field name="slide_ids" colspan="4" nolabel="1" widget="slide_category_one2many" mode="tree,kanban" context="{'default_channel_id': active_id, 'form_view_ref' : 'website_slides.view_slide_slide_form_wo_channel_id'}">
+                    <tree decoration-bf="is_category" editable="bottom">
+                      <field name="sequence" widget="handle"/>
+                      <field name="name"/>
+                      <field name="slide_type" attrs="{'invisible': [('slide_type', '=', 'category')]}"/>
+                      <field name="completion_time" attrs="{'invisible': [('slide_type', '=', 'category')]}" string="Duration" widget="float_time"/>
+                      <field name="total_views" attrs="{'invisible': [('slide_type', '=', 'category')]}"/>
+                      <field name="is_category" invisible="1"/>
+                      <control>
+                        <create name="add_slide_section" string="Añadir Sección" context="{'default_is_category': True}"/>
+                        <create name="add_slide_lesson" string="Añadir Contenido"/>
+                      </control>
+                    </tree>
+                  </field>
+                </page>
+                <page name="description" string="Descripción">
+                  <field name="description" colspan="4" nolabel="1"/>
+                </page>
+                <page name="options" string="Opciones">
+                  <group name="course" string="Curso">
+                    <field string="Tipo" name="channel_type" widget="radio"/>
+                    <field name="user_id" string="Profesor" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open' : True}"/>
+                  </group>
+                  <!-- <group name="access_rights" string="Access Rights"> <field name="enroll" widget="radio" options="{'horizontal': true}"/> <field name="upload_group_ids" widget="many2many_tags" groups="base.group_no_one"/> <field name="enroll_group_ids"
+                  widget="many2many_tags" groups="base.group_no_one"/> </group> -->
+                  <group>
+                    <group name="communication" string="Comunicación">
+                      <field string="Permitir calificación" name="allow_comment"/>
+                      <field string="Foro del Curso" name="forum_id"/>
+                    </group>
+                    <group name="display" string="Mostrar en pantalla">
+                      <field name="visibility" widget="radio"/>
+                    </group>
+                  </group>
+                </page>
+                <page string="Reglas del karma" name="karma_rules">
+                  <group>
+                    <field name="karma_gen_channel_rank" string="Rank Course"/>
+                    <field name="karma_gen_channel_finish" string="Finish Course"/>
+                    <field name="karma_review" attrs="{'invisible': [('allow_comment', '!=', True)]}"/>
+                    <field name="karma_slide_comment" attrs="{'invisible': [('allow_comment', '!=', True)]}"/>
+                    <field name="karma_slide_vote" attrs="{'invisible': [('allow_comment', '!=', True)]}"/>
+                  </group>
+                </page>
+                <page name="statistics" string="Estadísticas">
+                  <group>
+                    <group name="statistics_nbr" class="col-4">
+                      <field name="nbr_presentation"/>
+                      <field name="nbr_document"/>
+                      <field name="nbr_video"/>
+                      <field name="nbr_infographic"/>
+                      <field name="nbr_quiz" string="Quizzes"/>
+                      <field name="nbr_webpage"/>
+                    </group>
+                    <group name="view_stats">
+                      <field name="total_views" string="Visitas"/>
+                      <field string="Calificación" name="rating_avg" widget="field_float_rating"/>
+                      <label for="total_time" string="Tiempo de observación"/>
+                      <div>
+                        <field name="total_time"/>
+                        <span class="ml-2">Hours</span>
+                      </div>
+                    </group>
+                  </group>
+                </page>
+              </notebook>
+            </sheet>
+            <div class="oe_chatter">
+              <field name="message_follower_ids" widget="mail_followers"/>
+              <field name="message_ids" widget="mail_thread"/>
+            </div>
+          </form>
+        </field>
+      </record>
+
+    <record id="slide_channel_action_tech" model="ir.actions.act_window">
+      <field name="name">Cursos</field>
+      <field name="res_model">slide.channel</field>
+      <field name="view_mode">tree,kanban,form</field>
+      <field name="domain">[('company_id', '=', allowed_company_ids[0])]</field>
+      <field name="search_view_id" ref="website_slides.slide_channel_view_search"/>
+
+    </record>
+
+    <record model="ir.actions.act_window.view" id="curso_elearning_action_1">
+      <field name="sequence" eval="2"/>
+      <field name="view_mode">kanban</field>
+      <field name="view_id" ref="elearning_aprentech.cursos_aula_elearning_kanban_1"/>
+      <field name="act_window_id" ref="slide_channel_action_tech"/>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="curso_elearning_action_2">
+      <field name="sequence" eval="1"/>
+      <field name="view_mode">tree</field>
+      <field name="view_id" ref="elearning_aprentech.cursos_aula_elearning_tree_1"/>
+      <field name="act_window_id" ref="slide_channel_action_tech"/>
+    </record>
+
+
+    <record model="ir.actions.act_window.view" id="curso_elearning_action_3">
+      <field name="sequence" eval="3"/>
+      <field name="view_mode">form</field>
+      <field name="view_id" ref="elearning_aprentech.cursos_aula_elearning_form_1"/>
+      <field name="act_window_id" ref="slide_channel_action_tech"/>
+    </record>
+
+
+    <menuitem id="menu_principal"
+                name="AMAUTA"
+                action = "slide_channel_action_tech"
+                sequence="10"
+                groups='group_elearning_user_tech,group_elearning_admin_tech,elearning_aprentech.group_control_acceso_superadmin,elearning_aprentech.group_control_acceso_admin,elearning_aprentech.group_control_acceso_editor,elearning_aprentech.group_control_acceso_observador'
+                web_icon="elearning_aprentech,static/description/poster_image.png"/>
+
+    <menuitem id="menu_gestion"
+                name="Cursos"
+                sequence="10"
+                  groups='group_elearning_user_tech,group_elearning_admin_tech,elearning_aprentech.group_control_acceso_superadmin,elearning_aprentech.group_control_acceso_admin,elearning_aprentech.group_control_acceso_editor,elearning_aprentech.group_control_acceso_observador'
+                parent="elearning_aprentech.menu_principal"/>
+    <menuitem id="menu_cursos"
+                name="Cursos"
+                action = "slide_channel_action_tech"
+                sequence="10"
+                  groups='group_elearning_user_tech,group_elearning_admin_tech,elearning_aprentech.group_control_acceso_superadmin,elearning_aprentech.group_control_acceso_admin,elearning_aprentech.group_control_acceso_editor,elearning_aprentech.group_control_acceso_observador'
+                parent="elearning_aprentech.menu_gestion"/>
+
+      <record id="reuniones_action_tech" model="ir.actions.act_window">
+        <field name="name">Reuniones</field>
+        <field name="res_model">calendar.event</field>
+        <field name="view_mode">calendar,tree,form</field>
+        <field name="domain">[('company_id', '=', allowed_company_ids[0])]</field>
+        <field name="search_view_id" ref="calendar.view_calendar_event_search"/>
+
+      </record>
+
+      <record model="ir.actions.act_window.view" id="calendario_elearning_action_1">
+        <field name="sequence" eval="1"/>
+        <field name="view_mode">calendar</field>
+        <field name="view_id" ref="calendar.view_calendar_event_calendar"/>
+        <field name="act_window_id" ref="reuniones_action_tech"/>
+      </record>
+
+      <record model="ir.actions.act_window.view" id="calendario_elearning_action_2">
+        <field name="sequence" eval="2"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="calendar.view_calendar_event_tree"/>
+        <field name="act_window_id" ref="reuniones_action_tech"/>
+      </record>
+
+
+      <record model="ir.actions.act_window.view" id="calendario_elearning_action_3">
+        <field name="sequence" eval="3"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="calendar.view_calendar_event_form"/>
+        <field name="act_window_id" ref="reuniones_action_tech"/>
+      </record>
+
+
+      <!--menuitem id="menu_reuniones"
+                  name="Reuniones"
+                  action = "reuniones_action_tech"
+                  sequence="25"
+                  parent="elearning_aprentech.menu_principal"
+                  /-->
+</odoo>

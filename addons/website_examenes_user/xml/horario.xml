@@ -1,0 +1,285 @@
+<?xml version="1.0"?>
+<odoo>
+  <!--domain de de campos-->
+
+  <record id="group_horario_tree" model="ir.ui.view">
+    <field name="name">horario.tree</field>
+    <field name="model">horario</field>
+    <field name="arch" type="xml">
+      <tree string="horario">
+        <field name="curso_general_id"/>
+        <field name="profesor_id"/>
+        <field name="grupo_alumnos"/>
+        <field name="fecha_fin"/>
+        <field name="fecha_inicio"/>
+      </tree>
+    </field>
+  </record>
+
+  <record id="group_horario_form" model="ir.ui.view">
+    <field name="name">horario.form</field>
+    <field name="model">horario</field>
+    <field name="arch" type="xml">
+      <form string="Carreras">
+        <sheet>
+          <div class="oe_button_box" name="button_box">
+                <button name="action_reuniones_horario" type="object" class="oe_stat_button" icon="fa-pencil-square-o">
+                    <field string="REPROGRAMACIÓN" name="reuniones_repro" widget="statinfo"/>
+                </button>
+                <button name="action_sesiones_horario" type="object" class="oe_stat_button" icon="fa-pencil-square-o">
+                    SESIONES
+                </button>
+            </div>
+          <div class="row">
+            <div class="col-4">
+              <h4>
+                AULA
+              </h4>
+            </div>
+            <div class="col-4">
+              <h4>
+                CURSO
+              </h4>
+            </div>
+
+            <div class="col-4">
+              <h4>
+                PROFESOR
+              </h4>
+            </div>
+          </div>
+          <group>
+            <div class="row">
+              <div class="col-4">
+                <field name="grupo_alumnos" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open' : True}"/>
+              </div>
+              <div class="col-4">
+                <field name="curso_general_id" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open' : True}"/>
+              </div>
+              <div class="col-4">
+                <field name="profesor_id" domain="[('share', '=', False),('id', '!=', 2)]" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open' : True}"/>
+              </div>
+            </div>
+          </group>
+          <br/>
+          <br/>
+          <div class="row">
+            <div class="col-3 text-center">
+              <h4>
+                DESDE
+
+              </h4>
+            </div>
+            <div class="col-3">
+              <field name="fecha_inicio"/>
+            </div>
+            <div class="col-3 text-center">
+              <h4>
+                HASTA
+
+              </h4>
+            </div>
+            <div class="col-3">
+              <field name="fecha_fin"/>
+            </div>
+          </div>
+          <div class="row">
+            <group>
+              <field name="meet_url"  string="Link"/>
+
+            </group>
+          </div>
+
+          <hr/>
+          <div class="row mx-auto">
+            <div class="col-12 alert alert-primary text-center" role="alert">
+
+              <h4 >HORARIO DE CLASE
+              </h4>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-2">LUNES
+            </div>
+            <div class="col-2">
+              <field name="lunes"/>
+            </div>
+            <div class="col-4">
+              <field name="lunes_inicio" widget="float_time" attrs="{'invisible':[('lunes','=',False)],'required': [('lunes','!=',False)]}"/>
+
+            </div>
+            <div class="col-4">
+                <field name="lunes_fin" widget="float_time" attrs="{'invisible':[('lunes','=',False)],'required': [('lunes','!=',False)]}"/>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-2">
+              MARTES
+            </div>
+            <div class="col-2">
+              <field name="martes"/>
+            </div>
+            <div class="col-4">
+              <field name="martes_inicio" widget="float_time" attrs="{'invisible':[('martes','=',False)],'required': [('martes','!=',False)]}"/>
+
+            </div>
+            <div class="col-4">
+              <field name="martes_fin" widget="float_time" attrs="{'invisible':[('martes','=',False)],'required': [('martes','!=',False)]}"/>
+
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-2">
+              MIERCOLES
+            </div>
+            <div class="col-2">
+              <field name="miercoles"/>
+            </div>
+            <div class="col-4">
+              <field name="miercoles_inicio" widget="float_time" attrs="{'invisible':[('miercoles','=',False)],'required': [('miercoles','!=',False)]}"/>
+
+            </div>
+            <div class="col-4">
+              <field name="miercoles_fin" widget="float_time" attrs="{'invisible':[('miercoles','=',False)],'required': [('miercoles','!=',False)]}"/>
+
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-2">
+              JUEVES
+            </div>
+            <div class="col-2">
+              <field name="jueves"/>
+            </div>
+            <div class="col-4">
+              <field name="jueves_inicio" widget="float_time" attrs="{'invisible':[('jueves','=',False)],'required': [('jueves','!=',False)]}"/>
+
+            </div>
+            <div class="col-4">
+              <field name="jueves_fin" widget="float_time" attrs="{'invisible':[('jueves','=',False)],'required': [('jueves','!=',False)]}"/>
+
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-2">
+              VIERNES
+            </div>
+            <div class="col-2">
+              <field name="viernes"/>
+            </div>
+            <div class="col-4">
+              <field name="viernes_inicio" widget="float_time" attrs="{'invisible':[('viernes','=',False)],'required': [('viernes','!=',False)]}"/>
+
+            </div>
+            <div class="col-4">
+              <field name="viernes_fin" widget="float_time" attrs="{'invisible':[('viernes','=',False)],'required': [('viernes','!=',False)]}"/>
+
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-2">
+              SABADO
+            </div>
+            <div class="col-2">
+              <field name="sabado"/>
+            </div>
+            <div class="col-4">
+              <field name="sabado_inicio" widget="float_time" attrs="{'invisible':[('sabado','=',False)],'required': [('sabado','!=',False)]}"/>
+
+            </div>
+            <div class="col-4">
+              <field name="sabado_fin" widget="float_time" attrs="{'invisible':[('sabado','=',False)],'required': [('sabado','!=',False)]}"/>
+
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-2">
+              DOMINGO
+            </div>
+            <div class="col-2">
+              <field name="domingo"/>
+            </div>
+            <div class="col-4">
+              <field name="domingo_inicio" widget="float_time" attrs="{'invisible':[('domingo','=',False)],'required': [('domingo','!=',False)]}"/>
+
+            </div>
+            <div class="col-4">
+              <field name="domingo_fin" widget="float_time" attrs="{'invisible':[('domingo','=',False)],'required': [('domingo','!=',False)]}"/>
+
+            </div>
+          </div>
+
+        </sheet>
+
+      </form>
+    </field>
+  </record>
+
+  <record id="group_horario_action" model="ir.actions.act_window">
+    <field name="name">Reuniones</field>
+    <field name="res_model">horario</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+
+  <menuitem name="Reuniones" id="menu_horario_grei" parent="elearning_aprentech.menu_principal" sequence="27" action="group_horario_action"/>
+
+  <record id="reuniones_sesiones_tree" model="ir.ui.view">
+    <field name="name">reuniones.sesiones.tree</field>
+    <field name="model">reuniones.sesiones</field>
+    <field name="arch" type="xml">
+      <tree string="Sesiones">
+        <field name="fecha"/>
+      </tree>
+    </field>
+  </record>
+
+  <record id="reuniones_sesiones_form" model="ir.ui.view">
+    <field name="name">reuniones.sesiones.form</field>
+    <field name="model">reuniones.sesiones</field>
+    <field name="arch" type="xml">
+      <form string="Sesiones">
+        <header>
+          <button string="Marcar Como Feriado" type="object" name="marcar_como_feriado" class="oe_highlight" attrs="{'invisible': [('tipo_sesion','=','feriado')]}"/>
+          <button string="Marcar Como No Feriado" type="object" name="marcar_como_normal" class="oe_highlight" attrs="{'invisible': [('tipo_sesion','!=','feriado')]}"/>
+            <field name="tipo_sesion" widget="statusbar"/>
+        </header>
+      <sheet>
+        <group>
+          <field name="fecha"/>
+          <field name="horario_id" invisible="1"/>
+
+        </group>
+        <field name="asistencia_ids" mode="tree">
+          <tree editable="bottom">
+            <field name="user_id" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True}" string="usuario"/>
+            <field name="fecha" />
+            <field name="horario_id" invisible="1"/>
+            <field name="registro_asistencia"/>
+          </tree>
+          <form>
+            <group>
+              <field name="horario_id" invisible="1"/>
+              <field name="user_id" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True}" string="usuario"/>
+              <field name="fecha" />
+              <field name="registro_asistencia"/>
+              </group>
+
+          </form>
+        </field>
+      </sheet>
+      </form>
+    </field>
+  </record>
+
+  <record model="ir.ui.view" id="reuniones_sesiones_search">
+    <field name="name">reuniones.sesiones.search</field>
+    <field name="model">reuniones.sesiones</field>
+    <field name="arch" type="xml">
+      <search string="Agrupado por Estado">
+        <filter string="Activos" name="active"  domain="[('active','=',True)]"/>
+        <filter string="Inactivos" name="inactive"  domain="[('active','=',False)]"/>
+      </search>
+    </field>
+  </record>
+</odoo>

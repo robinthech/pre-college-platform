@@ -1,0 +1,75 @@
+.todo{
+}
+.tab{
+		max-width: 100%;
+		background-color: #FFF;
+		border-radius: 20px;
+	  box-shadow: -1px 15px 45px -12px #3CE7A2;
+	  line-height: 4em;
+	  font-weight: bold;
+	  white-space: nowrap;
+	  overflow: auto;
+		font-family: 'Roboto', sans-serif;
+		display: grid;
+		align-items: center;
+	  justify-content: space-around;
+		box-sizing: border-box;
+	  padding-right: 15px;
+	  padding-left: 15px;
+	  margin-left: 15px;
+	  margin-right: 15px;
+}
+
+.tab-items{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	display: inline-grid;
+	grid-auto-flow: column;
+	grid-gap: 1em;
+	width: 600px;
+	float: center;
+
+
+}
+
+.tab-item{
+	display: inline;
+	grid-row: 1 / 2;
+	&.active .item-link{
+	    color: #2DA;
+		}
+
+}
+
+.item-link{
+  padding: 0 .75em;
+  color: #456;
+  text-decoration: none;
+  display: inline-block;
+  transition: color 256ms;
+
+  &:hover{
+    color: #297;
+    text-decoration: undelrine;
+	}
+}
+
+.separatortech{
+  width: 1px;
+  height: 60%;
+  margin: 10% 0;
+  background-color: #CCC;
+  align-self: center;
+}
+
+
+.tab-indicator{
+  height: 3px;
+  background-color: #2DA;
+  border-radius: 3px 3px 0 0;
+  grid-column: var(--index) / span 1 !important;
+  grid-row: 1 / 2;
+  align-self: end;
+  transition: all 300ms;
+}

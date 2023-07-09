@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates>
+   <t t-name="link_pagina_web">
+       <li class="pagina_web o_mail_systray_item">
+           <a role="button"  class="pagina_web" title="Página Web">
+             <i class="fa fa-globe" aria-label="Página Web" /> 
+           </a>
+       </li>
+   </t>
+</templates>

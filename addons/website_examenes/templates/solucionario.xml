@@ -1,0 +1,181 @@
+<odoo>
+
+  <template id="examenes_solucionario" name="Solucionario">
+    <t t-call="website.layout">
+      <t t-if="len(examen.solve_file_ids)>0">
+        <div class="examenes">
+          <div class="mx-auto row-center  render-solucionario">
+            <object t-attf-data="/evaluaciones/content/{{evaluacion.id}}/{{examen.solve_file_ids[0].id}}" type="application/pdf" width="100%" height="100%"/>
+          </div>
+        </div>
+      </t>
+      <t t-else="">
+        <div class="card text-center">
+          <div class="card-header  bg-warning">
+            ALERTA
+          </div>
+          <div class="card-body">
+            <p class="card-text">No se ha publicado el pdf</p>
+          </div>
+          <div class="card-footer text-muted"></div>
+        </div>
+      </t>
+    </t>
+  </template>
+
+  <template id="examenes_detalle" name="Detalles">
+    <t t-call="website.layout">
+
+      <form>
+        <div class="form-group row">
+          <label for="staticEmail" class="col-sm-2 col-form-label">ALUMNO</label>
+          <div class="col-sm-10">
+            <input type="text" readonly="readonly" class="form-control-plaintext" value="email@example.com"/></div>
+        </div>
+        <div class="form-group row">
+          <label for="inputPassword" class="col-sm-2 col-form-label">FECHA HORA INICIO</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="Password"/></div>
+        </div>
+        <div class="form-group row">
+          <label for="inputPassword" class="col-sm-2 col-form-label">DURACION</label>
+          <div class="col-sm-10">
+            <input type="number" class="form-control" placeholder="Password"/></div>
+        </div>
+        <div class="form-group row">
+          <label for="inputPassword" class="col-sm-2 col-form-label">CALIFICACIÒN</label>
+          <div class="col-sm-10">
+            <input type="number" class="form-control" placeholder="Password"/></div>
+        </div>
+      </form>
+    </t>
+  </template>
+
+  <template id="examenes_solucionario_simulacro" name="Solucionario">
+    <t t-call="website.layout">
+      <div class="container evapro">
+        <div class="row py-5">
+          <div class="col-12">
+            <table id="resumen" class="table table-hover responsive nowrap" style="width:100%; text-align: center;">
+              <thead class="thead-dark">
+                <tr>
+                  <th>FASE</th>
+                  <th>DURACIÓN</th>
+                  <th>SOLUCIONARIO</th>
+                </tr>
+              </thead>
+              <tbody>
+                <t t-foreach="evaluacion.bloques_ids" t-as="bloque">
+                  <tr>
+                    <td>
+                      <div>
+                        <span t-field="bloque.name"/>
+                      </div>
+                    </td>
+                    <td >
+                      <span t-field="bloque.duracion"/>
+                    </td>
+                    <td >
+                      <a class="btn btn-success" role="button" t-att-href="'/evaluaciones/solucionarios/%s' % (bloque.id)">Ver Solucionario</a>
+                    </td>
+                  </tr>
+                </t>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </t>
+  </template>
+
+  <template id="template_solucionario_no_disponible" name="Solucionario">
+    <t t-call="website.layout">
+      <div class="card text-center">
+        <div class="card-header  bg-warning">
+          ALERTA
+        </div>
+        <div class="card-body">
+          <p class="card-text">El solucionario no esta disponible</p>
+        </div>
+        <div class="card-footer text-muted"></div>
+      </div>
+
+    </t>
+  </template>
+
+  <template id="template_detalle_no_disponible" name="Detalle">
+    <t t-call="website.layout">
+      <div class="container">
+        <div class="card text-center">
+          <div class="card-header  bg-warning">
+            ALERTA
+          </div>
+          <div class="card-body">
+            <p class="card-text">El detalle no esta disponible</p>
+          </div>
+          <div class="card-footer text-muted"></div>
+        </div>
+      </div>
+
+    </t>
+  </template>
+
+  <template id="template_examen_finalizado" name="Finalizado">
+    <t t-call="website.layout">
+      <div class="card text-center">
+        <div class="card-header  bg-warning">
+          ALERTA
+        </div>
+        <div class="card-body">
+          <p class="card-text">El examen ya finalizó</p>
+        </div>
+        <div class="card-footer text-muted"></div>
+      </div>
+
+    </t>
+  </template>
+
+  <template id="template_examen_inicio" name="Examen">
+    <t t-call="website.layout">
+      <div class="card text-center">
+        <div class="card-header  bg-warning">
+          ALERTA
+        </div>
+        <div class="card-body">
+          <p class="card-text">El examen aun no inicia</p>
+        </div>
+        <div class="card-footer text-muted"></div>
+      </div>
+
+    </t>
+  </template>
+
+  <template id="template_no_inscrito" name="No Inscrito">
+    <t t-call="website.layout">
+      <div class="card text-center">
+        <div class="card-header  bg-warning">
+          ALERTA
+        </div>
+        <div class="card-body">
+          <p class="card-text">No esta inscrito para este examen</p>
+        </div>
+        <div class="card-footer text-muted"></div>
+      </div>
+
+    </t>
+  </template>
+  <template id="template_examen_no_disponible" name="No Inscrito">
+    <t t-call="website.layout">
+      <div class="card text-center">
+        <div class="card-header  bg-warning">
+          ALERTA
+        </div>
+        <div class="card-body">
+          <p class="card-text">No esta disponible este examen</p>
+        </div>
+        <div class="card-footer text-muted"></div>
+      </div>
+
+    </t>
+  </template>
+</odoo>

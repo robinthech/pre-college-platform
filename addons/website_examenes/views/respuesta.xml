@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+
+    <record id="respuesta_form" model="ir.ui.view">
+      <field name="name">respuesta.form</field>
+      <field name="model">respuesta</field>
+      <field name="arch" type="xml">
+        <form string="Respuesta" delete="false" create="false">
+          <sheet>
+            <group>
+              <group>
+                <field name="examen_id" readonly="1" options="{'no_create': True, 'no_open' : True,'no_quick_create': True, 'no_create_edit':True}"/>
+                <field name="user_id" readonly="1" options="{'no_create': True, 'no_open' : True,'no_quick_create': True, 'no_create_edit':True}"/>
+                <field name="evaluacion_id" readonly="1" options="{'no_create': True, 'no_open' : True,'no_quick_create': True, 'no_create_edit':True}"/>
+              </group>
+              <group>
+                <field name="estado" readonly="1" invisible="1"/>
+                <field name="puntaje" readonly="1" invisible="1"/>
+                <field name="nota_vigesimal" readonly="1"/>
+                <field name="create_date" readonly="1" string="Fecha de Inicio"/>
+                <field name="write_date" readonly="1" string="Última Modificación" invisible="1"/>
+              </group>
+            </group>
+            <notebook>
+              <page name="Puntaje" string="Puntaje">
+                <field name="respuestas_ids" mode="tree" widget="cursos_general_seccion_one2many">
+                  <tree editable="bottom" decoration-bf="is_curso">
+                    <field name="curso_general_id" attrs="{'invisible': [('is_curso', '=', False)]}"/>
+                    <field name="sequence"/>
+                    <field name="respuesta_a" readonly="1"/>
+                    <field name="respuesta_b" readonly="1"/>
+                    <field name="respuesta_c" readonly="1"/>
+                    <field name="respuesta_d" readonly="1"/>
+                    <field name="respuesta_e" readonly="1"/>
+                    <field name="puntaje" readonly="1"/>
+                    <field name="is_curso" invisible="1"/>
+
+                    <control>
+                      <create name="add_slide_section" string="Curso" context="{'default_is_curso': True}"/>
+                      <create name="add_slide_lesson" string="Respuestas"/>
+                    </control>
+                  </tree>
+                  <form>
+                    <group>
+                      <field name="sequence"/>
+                      <field name="respuesta_a"/>
+                      <field name="respuesta_b"/>
+                      <field name="respuesta_c"/>
+                      <field name="respuesta_d"/>
+                      <field name="respuesta_e"/>
+                    </group>
+
+                  </form>
+                </field>
+              </page>
+              <page string="Puntaje por Cursos" name="Puntaje por Cursos">
+                <field name="respuestas_slide_ids" readonly="1">
+                  <tree editable="bottom">
+                    <field name="curso_general_id"/>
+                    <field name="n_correcto"/>
+                    <field name="n_incorrecto"/>
+                    <field name="n_blanco"/>
+                    <field name="puntaje" readonly="1"/>
+                    <field name="nota_vigesimal" readonly="1" invisible="1"/>
+                  </tree>
+                </field>
+              </page>
+            </notebook>
+
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="respuesta_form_simulacro" model="ir.ui.view">
+      <field name="name">respuesta.form</field>
+      <field name="model">respuesta</field>
+      <field name="arch" type="xml">
+        <form string="Respuesta" edit="false" delete="false" create="false">
+          <sheet>
+            <group>
+              <group>
+                <field name="examen_id" readonly="1" options="{'no_create': True, 'no_open' : True,'no_quick_create': True, 'no_create_edit':True}"/>
+                <field name="user_id" readonly="1" options="{'no_create': True, 'no_open' : True,'no_quick_create': True, 'no_create_edit':True}"/>
+                <field name="evaluacion_id" readonly="1" options="{'no_create': True, 'no_open' : True,'no_quick_create': True, 'no_create_edit':True}"/>
+              </group>
+              <group>
+                <field name="estado" readonly="1" invisible="1"/>
+                <field name="puntaje" readonly="1"/>
+                <field name="nota_vigesimal" readonly="1" invisible="1"/>
+                <field name="create_date" readonly="1" string="Fecha de Inicio"/>
+                <field name="write_date" readonly="1" string="Última Modificación" invisible="1"/>
+              </group>
+            </group>
+            <notebook>
+              <page name="Puntaje" string="Puntaje">
+                <field name="respuestas_ids" mode="tree" widget="cursos_general_seccion_one2many">
+                  <tree editable="bottom" decoration-bf="is_curso">
+                    <field name="curso_general_id" attrs="{'invisible': [('is_curso', '=', False)]}"/>
+                    <field name="sequence"/>
+                    <field name="respuesta_a" readonly="1"/>
+                    <field name="respuesta_b" readonly="1"/>
+                    <field name="respuesta_c" readonly="1"/>
+                    <field name="respuesta_d" readonly="1"/>
+                    <field name="respuesta_e" readonly="1"/>
+                    <field name="puntaje" readonly="1"/>
+                    <field name="is_curso" invisible="1"/>
+
+                    <control>
+                      <create name="add_slide_section" string="Curso" context="{'default_is_curso': True}"/>
+                      <create name="add_slide_lesson" string="Respuestas"/>
+                    </control>
+                  </tree>
+                  <form>
+                    <group>
+                      <field name="sequence"/>
+                      <field name="respuesta_a"/>
+                      <field name="respuesta_b"/>
+                      <field name="respuesta_c"/>
+                      <field name="respuesta_d"/>
+                      <field name="respuesta_e"/>
+                    </group>
+
+                  </form>
+                </field>
+              </page>
+              <page string="Puntaje por Cursos" name="Puntaje por Cursos">
+                <field name="respuestas_slide_ids" readonly="1">
+                  <tree editable="bottom">
+                    <field name="curso_general_id"/>
+                    <field name="n_correcto"/>
+                    <field name="n_incorrecto"/>
+                    <field name="n_blanco"/>
+                    <field name="puntaje" readonly="1"/>
+                    <field name="nota_vigesimal" readonly="1" invisible="1"/>
+                  </tree>
+                </field>
+              </page>
+
+            </notebook>
+
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="respuesta_tree" model="ir.ui.view">
+      <field name="name">respuesta.tree</field>
+      <field name="model">respuesta</field>
+      <field name="arch" type="xml">
+        <tree string="Respuesta" edit="false" delete="false" create="false">
+          <field name="evaluacion_id" readonly="1" string="Tipo de Prueba" invisible="1"/>
+          <field name="name" readonly="1" string="Tipo de Prueba" invisible="1"/>
+          <field name="tipo_evaluacion"/>
+          <field name="grupo_alumnos"/>
+          <field name="examen_id" readonly="1" string="Fase" invisible="1"/>
+          <field name="user_id" readonly="1" string="Alumno"/>
+          <field name="create_date" readonly="1" string="Fecha Hora Inicio"/>
+          <field name="fecha_termino" readonly="1"/>
+          <field name="duracion" readonly="1"/>
+          <field name="n_correcto" readonly="1"/>
+          <field name="n_incorrecto" readonly="1"/>
+          <field name="n_blanco" readonly="1"/>
+          <field name="nota_vigesimal" readonly="1"/>
+        </tree>
+      </field>
+    </record>
+
+    <record id="respuesta_tree_semanal" model="ir.ui.view">
+      <field name="name">respuesta.tree</field>
+      <field name="model">respuesta</field>
+      <field name="arch" type="xml">
+        <tree string="Respuesta" edit="false" delete="false" create="false">
+          <field name="evaluacion_id" readonly="1" string="Tipo de Prueba" invisible="1"/>
+          <field name="tipo_evaluacion"/>
+          <field name="grupo_alumnos"/>
+          <field name="name" readonly="1" string="FASE"/>
+          <field name="examen_id" readonly="1" string="Fase" invisible="1"/>
+          <field name="user_id" readonly="1" string="Alumno"/>
+          <field name="create_date" readonly="1" string="Fecha Hora Inicio"/>
+          <field name="fecha_termino" readonly="1"/>
+          <field name="duracion" readonly="1"/>
+          <field name="n_correcto" readonly="1"/>
+          <field name="n_incorrecto" readonly="1"/>
+          <field name="n_blanco" readonly="1"/>
+          <field name="nota_vigesimal" readonly="1"/>
+        </tree>
+      </field>
+    </record>
+
+    <record id="respuesta_tree_1" model="ir.ui.view">
+      <field name="name">respuesta.tree</field>
+      <field name="model">respuesta</field>
+      <field name="arch" type="xml">
+        <tree string="Respuesta" edit="false" delete="false" create="false">
+          <field name="evaluacion_id" readonly="1" string="Tipo de Prueba" invisible="1"/>
+          <field name="tipo_evaluacion"/>
+          <field name="grupo_alumnos"/>
+          <field name="name" readonly="1" string="Fase"/>
+          <field name="user_id" readonly="1" string="Usuario"/>
+          <field name="create_date" readonly="1" string="Fecha Hora Inicio"/>
+          <field name="fecha_termino" readonly="1"/>
+          <field name="duracion" readonly="1"/>
+          <field name="n_correcto" readonly="1"/>
+          <field name="n_incorrecto" readonly="1"/>
+          <field name="n_blanco" readonly="1"/>
+          <field name="puntaje" readonly="1"/>
+        </tree>
+      </field>
+    </record>
+
+    <record id="respuesta_simulacro_tree" model="ir.ui.view">
+      <field name="name">respuesta.simulacro.tree</field>
+      <field name="model">respuesta.simulacro</field>
+      <field name="arch" type="xml">
+        <tree string="Respuesta" edit="false" delete="false" create="false" default_order="puntaje desc">
+          <field name="evaluacion_id" readonly="1" invisible="1"/>
+          <field name="tipo_evaluacion"/>
+          <field name="grupo_alumnos"/>
+          <field name="user_id" readonly="1" string="Usuario"/>
+          <field name="n_correcto" readonly="1"/>
+          <field name="n_incorrecto" readonly="1"/>
+          <field name="n_blanco" readonly="1"/>
+          <field name="puntaje" readonly="1"/>
+        </tree>
+      </field>
+    </record>
+
+    <record id="respuesta_simulacro_form" model="ir.ui.view">
+      <field name="name">respuesta.simulacro.form</field>
+      <field name="model">respuesta.simulacro</field>
+      <field name="arch" type="xml">
+        <form string="Respuesta" edit="false" delete="false" create="false">
+          <sheet>
+            <group>
+              <field name="evaluacion_id" readonly="1" options="{'no_open' : True,'no_quick_create': True, 'no_create_edit':True}"/>
+              <field name="user_id" readonly="1" string="Usuario" options="{'no_open' : True,'no_quick_create': True, 'no_create_edit':True}"/>
+              <field name="puntaje" readonly="1"/>
+            </group>
+
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="respuesta_simulacro_tree_1" model="ir.ui.view">
+      <field name="name">respuesta.simulacro.tree</field>
+      <field name="model">respuesta.simulacro</field>
+      <field name="arch" type="xml">
+        <tree string="Respuesta" edit="false" delete="false" create="false">
+          <field name="evaluacion_id" readonly="1"/>
+          <field name="user_id" readonly="1" string="Usuario"/>
+          <field name="n_correcto" readonly="1"/>
+          <field name="n_incorrecto" readonly="1"/>
+          <field name="n_blanco" readonly="1"/>
+          <field name="nota_vigesimal" readonly="1"/>
+        </tree>
+      </field>
+    </record>
+
+    <record id="respuesta_simulacro_form_1" model="ir.ui.view">
+      <field name="name">respuesta.simulacro.form</field>
+      <field name="model">respuesta.simulacro</field>
+      <field name="arch" type="xml">
+        <form string="Respuesta" edit="false" delete="false" create="false">
+          <sheet>
+            <group>
+              <field name="evaluacion_id" readonly="1" options="{'no_open' : True,'no_quick_create': True, 'no_create_edit':True}"/>
+              <field name="user_id" readonly="1" string="Usuario" options="{'no_open' : True,'no_quick_create': True, 'no_create_edit':True}"/>
+              <field name="nota_vigesimal" readonly="1"/>
+            </group>
+
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="respuesta_action" model="ir.actions.act_window">
+      <field name="name">Respuestas</field>
+      <field name="res_model">respuesta</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Respuestas" id="menu_respuestas" parent="menu_evaluaciones_config" action="respuesta_action" groups='group_evaluaciones_admin_tech,elearning_aprentech.group_control_acceso_superadmin'/>
+
+  </data>
+</odoo>

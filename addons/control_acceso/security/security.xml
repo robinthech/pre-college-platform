@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data noupdate="0">
+
+    <record id="model_access_ciclo_superadmin" model="ir.model.access">
+      <field name="name">model.access.superadmin.ciclo</field>
+      <field name="group_id" ref="elearning_aprentech.group_control_acceso_superadmin"/>
+      <field name="model_id" ref="control_acceso.model_ciclo"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="1"/>
+      <field name="perm_write" eval="1"/>
+      <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record id="model_access_ciclo_admin" model="ir.model.access">
+      <field name="name">model.access.admin.ciclo</field>
+      <field name="group_id" ref="elearning_aprentech.group_control_acceso_admin"/>
+      <field name="model_id" ref="control_acceso.model_ciclo"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="1"/>
+      <field name="perm_write" eval="1"/>
+      <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record id="model_access_ciclo_editor" model="ir.model.access">
+      <field name="name">model.access.admin.ciclo</field>
+      <field name="group_id" ref="elearning_aprentech.group_control_acceso_editor"/>
+      <field name="model_id" ref="control_acceso.model_ciclo"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="1"/>
+      <field name="perm_write" eval="1"/>
+      <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record id="model_access_ciclo_observador" model="ir.model.access">
+      <field name="name">model.access.admin.ciclo</field>
+      <field name="group_id" ref="elearning_aprentech.group_control_acceso_observador"/>
+      <field name="model_id" ref="control_acceso.model_ciclo"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="1"/>
+      <field name="perm_write" eval="1"/>
+      <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record id="model_access_res_user_ciclo_superadmin" model="ir.model.access">
+      <field name="name">model.access.res.user.ciclo.superadmin</field>
+      <field name="group_id" ref="elearning_aprentech.group_control_acceso_superadmin"/>
+      <field name="model_id" ref="control_acceso.model_res_users_ciclo"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="1"/>
+      <field name="perm_write" eval="1"/>
+      <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record id="model_access_res_user_ciclo_admin" model="ir.model.access">
+      <field name="name">model.access.res.user.ciclo.admin</field>
+      <field name="group_id" ref="elearning_aprentech.group_control_acceso_admin"/>
+      <field name="model_id" ref="control_acceso.model_res_users_ciclo"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="1"/>
+      <field name="perm_write" eval="1"/>
+      <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record id="model_access_res_user_ciclo_editor" model="ir.model.access">
+      <field name="name">model.access.res.user.ciclo.editor</field>
+      <field name="group_id" ref="elearning_aprentech.group_control_acceso_editor"/>
+      <field name="model_id" ref="control_acceso.model_res_users_ciclo"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="0"/>
+      <field name="perm_write" eval="1"/>
+      <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record id="model_access_res_user_ciclo_observador" model="ir.model.access">
+      <field name="name">model.access.res.user.ciclo.observador</field>
+      <field name="group_id" ref="elearning_aprentech.group_control_acceso_observador"/>
+      <field name="model_id" ref="control_acceso.model_res_users_ciclo"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="0"/>
+      <field name="perm_write" eval="0"/>
+      <field name="perm_unlink" eval="0"/>
+    </record>
+
+  </data>
+</odoo>

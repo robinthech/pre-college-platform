@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data noupdate="0">
+
+    <record id="model_access_superadmin_im_livechat_channel" model="ir.model.access">
+      <field name="name">model.access.superadmin.livechat.channel</field>
+      <field name="group_id" ref="elearning_aprentech.group_control_acceso_superadmin"/>
+      <field name="model_id" ref="im_livechat.model_im_livechat_channel"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="1"/>
+      <field name="perm_write" eval="1"/>
+      <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record id="model_access_admin_im_livechat_channel" model="ir.model.access">
+      <field name="name">model.access.admin.livechat.channel</field>
+      <field name="group_id" ref="elearning_aprentech.group_control_acceso_admin"/>
+      <field name="model_id" ref="im_livechat.model_im_livechat_channel"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="1"/>
+      <field name="perm_write" eval="1"/>
+      <field name="perm_unlink" eval="0"/>
+    </record>
+
+    <record id="model_access_editor_im_livechat_channel" model="ir.model.access">
+      <field name="name">model.access.editor.livechat.channel</field>
+      <field name="group_id" ref="elearning_aprentech.group_control_acceso_editor"/>
+      <field name="model_id" ref="im_livechat.model_im_livechat_channel"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="1"/>
+      <field name="perm_write" eval="1"/>
+      <field name="perm_unlink" eval="0"/>
+    </record>
+
+    <record id="model_access_observador_im_livechat_channel" model="ir.model.access">
+      <field name="name">model.access.observador.livechat.channel</field>
+      <field name="group_id" ref="elearning_aprentech.group_control_acceso_observador"/>
+      <field name="model_id" ref="im_livechat.model_im_livechat_channel"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="0"/>
+      <field name="perm_write" eval="0"/>
+      <field name="perm_unlink" eval="0"/>
+    </record>
+
+    <record id="mail.access_mail_channel_user" model="ir.model.access">
+      <field name="name">model.access.mail.mail.channel</field>
+      <field name="group_id" ref="base.group_user"/>
+      <field name="model_id" ref="im_livechat.model_mail_channel"/>
+      <field name="perm_read" eval="0"/>
+      <field name="perm_create" eval="0"/>
+      <field name="perm_write" eval="0"/>
+      <field name="perm_unlink" eval="0"/>
+    </record>
+
+    <record id="mail.access_mail_shortcode" model="ir.model.access">
+      <field name="name">model.access.mail.shortcode.channel</field>
+      <field name="group_id" ref="base.group_user"/>
+      <field name="model_id" ref="mail.model_mail_shortcode"/>
+      <field name="perm_read" eval="0"/>
+      <field name="perm_create" eval="0"/>
+      <field name="perm_write" eval="0"/>
+      <field name="perm_unlink" eval="0"/>
+    </record>
+
+
+
+    <record id="mail.mail_channel_rule" model="ir.rule">
+      <field name="name">Mail.channel: access only public and joined groups 2</field>
+      <field name="model_id" ref="im_livechat.model_mail_channel"/>
+      <field name="groups" eval="[(4, ref('base.group_user')), (4, ref('base.group_portal')), (4, ref('base.group_public'))]"/>
+      <field name="domain_force"></field>
+      <field name="perm_create" eval="False"/>
+    </record>
+
+    <record id="model_access_superadmin_mail_channel" model="ir.model.access">
+      <field name="name">model.access.superadmin.mail.channel</field>
+      <field name="group_id" ref="elearning_aprentech.group_control_acceso_superadmin"/>
+      <field name="model_id" ref="im_livechat.model_mail_channel"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="1"/>
+      <field name="perm_write" eval="1"/>
+      <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record id="model_access_admin_mail_channel" model="ir.model.access">
+      <field name="name">model.access.admin.mail.channel</field>
+      <field name="group_id" ref="elearning_aprentech.group_control_acceso_admin"/>
+      <field name="model_id" ref="im_livechat.model_mail_channel"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="1"/>
+      <field name="perm_write" eval="1"/>
+      <field name="perm_unlink" eval="0"/>
+    </record>
+
+    <record id="model_access_editor_mail_channel" model="ir.model.access">
+      <field name="name">model.access.editor.mail.channel</field>
+      <field name="group_id" ref="elearning_aprentech.group_control_acceso_editor"/>
+      <field name="model_id" ref="im_livechat.model_mail_channel"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="1"/>
+      <field name="perm_write" eval="1"/>
+      <field name="perm_unlink" eval="0"/>
+    </record>
+
+    <record id="model_access_observador_mail_channel" model="ir.model.access">
+      <field name="name">model.access.observador.mail.channel</field>
+      <field name="group_id" ref="elearning_aprentech.group_control_acceso_observador"/>
+      <field name="model_id" ref="im_livechat.model_mail_channel"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="0"/>
+      <field name="perm_write" eval="0"/>
+      <field name="perm_unlink" eval="0"/>
+    </record>
+
+    <record id="model_access_superadmin_im_livechat_report_channel" model="ir.model.access">
+      <field name="name">model.access.superadmin.im_livechat.report.channel</field>
+      <field name="group_id" ref="elearning_aprentech.group_control_acceso_superadmin"/>
+      <field name="model_id" ref="im_livechat.model_im_livechat_report_channel"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="1"/>
+      <field name="perm_write" eval="1"/>
+      <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record id="model_access_admin_im_livechat_report_channel" model="ir.model.access">
+      <field name="name">model.access.admin.im_livechat.report.channel</field>
+      <field name="group_id" ref="elearning_aprentech.group_control_acceso_admin"/>
+      <field name="model_id" ref="im_livechat.model_im_livechat_report_channel"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="1"/>
+      <field name="perm_write" eval="1"/>
+      <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record id="model_access_superadmin_mail_shortcode" model="ir.model.access">
+      <field name="name">model.access.superadmin.mail.shortcode</field>
+      <field name="group_id" ref="elearning_aprentech.group_control_acceso_superadmin"/>
+      <field name="model_id" ref="mail.model_mail_shortcode"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="1"/>
+      <field name="perm_write" eval="1"/>
+      <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record id="model_access_admin_mail_shortcode" model="ir.model.access">
+      <field name="name">model.access.admin.mail.shortcode</field>
+      <field name="group_id" ref="elearning_aprentech.group_control_acceso_admin"/>
+      <field name="model_id" ref="mail.model_mail_shortcode"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="1"/>
+      <field name="perm_write" eval="1"/>
+      <field name="perm_unlink" eval="1"/>
+    </record>
+</data>
+</odoo>

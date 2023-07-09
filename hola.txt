@@ -1,0 +1,39 @@
+#### HERRAMIENTAS PARA PROGRAMADORES ####
+https://platzi.com/tutoriales/1170-git-github/2304-instalar-oh-my-zsh-en-ubuntu/
+
+#INSTALAR DOCKER COMPOSE
+https://docs.docker.com/compose/install/
+
+#LISTA DE COMANDO PARA LEVANTAMIENTO
+sudo docker-compose up -d --build
+
+docker run -d -p 80:80 docker/getting-started
+
+1.- sudo git fetch origin master
+2.- sudo git reset --hard origin/master
+
+#ACTUALIZAR CONTENEDOR ODOO
+sudo docker restart dabomb_odoo && sudo docker logs -f --tail 10 dabomb_odoo
+docker inspect --format='{{.LogPath}}' dabomb_odoo
+
+docker logs -f --tail 10 dabomb_odoo
+
+#COMO ENTRAR A LA CONSOLA ODOO
+sudo docker exec -it cliente_odoo /usr/bin/odoo -d nombre_db -u modulo_nuevo
+docker exec -i -t dabomb_db  /bin/bash 
+
+#Actualización de permisos de acceso de los directorios de addons
+sudo find addons -type d  -exec sudo chmod 755 {} \;
+#Actualización de permisos de acceso de los archivos
+sudo find addons -type f  -exec sudo chmod 664 {} \;
+
+git init
+git remote add origin https://gitlab.com/lortuno/dabomb.git
+asadsagit add .
+git commit -m "Initial commit"
+git push -u origin masterselect name,
+
+PARA BORRAR TODOS LOS ARCHIVOS O CONFLICTOS DE LOS ARCHIVOS PYC
+find . -name "*.pyc" -exec git rm -f "{}" \;
+
+docker logs -n 300  dabomb_odoo

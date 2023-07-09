@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo><data>
+
+    <record id="curso_general_form" model="ir.ui.view">
+        <field name="name">curso.general.form</field>
+        <field name="model">curso.general</field>
+        <field name="arch" type="xml">
+            <form string="Plantilla">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="name_corto"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="curso_general_tree" model="ir.ui.view">
+        <field name="name">curso.general.tree</field>
+        <field name="model">curso.general</field>
+        <field name="arch" type="xml">
+            <tree string="Plantilla" >
+              <field name="name"/>
+              <field name="name_corto"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="curso_general_action" model="ir.actions.act_window">
+        <field name="name">Curso Generales</field>
+        <field name="res_model">curso.general</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="plantilla_form" model="ir.ui.view">
+        <field name="name">plantilla.form</field>
+        <field name="model">plantilla</field>
+        <field name="arch" type="xml">
+            <form string="Plantilla">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="pts_correcto"/>
+                        <field name="pts_incorrecto"/>
+                        <field name="pts_blanco"/>
+                        <field name="numeracion"/>
+
+                    </group>
+                    <field name="cursos_ids" mode="tree">
+                      <tree editable="bottom" >
+                        <field name="curso_general_id"/>
+                        <field name="preguntas"/>
+                      </tree>
+                    </field>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="plantilla_tree" model="ir.ui.view">
+        <field name="name">plantilla.tree</field>
+        <field name="model">plantilla</field>
+        <field name="arch" type="xml">
+            <tree string="Plantilla" >
+              <field name="name"/>
+              <field name="pts_correcto" string="Pts. Correcto"/>
+              <field name="pts_incorrecto" string="Pts. Incorrecto"/>
+              <field name="pts_blanco" string="Pts. Blanco"/>
+              <field name="numeracion"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="plantilla_action" model="ir.actions.act_window">
+        <field name="name">Plantillas</field>
+        <field name="res_model">plantilla</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <record id="examen_form" model="ir.ui.view">
+        <field name="name">examen.form</field>
+        <field name="model">examen</field>
+        <field name="arch" type="xml">
+            <form string="Examenes">
+                <sheet>
+                  <group>
+                    <group>
+                      <field name="name"/>
+                      <field name="exam_file_ids" widget="many2many_binary" required="1" />
+
+                    </group>
+                    <group>
+                      <field name="plantilla_id" options="{'no_create': True, 'no_open' : True,'no_quick_create': True, 'no_create_edit':True}"/>
+                      <field name="solve_file_ids" widget="many2many_binary"/>
+                    </group>
+                  </group>
+
+                  <field name="claves_ids" mode="tree,form" widget="cursos_general_seccion_one2many">
+                    <tree editable="bottom"  decoration-bf="is_curso"  >
+                      <field name="examen_id" invisible="1"/>
+                      <field name="curso_general_id" attrs="{'invisible': [('is_curso', '=', False)]}"/>
+                      <field name="sequence" />
+                      <field name="clave_a" />
+                      <field name="clave_b"/>
+                      <field name="clave_c"/>
+                      <field name="clave_d"/>
+                      <field name="clave_e"/>
+                      <field name="is_curso" invisible="1"/>
+                      <control>
+                          <create name="add_slide_section" string="Curso" context="{'default_is_curso': True}"/>
+                          <create name="add_slide_lesson" string="Claves"/>
+                      </control>
+                    </tree>
+                      <form>
+                        <group>
+                          <field name="sequence" readonly="1"/>
+
+                            <field name="clave_a" />
+                            <field name="clave_b"/>
+                            <field name="clave_c"/>
+                            <field name="clave_d"/>
+                            <field name="clave_e"/>
+                        </group>
+
+                      </form>
+                  </field>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="examen_tree" model="ir.ui.view">
+        <field name="name">examen.tree</field>
+        <field name="model">examen</field>
+        <field name="arch" type="xml">
+            <tree string="Examenes">
+              <field name="name"/>
+              <field name="plantilla_id" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="examen_action" model="ir.actions.act_window">
+        <field name="name">Examenes</field>
+        <field name="res_model">examen</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="EVALUACIONES"
+        id="menu_principal_evaluaciones"
+        web_icon="website_slides,static/description/icon.png"
+        groups='group_evaluaciones_user_tech,group_evaluaciones_admin_tech,elearning_aprentech.group_control_acceso_superadmin,elearning_aprentech.group_control_acceso_admin,elearning_aprentech.group_control_acceso_editor,elearning_aprentech.group_control_acceso_observador'
+
+        action="evaluacion_action"/>
+
+    <!-- Main top menu elements -->
+    <menuitem name="Evaluaciones"
+        id="menu_evaluaciones"
+        parent="menu_principal_evaluaciones"
+        sequence="10"
+        groups='group_evaluaciones_user_tech,group_evaluaciones_admin_tech,elearning_aprentech.group_control_acceso_superadmin,elearning_aprentech.group_control_acceso_admin,elearning_aprentech.group_control_acceso_editor,elearning_aprentech.group_control_acceso_observador'
+
+        action="evaluacion_action"/>
+    <menuitem name="Exámenes"
+        id="menu_examenes"
+        parent="menu_principal_evaluaciones"
+        sequence="20"
+        groups='group_evaluaciones_user_tech,group_evaluaciones_admin_tech,elearning_aprentech.group_control_acceso_superadmin,elearning_aprentech.group_control_acceso_admin,elearning_aprentech.group_control_acceso_editor,elearning_aprentech.group_control_acceso_observador'
+
+        action="examen_action"/>
+    <menuitem name="Configuracion"
+        id="menu_evaluaciones_config"
+        parent="menu_principal_evaluaciones"
+        sequence="30"
+        groups='elearning_aprentech.group_control_acceso_superadmin,elearning_aprentech.group_control_acceso_admin,elearning_aprentech.group_control_acceso_editor'/>
+    <menuitem name="Grupo y Aulas"
+        id="menu_grupo_alumnos"
+        parent="menu_evaluaciones_config"
+        sequence="10"
+        action="group_alumnos_action"
+        groups='elearning_aprentech.group_control_acceso_superadmin,elearning_aprentech.group_control_acceso_admin,elearning_aprentech.group_control_acceso_editor'/>
+    <menuitem name="Plantilla"
+        id="menu_plantilla"
+        parent="menu_evaluaciones_config"
+        sequence="20"
+        action="plantilla_action"
+        groups='elearning_aprentech.group_control_acceso_superadmin,elearning_aprentech.group_control_acceso_admin,elearning_aprentech.group_control_acceso_editor'/>
+    <menuitem name="Cursos Generales"
+        id="menu_cursos_generales"
+        parent="menu_evaluaciones_config"
+        sequence="40"
+        action="curso_general_action"
+        groups='elearning_aprentech.group_control_acceso_superadmin,elearning_aprentech.group_control_acceso_admin,elearning_aprentech.group_control_acceso_editor'/>
+    </data>
+</odoo>

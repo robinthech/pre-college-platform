@@ -1,0 +1,551 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data noupdate="0">
+
+    <!-- acceso evaluacion -->
+
+    <record id="model_access_superadmin_evaluacion" model="ir.model.access">
+      <field name="name">model.access.superadmin.evaluacion</field>
+      <field name="group_id" ref="elearning_aprentech.group_control_acceso_superadmin"/>
+      <field name="model_id" ref="website_examenes.model_evaluacion"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="1"/>
+      <field name="perm_write" eval="1"/>
+      <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record id="model_access_admin_evaluacion" model="ir.model.access">
+      <field name="name">model.access.admin.evaluacion</field>
+      <field name="group_id" ref="elearning_aprentech.group_control_acceso_admin"/>
+      <field name="model_id" ref="website_examenes.model_evaluacion"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="1"/>
+      <field name="perm_write" eval="1"/>
+      <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record id="model_access_editor_evaluacion" model="ir.model.access">
+      <field name="name">model.access.editor.evaluacion</field>
+      <field name="group_id" ref="elearning_aprentech.group_control_acceso_editor"/>
+      <field name="model_id" ref="website_examenes.model_evaluacion"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="1"/>
+      <field name="perm_write" eval="1"/>
+      <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record id="model_access_observador_evaluacion" model="ir.model.access">
+      <field name="name">model.access.observador.evaluacion</field>
+      <field name="group_id" ref="elearning_aprentech.group_control_acceso_observador"/>
+      <field name="model_id" ref="website_examenes.model_evaluacion"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="0"/>
+      <field name="perm_write" eval="0"/>
+      <field name="perm_unlink" eval="0"/>
+    </record>
+
+    <!-- acceso evaluacion line -->
+
+    <record id="model_access_superadmin_evaluacion_line" model="ir.model.access">
+      <field name="name">model.access.superadmin.evaluacion.line</field>
+      <field name="group_id" ref="elearning_aprentech.group_control_acceso_superadmin"/>
+      <field name="model_id" ref="website_examenes.model_evaluacion_line"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="1"/>
+      <field name="perm_write" eval="1"/>
+      <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record id="model_access_admin_evaluacion_line" model="ir.model.access">
+      <field name="name">model.access.admin.evaluacion.line</field>
+      <field name="group_id" ref="elearning_aprentech.group_control_acceso_admin"/>
+      <field name="model_id" ref="website_examenes.model_evaluacion_line"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="1"/>
+      <field name="perm_write" eval="1"/>
+      <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record id="model_access_editor_evaluacion_line" model="ir.model.access">
+      <field name="name">model.access.editor.evaluacion.line</field>
+      <field name="group_id" ref="elearning_aprentech.group_control_acceso_editor"/>
+      <field name="model_id" ref="website_examenes.model_evaluacion_line"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="1"/>
+      <field name="perm_write" eval="1"/>
+      <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record id="model_access_observador_evaluacion_line" model="ir.model.access">
+      <field name="name">model.access.observador.evaluacion.line</field>
+      <field name="group_id" ref="elearning_aprentech.group_control_acceso_observador"/>
+      <field name="model_id" ref="website_examenes.model_evaluacion_line"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="0"/>
+      <field name="perm_write" eval="0"/>
+      <field name="perm_unlink" eval="0"/>
+    </record>
+
+    <!-- acceso grupo alumnos -->
+
+    <record id="model_access_superadmin_grupo_alumnos" model="ir.model.access">
+      <field name="name">model.access.superadmin.grupo.alumnos</field>
+      <field name="group_id" ref="elearning_aprentech.group_control_acceso_superadmin"/>
+      <field name="model_id" ref="website_examenes.model_grupo_alumnos"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="1"/>
+      <field name="perm_write" eval="1"/>
+      <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record id="model_access_admin_grupo_alumnos" model="ir.model.access">
+      <field name="name">model.access.admin.grupo.alumnos</field>
+      <field name="group_id" ref="elearning_aprentech.group_control_acceso_admin"/>
+      <field name="model_id" ref="website_examenes.model_grupo_alumnos"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="1"/>
+      <field name="perm_write" eval="1"/>
+      <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record id="model_access_editor_grupo_alumnos" model="ir.model.access">
+      <field name="name">model.access.editor.grupo.alumnos</field>
+      <field name="group_id" ref="elearning_aprentech.group_control_acceso_editor"/>
+      <field name="model_id" ref="website_examenes.model_grupo_alumnos"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="0"/>
+      <field name="perm_write" eval="1"/>
+      <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record id="model_access_observador_grupo_alumnos" model="ir.model.access">
+      <field name="name">model.access.observador.grupo.alumnos</field>
+      <field name="group_id" ref="elearning_aprentech.group_control_acceso_observador"/>
+      <field name="model_id" ref="website_examenes.model_grupo_alumnos"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="0"/>
+      <field name="perm_write" eval="0"/>
+      <field name="perm_unlink" eval="0"/>
+    </record>
+
+    <!-- acceso res users line -->
+
+    <record id="model_access_superadmin_res_users_line" model="ir.model.access">
+      <field name="name">model.access.superadmin.res.users.line</field>
+      <field name="group_id" ref="elearning_aprentech.group_control_acceso_superadmin"/>
+      <field name="model_id" ref="website_examenes.model_res_users_line"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="1"/>
+      <field name="perm_write" eval="1"/>
+      <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record id="model_access_admin_res_users_line" model="ir.model.access">
+      <field name="name">model.access.admin.res.users.line</field>
+      <field name="group_id" ref="elearning_aprentech.group_control_acceso_admin"/>
+      <field name="model_id" ref="website_examenes.model_res_users_line"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="1"/>
+      <field name="perm_write" eval="1"/>
+      <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record id="model_access_editor_res_users_line" model="ir.model.access">
+      <field name="name">model.access.editor.res.users.line</field>
+      <field name="group_id" ref="elearning_aprentech.group_control_acceso_editor"/>
+      <field name="model_id" ref="website_examenes.model_res_users_line"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="0"/>
+      <field name="perm_write" eval="1"/>
+      <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record id="model_access_observador_res_users_line" model="ir.model.access">
+      <field name="name">model.access.observador.res.users.line</field>
+      <field name="group_id" ref="elearning_aprentech.group_control_acceso_observador"/>
+      <field name="model_id" ref="website_examenes.model_res_users_line"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="0"/>
+      <field name="perm_write" eval="0"/>
+      <field name="perm_unlink" eval="0"/>
+    </record>
+
+    <!-- acceso plantilla slide -->
+
+    <record id="model_access_superadmin_plantilla_slide" model="ir.model.access">
+      <field name="name">model.access.superadmin.plantilla.slide</field>
+      <field name="group_id" ref="elearning_aprentech.group_control_acceso_superadmin"/>
+      <field name="model_id" ref="website_examenes.model_plantilla_slide"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="1"/>
+      <field name="perm_write" eval="1"/>
+      <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record id="model_access_admin_plantilla_slide" model="ir.model.access">
+      <field name="name">model.access.admin.plantilla.slide</field>
+      <field name="group_id" ref="elearning_aprentech.group_control_acceso_admin"/>
+      <field name="model_id" ref="website_examenes.model_plantilla_slide"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="1"/>
+      <field name="perm_write" eval="1"/>
+      <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record id="model_access_editor_plantilla_slide" model="ir.model.access">
+      <field name="name">model.access.editor.plantilla.slide</field>
+      <field name="group_id" ref="elearning_aprentech.group_control_acceso_editor"/>
+      <field name="model_id" ref="website_examenes.model_plantilla_slide"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="1"/>
+      <field name="perm_write" eval="1"/>
+      <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record id="model_access_observador_plantilla_slide" model="ir.model.access">
+      <field name="name">model.access.observador.plantilla.slide</field>
+      <field name="group_id" ref="elearning_aprentech.group_control_acceso_observador"/>
+      <field name="model_id" ref="website_examenes.model_plantilla_slide"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="0"/>
+      <field name="perm_write" eval="0"/>
+      <field name="perm_unlink" eval="0"/>
+    </record>
+
+    <!--  acceso plantilla-->
+
+    <record id="model_access_superadmin_plantilla" model="ir.model.access">
+      <field name="name">model.access.superadmin.plantilla</field>
+      <field name="group_id" ref="elearning_aprentech.group_control_acceso_superadmin"/>
+      <field name="model_id" ref="website_examenes.model_plantilla"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="1"/>
+      <field name="perm_write" eval="1"/>
+      <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record id="model_access_admin_plantilla" model="ir.model.access">
+      <field name="name">model.access.admin.plantilla</field>
+      <field name="group_id" ref="elearning_aprentech.group_control_acceso_admin"/>
+      <field name="model_id" ref="website_examenes.model_plantilla"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="1"/>
+      <field name="perm_write" eval="1"/>
+      <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record id="model_access_editor_plantilla" model="ir.model.access">
+      <field name="name">model.access.editor.plantilla</field>
+      <field name="group_id" ref="elearning_aprentech.group_control_acceso_editor"/>
+      <field name="model_id" ref="website_examenes.model_plantilla"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="1"/>
+      <field name="perm_write" eval="1"/>
+      <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record id="model_access_observador_plantilla" model="ir.model.access">
+      <field name="name">model.access.observador.plantilla</field>
+      <field name="group_id" ref="elearning_aprentech.group_control_acceso_observador"/>
+      <field name="model_id" ref="website_examenes.model_plantilla"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="0"/>
+      <field name="perm_write" eval="0"/>
+      <field name="perm_unlink" eval="0"/>
+    </record>
+
+    <!-- acceso examen  -->
+
+    <record id="model_access_superadmin_examen" model="ir.model.access">
+      <field name="name">model.access.superadmin.examen</field>
+      <field name="group_id" ref="elearning_aprentech.group_control_acceso_superadmin"/>
+      <field name="model_id" ref="website_examenes.model_examen"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="1"/>
+      <field name="perm_write" eval="1"/>
+      <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record id="model_access_admin_examen" model="ir.model.access">
+      <field name="name">model.access.admin.examen</field>
+      <field name="group_id" ref="elearning_aprentech.group_control_acceso_admin"/>
+      <field name="model_id" ref="website_examenes.model_examen"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="1"/>
+      <field name="perm_write" eval="1"/>
+      <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record id="model_access_editor_examen" model="ir.model.access">
+      <field name="name">model.access.editor.examen</field>
+      <field name="group_id" ref="elearning_aprentech.group_control_acceso_editor"/>
+      <field name="model_id" ref="website_examenes.model_examen"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="1"/>
+      <field name="perm_write" eval="1"/>
+      <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record id="model_access_observador_examen" model="ir.model.access">
+      <field name="name">model.access.observador.examen</field>
+      <field name="group_id" ref="elearning_aprentech.group_control_acceso_observador"/>
+      <field name="model_id" ref="website_examenes.model_examen"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="0"/>
+      <field name="perm_write" eval="0"/>
+      <field name="perm_unlink" eval="0"/>
+    </record>
+
+
+    <!-- acceso claves -->
+
+    <record id="model_access_superadmin_claves" model="ir.model.access">
+      <field name="name">model.access.superadmin.claves</field>
+      <field name="group_id" ref="elearning_aprentech.group_control_acceso_superadmin"/>
+      <field name="model_id" ref="website_examenes.model_claves"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="1"/>
+      <field name="perm_write" eval="1"/>
+      <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record id="model_access_admin_claves" model="ir.model.access">
+      <field name="name">model.access.admin.claves</field>
+      <field name="group_id" ref="elearning_aprentech.group_control_acceso_admin"/>
+      <field name="model_id" ref="website_examenes.model_claves"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="1"/>
+      <field name="perm_write" eval="1"/>
+      <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record id="model_access_editor_claves" model="ir.model.access">
+      <field name="name">model.access.editor.claves</field>
+      <field name="group_id" ref="elearning_aprentech.group_control_acceso_editor"/>
+      <field name="model_id" ref="website_examenes.model_claves"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="1"/>
+      <field name="perm_write" eval="1"/>
+      <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record id="model_access_observador_claves" model="ir.model.access">
+      <field name="name">model.access.observador.claves</field>
+      <field name="group_id" ref="elearning_aprentech.group_control_acceso_observador"/>
+      <field name="model_id" ref="website_examenes.model_claves"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="0"/>
+      <field name="perm_write" eval="0"/>
+      <field name="perm_unlink" eval="0"/>
+    </record>
+
+    <!-- acceso respuesta -->
+
+    <record id="model_access_superadmin_respuestas" model="ir.model.access">
+      <field name="name">model.access.superadmin.respuesta</field>
+      <field name="group_id" ref="elearning_aprentech.group_control_acceso_superadmin"/>
+      <field name="model_id" ref="website_examenes.model_respuesta"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="1"/>
+      <field name="perm_write" eval="1"/>
+      <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record id="model_access_admin_respuestas" model="ir.model.access">
+      <field name="name">model.access.admin.respuesta</field>
+      <field name="group_id" ref="elearning_aprentech.group_control_acceso_admin"/>
+      <field name="model_id" ref="website_examenes.model_respuesta"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="1"/>
+      <field name="perm_write" eval="1"/>
+      <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record id="model_access_editor_respuestas" model="ir.model.access">
+      <field name="name">model.access.editor.respuesta</field>
+      <field name="group_id" ref="elearning_aprentech.group_control_acceso_editor"/>
+      <field name="model_id" ref="website_examenes.model_respuesta"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="1"/>
+      <field name="perm_write" eval="1"/>
+      <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record id="model_access_observador_respuestas" model="ir.model.access">
+      <field name="name">model.access.observador.respuesta</field>
+      <field name="group_id" ref="elearning_aprentech.group_control_acceso_observador"/>
+      <field name="model_id" ref="website_examenes.model_respuesta"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="0"/>
+      <field name="perm_write" eval="0"/>
+      <field name="perm_unlink" eval="0"/>
+    </record>
+
+    <!-- acceso respuesta line -->
+
+    <record id="model_access_superadmin_respuestas_line" model="ir.model.access">
+      <field name="name">model.access.superadmin.respuesta.line</field>
+      <field name="group_id" ref="elearning_aprentech.group_control_acceso_superadmin"/>
+      <field name="model_id" ref="website_examenes.model_respuesta_line"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="1"/>
+      <field name="perm_write" eval="1"/>
+      <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record id="model_access_admin_respuestas_line" model="ir.model.access">
+      <field name="name">model.access.admin.respuesta.line</field>
+      <field name="group_id" ref="elearning_aprentech.group_control_acceso_admin"/>
+      <field name="model_id" ref="website_examenes.model_respuesta_line"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="1"/>
+      <field name="perm_write" eval="1"/>
+      <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record id="model_access_editor_respuestas_line" model="ir.model.access">
+      <field name="name">model.access.editor.respuesta.line</field>
+      <field name="group_id" ref="elearning_aprentech.group_control_acceso_editor"/>
+      <field name="model_id" ref="website_examenes.model_respuesta_line"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="1"/>
+      <field name="perm_write" eval="1"/>
+      <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record id="model_access_observador_respuestas_line" model="ir.model.access">
+      <field name="name">model.access.observador.respuesta.line</field>
+      <field name="group_id" ref="elearning_aprentech.group_control_acceso_observador"/>
+      <field name="model_id" ref="website_examenes.model_respuesta_line"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="0"/>
+      <field name="perm_write" eval="0"/>
+      <field name="perm_unlink" eval="0"/>
+    </record>
+
+    <!-- acceso respuesta slide -->
+    <record id="model_access_superadmin_respuestas_slide" model="ir.model.access">
+      <field name="name">model.access.superadmin.respuesta.slide</field>
+      <field name="group_id" ref="elearning_aprentech.group_control_acceso_superadmin"/>
+      <field name="model_id" ref="website_examenes.model_respuesta_slide"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="1"/>
+      <field name="perm_write" eval="1"/>
+      <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record id="model_access_admin_respuestas_slide" model="ir.model.access">
+      <field name="name">model.access.admin.respuesta.slide</field>
+      <field name="group_id" ref="elearning_aprentech.group_control_acceso_admin"/>
+      <field name="model_id" ref="website_examenes.model_respuesta_slide"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="1"/>
+      <field name="perm_write" eval="1"/>
+      <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record id="model_access_editor_respuestas_slide" model="ir.model.access">
+      <field name="name">model.access.editor.respuesta.slide</field>
+      <field name="group_id" ref="elearning_aprentech.group_control_acceso_editor"/>
+      <field name="model_id" ref="website_examenes.model_respuesta_slide"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="1"/>
+      <field name="perm_write" eval="1"/>
+      <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record id="model_access_observador_respuestas_slide" model="ir.model.access">
+      <field name="name">model.access.observador.respuesta.slide</field>
+      <field name="group_id" ref="elearning_aprentech.group_control_acceso_observador"/>
+      <field name="model_id" ref="website_examenes.model_respuesta_slide"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="0"/>
+      <field name="perm_write" eval="0"/>
+      <field name="perm_unlink" eval="0"/>
+    </record>
+
+    <!-- acceso respuesta simulacro -->
+    <record id="model_access_superadmin_respuestas_simulacro" model="ir.model.access">
+      <field name="name">model.access.superadmin.respuesta.simulacro</field>
+      <field name="group_id" ref="elearning_aprentech.group_control_acceso_superadmin"/>
+      <field name="model_id" ref="website_examenes.model_respuesta_simulacro"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="1"/>
+      <field name="perm_write" eval="1"/>
+      <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record id="model_access_admin_respuestas_simulacro" model="ir.model.access">
+      <field name="name">model.access.admin.respuesta.simulacro</field>
+      <field name="group_id" ref="elearning_aprentech.group_control_acceso_admin"/>
+      <field name="model_id" ref="website_examenes.model_respuesta_simulacro"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="1"/>
+      <field name="perm_write" eval="1"/>
+      <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record id="model_access_editor_respuestas_simulacro" model="ir.model.access">
+      <field name="name">model.access.editor.respuesta.simulacro</field>
+      <field name="group_id" ref="elearning_aprentech.group_control_acceso_editor"/>
+      <field name="model_id" ref="website_examenes.model_respuesta_simulacro"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="1"/>
+      <field name="perm_write" eval="1"/>
+      <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record id="model_access_observador_respuestas_simulacro" model="ir.model.access">
+      <field name="name">model.access.observador.respuesta.simulacro</field>
+      <field name="group_id" ref="elearning_aprentech.group_control_acceso_observador"/>
+      <field name="model_id" ref="website_examenes.model_respuesta_simulacro"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="0"/>
+      <field name="perm_write" eval="0"/>
+      <field name="perm_unlink" eval="0"/>
+    </record>
+
+    <!-- acceso curso general -->
+
+    <record id="model_access_superadmin_curso_general" model="ir.model.access">
+      <field name="name">model.access.superadmin.curso.general</field>
+      <field name="group_id" ref="elearning_aprentech.group_control_acceso_superadmin"/>
+      <field name="model_id" ref="website_examenes.model_curso_general"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="1"/>
+      <field name="perm_write" eval="1"/>
+      <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record id="model_access_admin_curso_general" model="ir.model.access">
+      <field name="name">model.access.admin.curso.general</field>
+      <field name="group_id" ref="elearning_aprentech.group_control_acceso_admin"/>
+      <field name="model_id" ref="website_examenes.model_curso_general"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="1"/>
+      <field name="perm_write" eval="1"/>
+      <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record id="model_access_editor_curso_general" model="ir.model.access">
+      <field name="name">model.access.editor.curso.general</field>
+      <field name="group_id" ref="elearning_aprentech.group_control_acceso_editor"/>
+      <field name="model_id" ref="website_examenes.model_curso_general"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="1"/>
+      <field name="perm_write" eval="1"/>
+      <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record id="model_access_observador_curso_general" model="ir.model.access">
+      <field name="name">model.access.observador.curso.general</field>
+      <field name="group_id" ref="elearning_aprentech.group_control_acceso_observador"/>
+      <field name="model_id" ref="website_examenes.model_curso_general"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_create" eval="0"/>
+      <field name="perm_write" eval="0"/>
+      <field name="perm_unlink" eval="0"/>
+    </record>
+
+  </data>
+</odoo>

@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<odoo>
+  <record id="group_ciclo_tree" model="ir.ui.view">
+    <field name="name">ciclo.tree</field>
+    <field name="model">ciclo</field>
+    <field name="arch" type="xml">
+      <tree string="Ciclo">
+        <field name="name"/>
+        <field name="fecha_inicio"/>
+        <field name="fecha_fin"/>
+      </tree>
+    </field>
+  </record>
+
+  <record id="view_ciclo_user_form" model="ir.ui.view">
+    <field name="name">view.ciclo.user.form</field>
+    <field name="model">ciclo</field>
+    <field name="arch" type="xml">
+      <form>
+        <sheet>
+          <div class="row justify-content-around my-5 mx-5 align-items-center">
+            <div class="col-6 text-center">
+              <h1>
+                CICLO
+              </h1>
+            </div>
+            <div class="col-3 mx-auto text-center" style="font-size:2rem">
+              <field name="name"/>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-3 text-center">
+              <h4>
+                DESDE
+              </h4>
+            </div>
+            <div class="col-3">
+              <field name="fecha_inicio"/>
+            </div>
+            <div class="col-3 text-center">
+              <h4>
+                HASTA
+              </h4>
+            </div>
+            <div class="col-3">
+              <field name="fecha_fin"/>
+            </div>
+            <div class="mx-5 mt-5">
+              <field name="users_ids" mode="tree">
+                <tree editable="bottom">
+                  <field name="user_id" domain="[('share', '=', True), ('active','!=',False)]" options="{'no_create': True, 'no_open' : True,'no_quick_create': True, 'no_create_edit':True}"/>
+                </tree>
+              </field>
+            </div>
+          </div>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <record id="group_ciclo_action" model="ir.actions.act_window">
+    <field name="name">Ciclos</field>
+    <field name="res_model">ciclo</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+
+  <record id="inherit_usuarios_ciclos" model="ir.ui.view">
+    <field name="name">inherit.usuarios.ciclos</field>
+    <field name="model">res.users</field>
+    <field name="inherit_id" ref="website_examenes_user.inherit_usuarios_add_aprentech"/>
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='aula_eval_ids']" position="after">
+        <field name="ciclo_eval_ids" widget="many2many_tags"/>
+      </xpath>
+
+    </field>
+  </record>
+
+  <record id="inherit_usuarios_ciclos_tree" model="ir.ui.view">
+    <field name="name">inherit.usuarios.ciclo.tree</field>
+    <field name="model">res.users</field>
+    <field name="inherit_id" ref="website_examenes_user.inherit_usuarios_adds_aprentech"/>
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='aula_eval_ids']" position="after">
+        <field name="ciclo_eval_ids" mode="tree">
+          <tree editable="bottom">
+            <field name="ciclo_id" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True}"/>
+          </tree>
+        </field>
+      </xpath>
+    </field>
+  </record>
+
+  <menuitem name="Ciclos" id="user_ciclo_action" parent="elearning_aprentech.menu_configuracion_add" groups="elearning_aprentech.group_control_acceso_superadmin,elearning_aprentech.group_control_acceso_admin"  sequence="10" action="group_ciclo_action"/>
+
+  <menuitem id="ks_chat_edit_and_delete.menu_root" name="Conversaciones" action="mail.action_discuss" web_icon="ks_chat_edit_and_delete,static/src/img/icon.png" groups="im_livechat.im_livechat_group_user,elearning_aprentech.group_control_acceso_superadmin,elearning_aprentech.group_control_acceso_admin,elearning_aprentech.group_control_acceso_editor,elearning_aprentech.group_control_acceso_observador" sequence="10"/>
+  <menuitem id="ks_chat_edit_and_delete.menu_canales" name="Chat's" parent="ks_chat_edit_and_delete.menu_root" sequence="15" groups="im_livechat.im_livechat_group_user,elearning_aprentech.group_control_acceso_superadmin,elearning_aprentech.group_control_acceso_admin"  action="ks_chat_edit_and_delete.im_livechat_channel_action_chat"/>
+  <menuitem id="ks_chat_edit_and_delete.menu_informe" name="Informe" parent="ks_chat_edit_and_delete.menu_root" sequence="20" groups="im_livechat.im_livechat_group_user,elearning_aprentech.group_control_acceso_superadmin,elearning_aprentech.group_control_acceso_admin"/>
+  <menuitem id="ks_chat_edit_and_delete.menu_sesiones" name="Sesiones" parent="ks_chat_edit_and_delete.menu_root" sequence="10" groups="im_livechat.im_livechat_group_user,elearning_aprentech.group_control_acceso_superadmin,elearning_aprentech.group_control_acceso_admin,elearning_aprentech.group_control_acceso_editor,elearning_aprentech.group_control_acceso_observador" action="im_livechat.mail_channel_action" />
+  <menuitem id="ks_chat_edit_and_delete.menu_estadistica" name="Estadísticas" parent="ks_chat_edit_and_delete.menu_informe" sequence="20" groups="im_livechat.im_livechat_group_user,elearning_aprentech.group_control_acceso_superadmin,elearning_aprentech.group_control_acceso_admin" action="im_livechat.im_livechat_report_channel_action" />
+  <menuitem id="ks_chat_edit_and_delete.menu_calificacion" name="Calificación" parent="ks_chat_edit_and_delete.menu_informe" sequence="30" groups="im_livechat.im_livechat_group_user,elearning_aprentech.group_control_acceso_superadmin,elearning_aprentech.group_control_acceso_admin" action="im_livechat.rating_rating_action_livechat_report" />
+  <menuitem id="ks_chat_edit_and_delete.menu_configuracion" parent="ks_chat_edit_and_delete.menu_root" name="Configuración" groups="im_livechat.im_livechat_group_user,elearning_aprentech.group_control_acceso_superadmin,elearning_aprentech.group_control_acceso_admin" sequence="30"/>
+  <menuitem id="ks_chat_edit_and_delete.menu_respuestas" parent="ks_chat_edit_and_delete.menu_configuracion" name="Respuestas Programadas" action="im_livechat.im_livechat_canned_response_action" groups="im_livechat.im_livechat_group_user,elearning_aprentech.group_control_acceso_superadmin,elearning_aprentech.group_control_acceso_admin" sequence="10"/>
+  
+</odoo>

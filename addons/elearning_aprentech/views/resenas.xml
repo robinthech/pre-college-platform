@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<odoo>
+
+  <record id="inherit_resena_aprentech" model="ir.ui.view">
+     <field name="name">inherit.resena.aprentech</field>
+     <field name="model">rating.rating</field>
+     <field name="inherit_id" ref="rating.rating_rating_view_form"/>
+     <field name="arch" type="xml">
+
+         <xpath expr="//field[@name='rated_partner_id']" position="replace">
+            <field name="rated_partner_id" invisible='1'/>
+     </xpath>
+         <xpath expr="//field[@name='partner_id']" position="replace">
+            <field name="partner_id" readonly='1' options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True, 'no_open' : True}"/>
+      </xpath>
+      <xpath expr="//field[@name='feedback']" position="replace">
+         <field name="feedback" readonly='1'/>
+    </xpath>
+
+     </field>
+   </record>
+
+<record id="resena_resena_action_tech" model="ir.actions.act_window">
+  <field name="name">Reseñas</field>
+  <field name="res_model">rating.rating</field>
+  <field name="view_mode">kanban,tree</field>
+  <field name="domain">[('company_id', '=', allowed_company_ids[0])]</field>
+  <field name="search_view_id" ref="website_slides.rating_rating_view_search_slide_channel"/>
+
+</record>
+
+<record model="ir.actions.act_window.view" id="gestion_resena_elearning_action_kanban">
+  <field name="sequence" eval="1"/>
+  <field name="view_mode">kanban</field>
+  <field name="view_id" ref="website_slides.rating_rating_view_kanban_slide_channel"/>
+  <field name="act_window_id" ref="resena_resena_action_tech"/>
+</record>
+
+
+<record model="ir.actions.act_window.view" id="gestion_resena_elearning_action_tree">
+  <field name="sequence" eval="2"/>
+  <field name="view_mode">tree</field>
+  <field name="view_id" ref="rating.rating_rating_view_tree"/>
+  <field name="act_window_id" ref="resena_resena_action_tech"/>
+</record>
+
+<record model="ir.actions.act_window.view" id="gestion_resena_elearning_action_formulario">
+  <field name="sequence" eval="3"/>
+  <field name="view_mode">form</field>
+  <field name="view_id" ref="rating.rating_rating_view_form"/>
+  <field name="act_window_id" ref="resena_resena_action_tech"/>
+</record>
+
+
+
+<menuitem id="menu_resena"
+            name="Reseñas"
+            action = "resena_resena_action_tech"
+            sequence="30"
+              groups='group_elearning_user_tech,group_elearning_admin_tech,elearning_aprentech.group_control_acceso_superadmin,elearning_aprentech.group_control_acceso_admin,elearning_aprentech.group_control_acceso_editor,elearning_aprentech.group_control_acceso_observador'
+            parent="elearning_aprentech.menu_gestion"/>
+
+
+</odoo>

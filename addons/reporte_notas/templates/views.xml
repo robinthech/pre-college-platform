@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <record id="inherit_minimo_add_aprentech_tree" model="ir.ui.view">
+      <field name="name">inherit.estudiante.carrera</field>
+      <field name="model">estudiante.carrera</field>
+      <field name="inherit_id" ref="website_examenes_user.group_carrera_tree"/>
+      <field name="arch" type="xml">
+        <xpath expr="//field[@name='name']" position="after">
+          <field name="minimo" />
+        </xpath>
+      </field>
+    </record>
+    <record id="inherit_minimo_add_aprentech_form" model="ir.ui.view">
+      <field name="name">inherit.estudiante.carrera</field>
+      <field name="model">estudiante.carrera</field>
+      <field name="inherit_id" ref="website_examenes_user.group_carrera_form"/>
+      <field name="arch" type="xml">
+        <xpath expr="//field[@name='name']" position="after">
+          <field name="minimo" />
+        </xpath>
+      </field>
+    </record>
+
+    <record id="situacion_alumno_form" model="ir.ui.view">
+      <field name="name">situacion.alumno.form</field>
+      <field name="model">situacion.alumno</field>
+      <field name="arch" type="xml">
+        <form string="Situacion">
+          <sheet>
+            <group>
+              <field name="name"/>
+              <field name="desde"/>
+              <field name="hasta"/>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="situacion_alumno_tree" model="ir.ui.view">
+      <field name="name">situacion.alumno.tree</field>
+      <field name="model">situacion.alumno</field>
+      <field name="arch" type="xml">
+        <tree string="Situacion">
+          <field name="name"/>
+          <field name="desde"/>
+          <field name="hasta"/>
+        </tree>
+      </field>
+    </record>
+
+    <record id="situacion_alumno_action" model="ir.actions.act_window">
+      <field name="name">Rango del Alumno</field>
+      <field name="res_model">situacion.alumno</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Situacion Alumno" id="menu_situacion_alumno" parent="website_examenes.menu_evaluaciones_config" sequence="60" action="situacion_alumno_action"/>
+
+    <record id="peso_evaluacion_form" model="ir.ui.view">
+      <field name="name">peso.evaluacion.form</field>
+      <field name="model">peso.evaluacion</field>
+      <field name="arch" type="xml">
+        <form string="Situacion">
+          <sheet>
+            <group>
+              <field name="name" invisible="1"/>
+              <field name="tipo_evaluacion"/>
+              <field name="peso"/>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="peso_evaluacion_tree" model="ir.ui.view">
+      <field name="name">peso.evaluacion.tree</field>
+      <field name="model">peso.evaluacion</field>
+      <field name="arch" type="xml">
+        <tree string="Situacion">
+          <field name="name" invisible="1"/>
+          <field name="tipo_evaluacion"/>
+          <field name="peso"/>
+        </tree>
+      </field>
+    </record>
+
+    <record id="peso_evaluacion_action" model="ir.actions.act_window">
+      <field name="name">Peso de Evaluacion</field>
+      <field name="res_model">peso.evaluacion</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Peso de Evaluacion" id="menu_peso_evaluacion" parent="website_examenes.menu_evaluaciones_config" sequence="70" action="peso_evaluacion_action"/>
+
+    <record model="ir.actions.act_url" id="action_reporte_url">
+      <field name="name">reporte de notas</field>
+      <field name="url">/reporte/administrador</field>
+      <field name="target">self</field>
+
+    </record>
+
+    <menuitem name="Reporte de Notas" web_icon="reporte_notas,static/img/reporte.jpg" id="menu_reporte_url" action="action_reporte_url"/>
+  </data>
+</odoo>

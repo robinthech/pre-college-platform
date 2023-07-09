@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<odoo>
+	<record id="view_form_import_users" model="ir.ui.view">
+		<field name="name">Import Users Form</field>
+		<field name="model">import.users</field>
+		<field name="arch" type="xml">
+			<form>
+				
+				<group>
+					<field name="file" filename="name"/>
+				</group>
+				<footer>
+					<a class="btn float-left" style="background-color:#aed581;" href="/import_user/file/import_user.xlsx" download="1"><i class="fa fa-download"/>Plantilla</a>
+
+                    <button name="import_button" string="Import" type="object"/>
+                </footer>
+			</form>
+		</field>
+	</record>
+
+	<record id="import_users_wizard_action" model="ir.actions.act_window">
+        <field name="name">Import Users</field>
+        <field name="res_model">import.users</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+
+	<menuitem action="import_users_wizard_action"
+		id="menu_action_import_users_form"
+		name="Importar Usuarios"
+		parent="elearning_aprentech.menu_configuracion_add"/>
+
+</odoo>
